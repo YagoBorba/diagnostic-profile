@@ -303,4 +303,3 @@ Referência para SHA de Actions: https://docs.github.com/en/actions/reference/se
 OAuth, backend permanente, rastreamento de visitas, rankings, marketplace de temas com código, muitas integrações externas e instalação automática com acesso de escrita à conta. Só avançar quando houver demanda comprovada e manutenção viável.
 
 O diferencial inicial recomendado é: montar visualmente, escolher estilos consistentes, entender os dados e instalar com confiança.
-
