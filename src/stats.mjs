@@ -25,9 +25,20 @@ export function summarize(user, { excludeLanguages = DEFAULT_EXCLUDED_LANGUAGES,
     streaks: streaks(days),
     weekly: weekly.slice(-52),
     languages: languageMix(repos, new Set(excludeLanguages), languageLimit),
-    repos: Object.fromEntries(repos.map((repo) => [repo.name, repo])),
+    repos: repositoryIndex(user),
     pinned: user.pinnedItems.nodes.filter((node) => node?.name),
   };
+}
+
+function repositoryIndex(user) {
+  const index = Object.create(null);
+  const repos = [...(user.pinnedItems?.nodes ?? []), ...user.repositories.nodes, ...(user.selectedRepositories ?? [])];
+  for (const repo of repos.filter(Boolean)) {
+    const fullName = repo.nameWithOwner ?? (repo.owner?.login ?? user.login) + '/' + repo.name;
+    index[fullName.toLowerCase()] = repo;
+    if (fullName.toLowerCase().startsWith(user.login.toLowerCase() + '/')) index[repo.name] = repo;
+  }
+  return index;
 }
 
 export function streaks(days) {

@@ -23,7 +23,7 @@ if (values.help) {
   --output, -o   Directory for the generated SVGs (default: dist)
   --fixture      Render from a saved GraphQL user payload instead of the API
 
-Environment: GITHUB_TOKEN (required unless --fixture), DP_LOGIN to override the login.`);
+Environment: GITHUB_TOKEN (required unless --fixture), DP_LOGIN as fallback when config.login is absent.`);
   process.exit(0);
 }
 
@@ -35,7 +35,7 @@ try {
   } else {
     const token = process.env.GITHUB_TOKEN;
     if (!token) throw new Error('GITHUB_TOKEN is required');
-    user = await fetchUser(config.login, token);
+    user = await fetchUser(config.login, token, { projects: config.projects });
   }
 
   const data = summarize(user, config.telemetry);

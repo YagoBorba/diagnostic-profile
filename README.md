@@ -181,6 +181,14 @@ node src/cli.mjs --config examples/diagnostic-profile.json --fixture test/fixtur
 
 `npm run preview` regenerates `docs/preview` from the fictional profile in `examples/` and `test/fixtures/`. CI fails when the committed previews drift from the code.
 
+### Data scope
+
+Contribution, commit, pull request and issue counts cover the contribution calendar returned by GitHub (the last 12 months). Followers and stars are current totals, not gains during that period. The language mix measures code size, not coding time or skill.
+
+Stars and languages include all public, owned, non-fork repositories, with pagination. Project cards can use `owner/repository` in `repo`, including repositories owned by an organization. These cards do not change the profile totals. Private project cards are not exported. The token may affect contribution counts; review your generated assets before publishing them.
+
+Configuration validates types, text lengths, contact IDs and project filename collisions. `telemetry.languageLimit` accepts integers from 1 to 10. Contacts accept `https:`, `http:` and `mailto:` URLs; project and asset URLs accept HTTP(S). Contact IDs must remain unique after normalization.
+
 ## Roadmap
 
 - [ ] Recent activity as a fault code log (pull requests, reviews and releases as DTC entries)

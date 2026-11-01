@@ -23,7 +23,8 @@ export function buildAssets(config, data, now = new Date()) {
     files[`spectrum-${mode}.svg`] = renderSpectrum(theme, data.weekly);
     files[`footer-${mode}.svg`] = renderFooter(theme, config.footer.message, stamp);
     projects.forEach((project, index) => {
-      files[`project-${project.slug}-${mode}.svg`] = renderProject(theme, project, index, data.repos[project.repo], now);
+      const fullName = project.repo.includes('/') ? project.repo : config.login + '/' + project.repo;
+      files[`project-${project.slug}-${mode}.svg`] = renderProject(theme, project, index, data.repos[fullName.toLowerCase()] ?? data.repos[project.repo], now);
     });
     for (const contact of config.contacts) {
       files[`contact-${contact.id}-${mode}.svg`] = renderContact(theme, contact, ownerName);
