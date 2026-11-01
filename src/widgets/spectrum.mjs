@@ -7,8 +7,8 @@ export function renderSpectrum(theme, weekly) {
   const area = { x: 32, y: 72, w: WIDTH - 64, h: 104 };
   const slot = area.w / Math.max(1, weekly.length);
   const barWidth = Math.max(2, slot - 5);
-  const peak = Math.max(1, ...weekly.map((week) => week.count));
-  const scale = Math.log1p(peak);
+  const peak = Math.max(0, ...weekly.map((week) => week.count));
+  const scale = Math.log1p(Math.max(1, peak));
   const floor = area.y + area.h;
 
   const bars = weekly

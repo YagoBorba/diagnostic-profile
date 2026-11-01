@@ -1,4 +1,4 @@
-const attr = (value) => String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+const attr = (value) => String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 function picture(base, name, alt, size, indent = '') {
   return [
@@ -13,7 +13,7 @@ function picture(base, name, alt, size, indent = '') {
 const linked = (url, content) => [`  <a href="${attr(url)}">`, content, '  </a>'].join('\n');
 
 export function renderSnippet(config, data, projects) {
-  const base = config.assetsBaseUrl.endsWith('/') ? config.assetsBaseUrl : `${config.assetsBaseUrl}/`;
+  const base = attr(config.assetsBaseUrl.endsWith('/') ? config.assetsBaseUrl : `${config.assetsBaseUrl}/`);
   const name = config.header.name ?? data.name ?? data.login;
   const headline = config.header.headline ?? data.bio ?? '';
   const sections = [];
