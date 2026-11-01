@@ -1,0 +1,20 @@
+name: Theme or widget proposal
+description: Propose a visual style, preset or widget
+title: "feat(themes): "
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Proposal and intended audience
+    validations:
+      required: true
+  - type: textarea
+    id: samples
+    attributes:
+      label: Examples and licensing
+      description: Include references you can legally share and describe dark/light variants.
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Legibility and accessibility
+      description: Describe narrow layouts, contrast, reduced motion and text alternatives.
