@@ -23,5 +23,8 @@
     "svg",
     "github-actions",
     "profile-readme"
-  ]
+  ],
+  "devDependencies": {
+    "saxes": "^6.0.0"
+  }
 }

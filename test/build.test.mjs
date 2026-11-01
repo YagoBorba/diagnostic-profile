@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
+import { SaxesParser } from 'saxes';
 import { buildAssets } from '../src/build.mjs';
 import { normalizeConfig } from '../src/config.mjs';
 import { summarize } from '../src/stats.mjs';
@@ -35,6 +36,7 @@ test('buildAssets renders every widget in both modes for each palette', () => {
       assert.doesNotMatch(svg, /NaN|undefined|Infinity/, `${name} has no invalid numbers`);
       assert.match(svg, /<title id="title">[^<]+<\/title>/, `${name} has a title`);
       assertBalanced(svg, name);
+      assert.doesNotThrow(() => new SaxesParser({ xmlns: true }).write(svg).close(), `${name} is well-formed XML`);
     }
   }
 });

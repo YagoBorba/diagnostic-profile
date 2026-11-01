@@ -174,12 +174,32 @@ jobs:
 ## Local Development
 
 ```bash
+npm ci
 npm test
 npm run preview
 node src/cli.mjs --config examples/diagnostic-profile.json --fixture test/fixtures/user.json --output dist
 ```
 
 `npm run preview` regenerates `docs/preview` from the fictional profile in `examples/` and `test/fixtures/`. CI fails when the committed previews drift from the code.
+
+### CLI setup and checks
+
+```bash
+node src/cli.mjs init --login your-login
+node src/cli.mjs validate
+node src/cli.mjs doctor
+node src/cli.mjs list-themes
+node src/cli.mjs list-widgets
+node src/cli.mjs --fixture test/fixtures/user.json --dry-run --json
+```
+
+`init` creates a schema-enabled config and an example workflow, without replacing existing files unless `--force` is supplied. During pre-release development the generated workflow explicitly uses `@develop`; replace it with a reviewed release commit when one is published. The Action must be accessible from the calling repository.
+
+Configuration without `schemaVersion` is interpreted as version 1; unsupported future versions fail before generating assets. [JSON Schema](schema/diagnostic-profile.schema.json) provides editor completion. CLI validation also reports misspelled/unknown fields. Precedence is `--login`, then file login, then `DP_LOGIN`, then defaults for optional fields.
+
+`--json` returns structured results and `--dry-run` lists output without writing it. `doctor` reports environment/token presence without revealing credentials; it does not claim to verify live permissions. Builds write a SHA-256 manifest and stage the complete result before replacing output. Previous results are preserved on staging failure; unrelated files and manually edited stale assets are retained. A build lock prevents overlapping writes. After a process crash, inspect the sibling `.diagnostic-profile-lock` directory before removing it and retrying.
+
+The rendering engine and Action have zero runtime dependencies. Development uses an XML parser to validate generated SVGs; run `npm ci` before tests.
 
 ### Data scope
 
