@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run tests
+        run: npm test
+
+      - name: Render example from fixture
+        run: node src/cli.mjs --config examples/diagnostic-profile.json --fixture test/fixtures/user.json --output dist
+
+      - name: Check preview assets are up to date
+        run: |
+          npm run preview
+          git diff --exit-code -- docs/preview
