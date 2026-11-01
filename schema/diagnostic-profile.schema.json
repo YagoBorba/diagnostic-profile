@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/develop/schema/diagnostic-profile.schema.json",
+  "title": "Diagnostic Profile configuration",
+  "description": "Schema version 1. Unversioned configurations are interpreted as version 1. Unknown properties are warned about by the CLI.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "default": 1,
+      "description": "Configuration format version."
+    },
+    "login": {
+      "type": "string",
+      "description": "GitHub account to read; falls back to DP_LOGIN or the Action login.",
+      "maxLength": 39,
+      "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$"
+    },
+    "theme": {
+      "type": "string",
+      "enum": [
+        "amber",
+        "phosphor",
+        "ice",
+        "ember"
+      ],
+      "default": "amber"
+    },
+    "assetsBaseUrl": {
+      "type": "string",
+      "description": "Public HTTP(S) base URL without query or fragment; defaults to the profile repository output branch.",
+      "maxLength": 2048,
+      "pattern": "^https?://[^\\s,?#]+$"
+    },
+    "header": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name; falls back to GitHub.",
+          "maxLength": 120
+        },
+        "headline": {
+          "type": "string",
+          "description": "Profile subtitle; falls back to GitHub bio.",
+          "maxLength": 200
+        },
+        "prompt": {
+          "type": "string",
+          "description": "Terminal prompt.",
+          "maxLength": 120
+        },
+        "systemLabel": {
+          "type": "string",
+          "description": "Header status label.",
+          "maxLength": 80
+        },
+        "readouts": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Readout label.",
+                "maxLength": 40
+              },
+              "value": {
+                "type": "string",
+                "description": "Readout value.",
+                "maxLength": 80
+              }
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "description": "Focus tag.",
+            "maxLength": 50
+          }
+        }
+      }
+    },
+    "projects": {
+      "description": "Pinned repositories or up to eight explicit cards. Foreign repositories use owner/name.",
+      "default": "pinned",
+      "anyOf": [
+        {
+          "const": "pinned"
+        },
+        {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "repo"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "repo": {
+                "type": "string",
+                "description": "Repository name or owner/name.",
+                "maxLength": 140,
+                "minLength": 1,
+                "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9-]*/)?[a-zA-Z0-9_.-]+$"
+              },
+              "title": {
+                "type": "string",
+                "description": "Card title.",
+                "maxLength": 120
+              },
+              "kind": {
+                "type": "string",
+                "description": "Module category.",
+                "maxLength": 120
+              },
+              "summary": {
+                "type": "string",
+                "description": "Card description.",
+                "maxLength": 1000
+              },
+              "tags": {
+                "type": "array",
+                "maxItems": 5,
+                "items": {
+                  "type": "string",
+                  "description": "Technology tag.",
+                  "maxLength": 50
+                }
+              },
+              "url": {
+                "type": "string",
+                "description": "HTTP(S) project URL.",
+                "maxLength": 2048,
+                "pattern": "^https?://"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "contacts": {
+      "type": "array",
+      "maxItems": 12,
+      "default": [],
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "url"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique filename identifier, after slug normalization.",
+            "maxLength": 60
+          },
+          "label": {
+            "type": "string",
+            "description": "Button label.",
+            "maxLength": 40,
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "description": "HTTP(S) or mailto link without credentials.",
+            "maxLength": 2048,
+            "pattern": "^(https?://|mailto:)"
+          },
+          "glyph": {
+            "type": "string",
+            "description": "Short button glyph.",
+            "maxLength": 3
+          }
+        }
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "excludeLanguages": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "string",
+            "description": "Excluded language.",
+            "maxLength": 80
+          }
+        },
+        "languageLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 7
+        }
+      }
+    },
+    "footer": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Footer message.",
+          "maxLength": 120
+        }
+      }
+    }
+  }
+}

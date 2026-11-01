@@ -10,6 +10,13 @@
 - Escape asset URLs in README attributes and report a true zero peak for an empty contribution spectrum.
 - Bound GitHub request retries and timeouts, with specific authentication and rate-limit errors.
 
+### Improved
+
+- Add schema version 1, editor JSON Schema and warnings for unknown configuration fields.
+- Add init, validate, doctor, list-themes, list-widgets, structured JSON output and dry-run commands.
+- Stage complete asset sets with rollback, output locking, safe stale-file cleanup and SHA-256 manifests.
+- Validate SVG XML with a real parser and test supported Node versions on Linux and Windows.
+
 ### Added
 
 - Header, telemetry, spectrum, project card, contact and footer widgets in dark and light variants.
