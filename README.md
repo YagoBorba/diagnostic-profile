@@ -37,6 +37,15 @@ It started as the profile of [YagoBorba](https://github.com/YagoBorba) after the
 - **Motion that respects the viewer.** Animations stop under `prefers-reduced-motion`.
 - **Zero dependencies.** Plain Node.js 22, nothing to install.
 
+## Profile Studio
+
+Build a profile visually with six presets, six palettes and three families: Diagnostic, Terminal and Minimal. Edit profile fields, projects and contacts, reorder blocks, compare styles and export matching configuration, snippet and workflow.
+
+    npm ci
+    npm run studio
+
+Studio uses clearly labeled fictional data and the same rendering engine as the CLI and Action. It includes narrow variants, custom colors with contrast feedback, local drafts/favorites, JSON import, share links and ZIP export. [Studio guide](docs/STUDIO.md).
+
 ## Widgets
 
 | Widget | File | What it shows |
@@ -44,9 +53,11 @@ It started as the profile of [YagoBorba](https://github.com/YagoBorba) after the
 | Header | `header-{mode}.svg` | Name, headline, up to three readouts, up to six PID tags and an animated oscilloscope. |
 | Telemetry | `telemetry-{mode}.svg` | Contributions gauge, commits, pull requests, issues, stars, repositories, followers, streaks and language mix. |
 | Spectrum | `spectrum-{mode}.svg` | Contributions per week over the last 52 weeks on a log scale, so quiet weeks still show. |
-| Project card | `project-{repo}-{mode}.svg` | Module label, status (active or stable), summary, tags, stars and last push. |
+| Project card | `project-{repo}-{mode}.svg` | Module label, push recency (recent, older or unknown), summary, tags, stars and last push. |
 | Contact button | `contact-{id}-{mode}.svg` | A compact link button with a glyph port. |
 | Footer | `footer-{mode}.svg` | End-of-report line with the last scan timestamp. |
+
+Additional blocks: skills, currently learning/building, contribution calendar, milestones and divider. Widget IDs are configurable file prefixes. Push recency uses a 60-day window; inactivity is not presented as proof of stability. Unavailable stars are displayed as unavailable rather than zero.
 
 The run also writes `README.snippet.md`, ready to paste into your profile README.
 
@@ -92,6 +103,8 @@ Pick one with the `theme` key. Each palette has a dark and a light variant.
 
 ## Quick Start
 
+This is a pre-release setup using the existing develop branch. The Action must be accessible from the calling repository; a stable public release is not yet published.
+
 1. In your profile repository (`<user>/<user>`), add a `diagnostic-profile.json`:
 
 ```json
@@ -134,7 +147,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: YagoBorba/diagnostic-profile@v0
+      - uses: YagoBorba/diagnostic-profile@develop
         with:
           config: diagnostic-profile.json
           output_dir: dist
@@ -157,7 +170,7 @@ jobs:
 | Key | Default | Description |
 | --- | --- | --- |
 | `login` | workflow owner | GitHub login to scan. |
-| `theme` | `amber` | `amber`, `phosphor`, `ice` or `ember`. |
+| `theme` | `amber` | `amber`, `phosphor`, `ice`, `ember`, `monochrome` or `violet`. |
 | `assetsBaseUrl` | `https://raw.githubusercontent.com/<login>/<login>/output/` | Base URL used in the generated snippet. |
 | `header.name` | profile name | Large title in the header. |
 | `header.headline` | profile bio | Subtitle under the name. |
@@ -170,6 +183,18 @@ jobs:
 | `telemetry.excludeLanguages` | markup and build files | Languages left out of the language mix. |
 | `telemetry.languageLimit` | `7` | Languages shown before grouping the rest as Other. |
 | `footer.message` | `NO FAULTS DETECTED` | Middle part of the footer line. |
+
+### Composition and presets
+
+Choose a preset with preset: diagnostic, terminal, minimal, opensource, student or portfolio. Explicit settings override its defaults.
+
+- appearance: family, motion, density, borders, decorations and per-mode colors.
+- layout: standard/compact/grid, project columns, HTML alignment, image theme, incorporation format, headings and text summary.
+- widgets: ordered objects with id, type, enabled and optional title. Up to 16 unique instances.
+- content: manual skills, learning, building and timeline lists.
+- destination: asset repository and branch, independent of the scanned account.
+
+The [JSON Schema](schema/diagnostic-profile.schema.json) describes all types and limits. [Preset gallery](docs/GALLERY.md).
 
 ## Local Development
 
@@ -190,6 +215,8 @@ node src/cli.mjs validate
 node src/cli.mjs doctor
 node src/cli.mjs list-themes
 node src/cli.mjs list-widgets
+node src/cli.mjs list-presets
+node src/cli.mjs preview
 node src/cli.mjs --fixture test/fixtures/user.json --dry-run --json
 ```
 
@@ -210,6 +237,8 @@ Stars and languages include all public, owned, non-fork repositories, with pagin
 Configuration validates types, text lengths, contact IDs and project filename collisions. `telemetry.languageLimit` accepts integers from 1 to 10. Contacts accept `https:`, `http:` and `mailto:` URLs; project and asset URLs accept HTTP(S). Contact IDs must remain unique after normalization.
 
 ## Roadmap
+
+The [complete roadmap](docs/ROADMAP.md) and [implementation evidence](docs/IMPLEMENTATION.md) distinguish delivered work from pending proposals.
 
 - [ ] Recent activity as a fault code log (pull requests, reviews and releases as DTC entries)
 - [ ] Achievements as readiness monitors

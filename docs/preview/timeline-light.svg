@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="164" viewBox="0 0 1200 164" role="img" aria-labelledby="title desc">
+<title id="title">Milestones</title>
+<desc id="desc">Milestones. 2024 · First open-source project. 2026 · Platform engineering</desc>
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect x="0.5" y="0.5" width="1199" height="163" rx="12" fill="#ffffff" stroke="#d0d7de"/><text x="24" y="35" class="sans" font-size="18" font-weight="600" fill="#a35f00" text-anchor="start">Milestones</text><text x="24" y="88" class="sans" font-size="16" font-weight="400" fill="#1f2328" text-anchor="start">2024 · First open-source project</text><text x="24" y="121" class="sans" font-size="16" font-weight="400" fill="#1f2328" text-anchor="start">2026 · Platform engineering</text>
+</svg>

@@ -1,4 +1,6 @@
 {
+  "$schema": "https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/develop/schema/diagnostic-profile.schema.json",
+  "schemaVersion": 1,
   "login": "ada-mercer",
   "theme": "amber",
   "header": {
@@ -6,11 +8,25 @@
     "headline": "Platform Engineer · Distributed Systems",
     "systemLabel": "Developer profile",
     "readouts": [
-      { "label": "Role", "value": "Platform & SRE" },
-      { "label": "Base", "value": "Lisbon, PT" },
-      { "label": "Stack", "value": "Go · Rust · TS" }
+      {
+        "label": "Role",
+        "value": "Platform & SRE"
+      },
+      {
+        "label": "Base",
+        "value": "Lisbon, PT"
+      },
+      {
+        "label": "Stack",
+        "value": "Go · Rust · TS"
+      }
     ],
-    "tags": ["DISTRIBUTED SYSTEMS", "OBSERVABILITY", "EDGE & IoT", "DEVEX"]
+    "tags": [
+      "DISTRIBUTED SYSTEMS",
+      "OBSERVABILITY",
+      "EDGE & IoT",
+      "DEVEX"
+    ]
   },
   "projects": [
     {
@@ -18,39 +34,88 @@
       "title": "FleetLink",
       "kind": "Gateway · Telemetry",
       "summary": "Fleet telemetry gateway that streams vehicle data over MQTT into a time-series store, with backpressure, replay and per-device quotas.",
-      "tags": ["Go", "MQTT", "TimescaleDB", "gRPC"]
+      "tags": [
+        "Go",
+        "MQTT",
+        "TimescaleDB",
+        "gRPC"
+      ]
     },
     {
       "repo": "pulse-ui",
       "title": "Pulse UI",
       "kind": "Web · Dashboards",
       "summary": "Composable dashboard kit for live operational data, with streaming charts, alert timelines and keyboard-first navigation.",
-      "tags": ["TypeScript", "React", "WebSockets"]
+      "tags": [
+        "TypeScript",
+        "React",
+        "WebSockets"
+      ]
     },
     {
       "repo": "ledger-api",
       "title": "Ledger API",
       "kind": "Service · Finance",
       "summary": "Double-entry ledger service with idempotent writes, audit trails and point-in-time balance queries.",
-      "tags": ["Rust", "PostgreSQL", "OpenAPI"]
+      "tags": [
+        "Rust",
+        "PostgreSQL",
+        "OpenAPI"
+      ]
     },
     {
       "repo": "edge-sensor-kit",
       "title": "Edge Sensor Kit",
       "kind": "Embedded · IoT",
       "summary": "Firmware and calibration tooling for low-power environmental sensors on ESP32, with OTA updates and a Python test bench.",
-      "tags": ["C++", "ESP32", "Python"]
+      "tags": [
+        "C++",
+        "ESP32",
+        "Python"
+      ]
     }
   ],
   "contacts": [
-    { "id": "linkedin", "label": "LinkedIn", "url": "https://www.linkedin.com/in/example", "glyph": "in" },
-    { "id": "email", "label": "Email", "url": "mailto:ada@example.com", "glyph": "@" },
-    { "id": "website", "label": "Website", "url": "https://example.com", "glyph": "www" }
+    {
+      "id": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/example",
+      "glyph": "in"
+    },
+    {
+      "id": "email",
+      "label": "Email",
+      "url": "mailto:ada@example.com",
+      "glyph": "@"
+    },
+    {
+      "id": "website",
+      "label": "Website",
+      "url": "https://example.com",
+      "glyph": "www"
+    }
   ],
   "telemetry": {
     "languageLimit": 6
   },
   "footer": {
     "message": "No faults detected"
+  },
+  "content": {
+    "skills": [
+      "Go",
+      "Rust",
+      "TypeScript"
+    ],
+    "learning": [
+      "Distributed systems"
+    ],
+    "building": [
+      "Developer tools"
+    ],
+    "timeline": [
+      "2024 · First open-source project",
+      "2026 · Platform engineering"
+    ]
   }
 }

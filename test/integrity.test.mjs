@@ -128,3 +128,28 @@ test('empty contribution calendars have a true zero peak without invalid geometr
   assert.match(svg, /Peak week: 0 contributions/);
   assert.doesNotMatch(svg, /NaN|Infinity/);
 });
+
+test('request timeouts are attached to fetch and classified without exposing request data', async () => {
+  await assert.rejects(fetchUser('a', 'secret', { retries: 0, fetchImpl: async (_, options) => {
+    assert.ok(options.signal instanceof AbortSignal);
+    throw new DOMException('request expired', 'TimeoutError');
+  } }), (error) => error.code === 'NETWORK' && /timed out/.test(error.message));
+});
+
+test('invalid JSON and insufficient permissions produce specific errors', async () => {
+  await assert.rejects(fetchUser('a', 'secret', { fetchImpl: async () => new Response('{broken') }), /invalid JSON/);
+  await assert.rejects(fetchUser('a', 'secret', { fetchImpl: async () => response(null, 403) }), /does not have permission/);
+});
+
+test('temporary server failure retries before loading a complete response', async () => {
+  const user = fixture();
+  user.repositories.nodes = user.repositories.nodes.map((r) => repo(user.login, r.name, r.stargazerCount));
+  user.pinnedItems.nodes = [];
+  let attempts = 0;
+  const loaded = await fetchUser(user.login, 'secret', { sleep: async () => {}, fetchImpl: async () => {
+    attempts += 1;
+    return attempts === 1 ? response(null, 503) : response({ user });
+  } });
+  assert.equal(attempts, 2);
+  assert.equal(loaded.login, user.login);
+});

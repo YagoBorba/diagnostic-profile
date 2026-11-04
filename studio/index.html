@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Monte um README do GitHub com estilos, blocos e SVGs gerados no seu próprio repositório.">
+  <title>Diagnostic Profile — Studio</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip" href="#workspace">Ir para o configurador</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Diagnostic Profile Studio">
+      <span class="brand-mark" aria-hidden="true">D<span>_</span></span>
+      <span>Diagnostic Profile <small>STUDIO</small></span>
+    </a>
+    <nav aria-label="Navegação principal">
+      <a href="#gallery">Modelos</a>
+      <a href="#workspace">Personalizar</a>
+      <a href="https://github.com/YagoBorba/diagnostic-profile" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div>
+        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> O SEU README, COM IDENTIDADE</p>
+        <h1>Seu perfil.<br><span>Do seu jeito.</span></h1>
+        <p class="intro">Escolha um ponto de partida, combine estilos e organize seus blocos. Veja o resultado antes de colocar no GitHub.</p>
+      </div>
+      <div class="hero-note">
+        <span class="note-index">01 — 02 — 03</span>
+        <p>Escolha.<br>Experimente.<br>Publique no seu repositório.</p>
+        <span class="note-caption">SVGs próprios · claro e escuro · sem servidor de imagens</span>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="gallery" aria-labelledby="gallery-title">
+      <div class="section-header">
+        <div><p class="eyebrow">01 / PONTO DE PARTIDA</p><h2 id="gallery-title">Encontre a sua frequência.</h2></div>
+        <p>Todos os modelos continuam editáveis.</p>
+      </div>
+      <div class="preset-grid" id="presets" aria-label="Modelos de perfil"></div>
+    </section>
+
+    <section id="workspace" class="workspace" aria-labelledby="workspace-title">
+      <div class="section-header">
+        <div><p class="eyebrow">02 / SUA COMPOSIÇÃO</p><h2 id="workspace-title">Ajuste cada detalhe.</h2></div>
+        <div class="history-actions">
+          <button id="undo" class="quiet" disabled>↶ Desfazer</button>
+          <button id="redo" class="quiet" disabled>↷ Refazer</button>
+          <button id="random" class="quiet">Surpreenda-me</button>
+        </div>
+      </div>
+
+      <div class="editor-layout">
+        <aside class="controls" aria-label="Controles de personalização">
+          <div class="editor-tabs" role="tablist" aria-label="Categorias">
+            <button role="tab" id="tab-profile" aria-controls="panel-profile" aria-selected="true" data-tab="profile">Perfil</button>
+            <button role="tab" id="tab-style" aria-controls="panel-style" aria-selected="false" data-tab="style">Estilo</button>
+            <button role="tab" id="tab-blocks" aria-controls="panel-blocks" aria-selected="false" data-tab="blocks">Blocos</button>
+          </div>
+
+          <div id="panel-profile" role="tabpanel" aria-labelledby="tab-profile">
+            <label>Login do GitHub<input id="login" maxlength="39" autocomplete="off" spellcheck="false"></label>
+            <label>Nome de exibição<input id="name" maxlength="120"></label>
+            <label>Uma frase sobre você<textarea id="headline" rows="2" maxlength="200"></textarea></label>
+            <label>Áreas de foco <small>Até 6, separadas por vírgula</small><input id="tags" maxlength="300"></label>
+            <details>
+              <summary>Textos e campos do cabeçalho</summary>
+              <label>Rótulo do painel<input id="system-label" maxlength="80"></label>
+              <label>Prompt do terminal <small>Vazio usa o login automaticamente</small><input id="prompt" maxlength="120"></label>
+              <div id="readouts-editor"></div>
+              <button id="add-readout" class="quiet full">+ Adicionar campo</button>
+            </details>
+            <details>
+              <summary>Projetos e contatos</summary>
+              <label class="check"><input id="pinned" type="checkbox"> Usar meus repositórios fixados</label>
+              <p class="help">No preview, os projetos são fictícios. O workflow consulta os dados reais.</p>
+              <div id="projects-editor"></div>
+              <button id="add-project" class="quiet full">+ Adicionar projeto</button>
+              <h3>Contatos</h3><div id="contacts-editor"></div>
+              <button id="add-contact" class="quiet full">+ Adicionar contato</button>
+            </details>
+            <details>
+              <summary>Conteúdo pessoal</summary>
+              <label>Tecnologias <small>Uma por linha; sem notas de habilidade</small><textarea id="skills" rows="3"></textarea></label>
+              <label>Estudando agora <small>Um item por linha</small><textarea id="learning" rows="3"></textarea></label>
+              <label>Construindo agora<textarea id="building" rows="3"></textarea></label>
+              <label>Marcos e trajetória <small>Uma entrada por linha</small><textarea id="timeline" rows="3"></textarea></label>
+              <label>Mensagem de rodapé<input id="footer-message" maxlength="120"></label>
+            </details>
+            <details>
+              <summary>Destino dos arquivos</summary>
+              <label>Repositório dos assets <small>owner/repository; vazio usa login/login</small><input id="destination" placeholder="seu-login/seu-login" maxlength="140"></label>
+              <label>Branch dos assets<input id="branch" maxlength="100" placeholder="output"></label>
+              <label>URL base personalizada <small>Opcional; substitui o endereço calculado</small><input id="base-url" type="url" placeholder="https://..." maxlength="2048"></label>
+            </details>
+          </div>
+
+          <div id="panel-style" role="tabpanel" aria-labelledby="tab-style" hidden>
+            <label>Família visual<select id="family"><option value="diagnostic">Diagnóstico</option><option value="terminal">Terminal</option><option value="minimal">Minimalista</option></select></label>
+            <label>Paleta<select id="theme"></select></label>
+            <div class="swatches" id="swatches" aria-label="Cores da paleta"></div>
+            <div class="field-pair"><label>Destaque<input id="accent" type="color"></label><label>Fundo do painel<input id="panel-color" type="color"></label></div>
+            <div class="field-pair"><label>Texto<input id="text-color" type="color"></label><label>Sinal<input id="signal-color" type="color"></label></div>
+            <button id="reset-colors" class="quiet full">Restaurar cores da paleta</button>
+            <label>Composição<select id="layout"><option value="standard">Completa</option><option value="compact">Compacta</option><option value="grid">Grade de projetos</option></select></label>
+            <div class="field-pair">
+              <label>Bordas<select id="border"><option value="rounded">Arredondadas</option><option value="square">Retas</option></select></label>
+              <label>Densidade<select id="density"><option value="comfortable">Confortável</option><option value="compact">Compacta</option></select></label>
+            </div>
+            <label>Animação<select id="motion"><option value="none">Sem animação</option><option value="subtle">Suave</option><option value="full">Completa</option></select></label>
+            <label class="check"><input id="decorations" type="checkbox"> Detalhes decorativos do diagnóstico</label>
+            <label>Colunas de projetos<select id="columns"><option value="1">Uma coluna</option><option value="2">Duas colunas</option></select></label>
+            <label>Alinhamento dos cartões e contatos<select id="alignment"><option value="left">À esquerda</option><option value="center">Centralizado</option><option value="right">À direita</option></select><small>Disponível na incorporação com HTML.</small></label>
+            <label>Tema no README<select id="readme-mode"><option value="auto">Automático, conforme o visitante</option><option value="dark">Sempre escuro</option><option value="light">Sempre claro</option></select></label>
+            <label>Formato de incorporação<select id="markup"><option value="picture">HTML com picture</option><option value="markdown">Markdown simples</option></select></label>
+            <label class="check"><input id="headings" type="checkbox"> Títulos das seções</label>
+            <label class="check"><input id="text-summary" type="checkbox"> Resumo textual das métricas</label>
+            <p class="help">Movimento reduzido é respeitado. Em Markdown simples, o tema automático usa a variante escura.</p>
+          </div>
+
+          <div id="panel-blocks" role="tabpanel" aria-labelledby="tab-blocks" hidden>
+            <p class="help">Arraste os blocos ou use as setas. Desmarque para ocultar; o conteúdo continua salvo.</p>
+            <ol id="widget-list" class="widget-list"></ol>
+            <label>Novo bloco<select id="new-widget"></select></label>
+            <button id="add-widget" class="quiet full">+ Adicionar bloco</button>
+          </div>
+
+          <div class="draft-note"><span aria-hidden="true">◌</span> <span id="draft-status">Rascunho local neste navegador.</span><button id="reset" class="text-button">Recomeçar</button></div>
+        </aside>
+
+        <div class="preview-workspace">
+          <div class="preview-toolbar">
+            <div class="segmented" aria-label="Tema do preview"><button id="preview-dark" aria-pressed="true">Escuro</button><button id="preview-light" aria-pressed="false">Claro</button></div>
+            <div class="segmented" aria-label="Largura do preview"><button id="desktop" aria-pressed="true">Desktop</button><button id="mobile" aria-pressed="false">Celular</button></div>
+            <button id="compare" class="quiet" aria-pressed="false">Comparar</button>
+          </div>
+          <div class="demo-banner"><span class="demo-dot" aria-hidden="true"></span> DADOS FICTÍCIOS <span>Você está criando o estilo. O workflow buscará seus dados reais.</span></div>
+          <div id="errors" class="error-box" role="alert" hidden></div>
+          <div id="contrast-warning" class="warning-box" role="status" hidden></div>
+          <div class="comparison" id="comparison">
+            <div class="preview-canvas" id="preview" data-mode="dark" aria-label="Preview do perfil"></div>
+            <div class="preview-canvas" id="baseline" data-mode="dark" aria-label="Modelo de referência" hidden></div>
+          </div>
+          <div class="preview-caption"><span id="render-status" role="status" aria-live="polite">Preparando preview…</span><span>Motor compartilhado com CLI e Action</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="export" class="export-section" aria-labelledby="export-title">
+      <div class="export-copy"><p class="eyebrow">03 / LEVE PARA O GITHUB</p><h2 id="export-title">Pronto para ser seu.</h2><p>Baixe os arquivos e siga os passos. Você mantém o controle dos assets no seu repositório.</p>
+        <ol class="install-steps"><li>Adicione a configuração e o workflow ao seu repositório de perfil.</li><li>Confira o destino, as permissões e a referência da Action.</li><li>Execute o workflow e incorpore o snippet no README.</li></ol>
+        <p class="help">Versão em desenvolvimento: a Action precisa estar acessível ao repositório que a utiliza. O kit inclui instruções e previews fictícios separados dos arquivos de instalação.</p>
+      </div>
+      <div class="export-panel">
+        <div class="export-tabs"><button id="show-config" aria-pressed="true">Configuração</button><button id="show-snippet" aria-pressed="false">Snippet</button><button id="show-workflow" aria-pressed="false">Workflow</button></div>
+        <pre id="code" tabindex="0" aria-label="Código para exportação"></pre>
+        <div class="export-actions"><button id="copy" class="quiet">Copiar código</button><button id="download" class="primary">Baixar kit ZIP ↗</button></div>
+        <div class="secondary-actions"><button id="import" class="text-button">Importar JSON</button><button id="save-json" class="text-button">Baixar JSON</button><button id="share" class="text-button">Compartilhar estilo</button><button id="favorite" class="text-button">Salvar favorito</button></div>
+        <p class="help">Links de estilo incluem seus textos e contatos. Confira antes de compartilhar. Não inclua credenciais.</p>
+        <input id="import-file" type="file" accept=".json,application/json" hidden>
+        <div id="favorites"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>Diagnostic Profile <span aria-hidden="true">/</span> crie, combine, compartilhe.</span><a href="https://github.com/YagoBorba/diagnostic-profile/blob/develop/LICENSE">MIT License</a></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

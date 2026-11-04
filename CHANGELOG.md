@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+### Studio and personalization
+
+- Add a browser Studio with six presets, six palettes, three visual families and shared-engine previews.
+- Add configurable blocks, narrow panels/project cards, custom colors, alignment, motion and incorporation formats.
+- Add skills, learning/building, calendar, milestone and divider widgets.
+- Add drafts/favorites, comparison, undo/redo, JSON import, share links and ZIP installation kits.
+- Match generated workflows to their destination and guard source branches and cross-repository credentials.
+- Preserve grapheme clusters when wrapping text and distinguish unknown metrics from real zero values.
+
 ### Fixed
 
 - Paginate public repositories and repository languages instead of silently truncating profile totals.
