@@ -13,6 +13,8 @@
 
 ### Fixed
 
+- Reject invalid Git destination refs before exporting a publication workflow.
+
 - Paginate public repositories and repository languages instead of silently truncating profile totals.
 - Keep pinned and explicitly selected projects associated with their real owner, URL and metadata.
 - Validate configuration types, numeric limits, URL protocols and output filename collisions before rendering.
