@@ -12,9 +12,10 @@ import { writeAssets } from './output.mjs';
 import { summarize } from './stats.mjs';
 import { paletteNames } from './themes.mjs';
 import { generateWorkflow } from './workflow.mjs';
+import { PRESETS } from './presets.mjs';
 
 const HELP = [
-  'Usage: diagnostic-profile [build|init|validate|doctor|list-themes|list-widgets] [options]',
+  'Usage: diagnostic-profile [build|init|validate|doctor|list-themes|list-widgets|list-presets|preview] [options]',
   '', '  --config, -c   JSON config (default: diagnostic-profile.json)',
   '  --output, -o   Generated asset directory (default: dist)',
   '  --login        Override config.login; DP_LOGIN is only a fallback',
@@ -33,7 +34,7 @@ export async function main(args = process.argv.slice(2), env = process.env) {
   const { values, positionals } = parseArgs({ args, allowPositionals: true, options: {
     config: { type: 'string', short: 'c', default: env.DP_CONFIG ?? 'diagnostic-profile.json' },
     output: { type: 'string', short: 'o', default: env.DP_OUTPUT_DIR ?? 'dist' },
-    login: { type: 'string' }, fixture: { type: 'string' }, help: { type: 'boolean', short: 'h' },
+    login: { type: 'string' }, fixture: { type: 'string' }, preset: { type: 'string' }, port: { type: 'string' }, help: { type: 'boolean', short: 'h' },
     version: { type: 'boolean' }, json: { type: 'boolean' }, 'dry-run': { type: 'boolean' }, force: { type: 'boolean' },
   } });
   const pkg = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
@@ -44,9 +45,17 @@ export async function main(args = process.argv.slice(2), env = process.env) {
   const print = (data, message) => console.log(values.json ? JSON.stringify(data) : message);
   if (command === 'list-themes') { print(paletteNames, paletteNames.join('\n')); return; }
   if (command === 'list-widgets') { print(WIDGETS, WIDGETS.map((w) => w.id + ': ' + w.description).join('\n')); return; }
+  if (command === 'list-presets') { print(PRESETS, Object.entries(PRESETS).map(([id, p]) => id + ': ' + p.name).join('\n')); return; }
+  if (command === 'preview') {
+    const { buildStudio, serveStudio } = await import('../scripts/studio.mjs');
+    await buildStudio();
+    await serveStudio(Number(values.port ?? 4173));
+    return;
+  }
   if (command === 'init') {
     const login = values.login ?? env.DP_LOGIN ?? env.GITHUB_REPOSITORY_OWNER ?? 'your-login';
     const config = starterConfig(login);
+    if (values.preset) { delete config.theme; config.preset = values.preset; config.presetVersion = 1; }
     normalizeConfig(config);
     const configPath = resolve(values.config);
     const workflowPath = resolve('.github/workflows/profile.yml');
@@ -62,9 +71,7 @@ export async function main(args = process.argv.slice(2), env = process.env) {
     }
     await writeFile(configPath, JSON.stringify(config, null, 2) + '\n', { flag });
     // Nonstandard config paths need an explicit matching workflow input.
-    const workflow = generateWorkflow()
-      .replace('config: diagnostic-profile.json', 'config: ' + JSON.stringify(values.config))
-      .replace('      - diagnostic-profile.json', '      - ' + JSON.stringify(values.config));
+    const workflow = generateWorkflow(config, { configPath: values.config, outputDir: values.output });
     await writeFile(workflowPath, workflow, { flag });
     print({ config: configPath, workflow: workflowPath }, 'Created config and workflow. Edit the profile, review permissions, then run validate.');
     return;

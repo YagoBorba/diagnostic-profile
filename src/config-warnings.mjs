@@ -1,5 +1,12 @@
 const known = {
-  '': ['$schema', 'schemaVersion', 'login', 'theme', 'assetsBaseUrl', 'header', 'projects', 'contacts', 'telemetry', 'footer'],
+  '': ['$schema', 'schemaVersion', 'preset', 'presetVersion', 'login', 'theme', 'assetsBaseUrl', 'header', 'projects', 'contacts', 'telemetry', 'footer', 'appearance', 'layout', 'content', 'widgets', 'destination'],
+  appearance: ['family', 'motion', 'border', 'density', 'decorations', 'colors'],
+  layout: ['type', 'mode', 'markup', 'projectColumns', 'headings', 'textSummary', 'align'],
+  colors: ['dark', 'light'],
+  palette: ['accent', 'signal', 'panel', 'text'],
+  content: ['skills', 'learning', 'building', 'timeline'],
+  destination: ['repository', 'branch'],
+  widgets: ['id', 'type', 'enabled', 'title'],
   header: ['name', 'headline', 'prompt', 'systemLabel', 'readouts', 'tags'],
   telemetry: ['excludeLanguages', 'languageLimit'], footer: ['message'],
   projects: ['repo', 'title', 'kind', 'summary', 'tags', 'url'],
@@ -14,10 +21,12 @@ export function configWarnings(input) {
     }
   };
   inspect(input, '', '');
-  for (const key of ['header', 'telemetry', 'footer']) inspect(input?.[key], key, key);
-  for (const key of ['projects', 'contacts']) {
+  for (const key of ['header', 'telemetry', 'footer', 'appearance', 'layout', 'content', 'destination']) inspect(input?.[key], key, key);
+  for (const key of ['projects', 'contacts', 'widgets']) {
     if (Array.isArray(input?.[key])) input[key].forEach((entry, i) => inspect(entry, key, key + '[' + i + ']'));
   }
+  inspect(input?.appearance?.colors, 'colors', 'appearance.colors');
+  for (const mode of ['dark', 'light']) inspect(input?.appearance?.colors?.[mode], 'palette', 'appearance.colors.' + mode);
   if (Array.isArray(input?.header?.readouts)) input.header.readouts.forEach((entry, i) => inspect(entry, 'readouts', 'header.readouts[' + i + ']'));
   return warnings;
 }

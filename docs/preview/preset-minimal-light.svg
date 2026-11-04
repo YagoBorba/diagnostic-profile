@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="356" viewBox="0 0 1200 356" role="img" aria-labelledby="title desc">
+<title id="title">Ada Mercer — Platform Engineer · Distributed Systems</title>
+<desc id="desc">Ada Mercer. Platform Engineer · Distributed Systems. Role: Platform &amp; SRE. Base: Lisbon, PT. Stack: Go · Rust · TS</desc>
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+*{animation:none!important}
+</style>
+<rect x="0.5" y="0.5" width="1199" height="355" rx="4" fill="#ffffff" stroke="#d0d7de"/><text x="24" y="35" class="sans" font-size="18" font-weight="600" fill="#0969da" text-anchor="start">Developer profile</text><text x="24" y="98" class="sans" font-size="40" font-weight="700" fill="#1f2328" text-anchor="start">Ada Mercer</text><text x="24" y="146" class="sans" font-size="20" font-weight="400" fill="#59636e" text-anchor="start">Platform Engineer · Distributed Systems</text><text x="24" y="190" class="sans" font-size="16" font-weight="400" fill="#1f2328" text-anchor="start">Role: Platform &amp; SRE</text><text x="24" y="223" class="sans" font-size="16" font-weight="400" fill="#1f2328" text-anchor="start">Base: Lisbon, PT</text><text x="24" y="256" class="sans" font-size="16" font-weight="400" fill="#1f2328" text-anchor="start">Stack: Go · Rust · TS</text><text x="24" y="303" class="sans" font-size="16" font-weight="400" fill="#1f2328" text-anchor="start">DISTRIBUTED SYSTEMS · OBSERVABILITY · EDGE &amp; IoT · DEVEX</text>
+</svg>

@@ -32,10 +32,17 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test
+        run: |
+          npm run check
+          npm test
 
       - name: Render example from fixture
         run: node src/cli.mjs --config examples/diagnostic-profile.json --fixture test/fixtures/user.json --output dist
+
+      - name: Build Studio and check its module syntax
+        run: |
+          node --check studio/app.mjs
+          npm run build:studio
 
       - name: Check preview assets are up to date
         run: |

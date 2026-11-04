@@ -1,5 +1,7 @@
 import { DEFAULT_EXCLUDED_LANGUAGES } from './stats.mjs';
 import { paletteNames } from './themes.mjs';
+import { normalizeDesign } from './design.mjs';
+import { resolvePreset } from './presets.mjs';
 
 const slug = (value) => String(value).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -19,7 +21,9 @@ export async function loadConfig(path) {
 
 export function normalizeConfig(input, fallbackLogin) {
   if (!isObject(input)) throw new Error('Invalid config:\n- config must be an object');
+  input = resolvePreset(input);
   const errors = [];
+  const design = normalizeDesign(input, errors);
   if (input.schemaVersion !== undefined && input.schemaVersion !== 1) errors.push('"schemaVersion" must be 1; newer formats require a newer generator');
   const text = (value, path, fallback = '', max = 200) => {
     const result = value === undefined ? fallback : value;
@@ -97,11 +101,12 @@ export function normalizeConfig(input, fallbackLogin) {
   if (!Number.isInteger(languageLimit) || languageLimit < 1 || languageLimit > 10) errors.push('"telemetry.languageLimit" must be an integer between 1 and 10');
   const excludeLanguages = telemetry.excludeLanguages === undefined ? DEFAULT_EXCLUDED_LANGUAGES :
     list(telemetry.excludeLanguages, 'telemetry.excludeLanguages', 100).map((v, i) => text(v, 'telemetry.excludeLanguages[' + i + ']', '', 80));
-  const assetsBaseUrl = input.assetsBaseUrl === undefined ? 'https://raw.githubusercontent.com/' + login + '/' + login + '/output/' :
+  const target = design.destination.repository || login + '/' + login;
+  const assetsBaseUrl = input.assetsBaseUrl === undefined ? 'https://raw.githubusercontent.com/' + target + '/' + design.destination.branch + '/' :
     url(input.assetsBaseUrl, 'assetsBaseUrl', ['https:', 'http:']);
   if (/[?#\s,]/.test(assetsBaseUrl)) errors.push('"assetsBaseUrl" cannot contain query strings, fragments, whitespace or commas');
   const result = {
-    schemaVersion: 1, login, theme, assetsBaseUrl,
+    schemaVersion: 1, login, theme, assetsBaseUrl, ...design,
     header: {
       name: header.name === undefined ? undefined : text(header.name, 'header.name', '', 120),
       headline: header.headline === undefined ? undefined : text(header.headline, 'header.headline', '', 200),

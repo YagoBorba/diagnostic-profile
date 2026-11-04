@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="197" viewBox="0 0 1200 197" role="img" aria-labelledby="title desc">
+<title id="title">Technologies I use</title>
+<desc id="desc">Technologies I use. Go. Rust. TypeScript</desc>
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect x="0.5" y="0.5" width="1199" height="196" rx="12" fill="#0f141b" stroke="#2a3441"/><text x="24" y="35" class="sans" font-size="18" font-weight="600" fill="#ffb547" text-anchor="start">Technologies I use</text><text x="24" y="88" class="sans" font-size="16" font-weight="400" fill="#e6edf3" text-anchor="start">Go</text><text x="24" y="121" class="sans" font-size="16" font-weight="400" fill="#e6edf3" text-anchor="start">Rust</text><text x="24" y="154" class="sans" font-size="16" font-weight="400" fill="#e6edf3" text-anchor="start">TypeScript</text>
+</svg>

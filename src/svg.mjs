@@ -1,28 +1,41 @@
 import { MONO, MONO_RATIO, SANS } from './themes.mjs';
 
 export const esc = (value) =>
-  String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  String(value).toWellFormed().replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/g, '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-export const monoWidth = (content, size) => String(content).length * size * MONO_RATIO;
+const segmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+const graphemes = (value) => Array.from(segmenter.segment(String(value)), (entry) => entry.segment);
+const columns = (value) => /[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}\p{Extended_Pictographic}]/u.test(value) ? 2 : 1;
+export const textColumns = (value) => graphemes(value).reduce((sum, part) => sum + columns(part), 0);
+export const monoWidth = (content, size) => textColumns(content) * size * MONO_RATIO;
 
 export const fmt = (value) => new Intl.NumberFormat('en-US').format(value);
 
 export function wrap(content, maxChars, maxLines) {
+  if (!Number.isInteger(maxChars) || maxChars < 2 || !Number.isInteger(maxLines) || maxLines < 1) throw new Error('Text wrapping needs positive line limits');
   const lines = [];
   let line = '';
-  for (const word of String(content).trim().split(/\s+/)) {
-    const candidate = line ? `${line} ${word}` : word;
-    if (candidate.length > maxChars && line) {
-      lines.push(line);
-      line = word;
-    } else {
-      line = candidate;
+  const words = String(content).trim().split(/\s+/).flatMap((word) => {
+    const chunks = [];
+    let chunk = '', width = 0;
+    for (const part of graphemes(word)) {
+      if (width + columns(part) > maxChars && chunk) { chunks.push(chunk); chunk = ''; width = 0; }
+      chunk += part; width += columns(part);
     }
+    if (chunk) chunks.push(chunk);
+    return chunks;
+  });
+  for (const word of words) {
+    const candidate = line ? line + ' ' + word : word;
+    if (textColumns(candidate) > maxChars && line) { lines.push(line); line = word; }
+    else line = candidate;
   }
   if (line) lines.push(line);
   if (lines.length > maxLines) {
     const kept = lines.slice(0, maxLines);
-    kept[maxLines - 1] = `${kept[maxLines - 1].replace(/[\s,.;:]+\S*$/, '')}…`;
+    const last = graphemes(kept[maxLines - 1]);
+    while (textColumns(last.join('')) > maxChars - 1) last.pop();
+    kept[maxLines - 1] = last.join('').trimEnd() + '…';
     return kept;
   }
   return lines;
@@ -44,7 +57,7 @@ ${body}
 }
 
 export const panel = (width, height, theme, radius = 12) =>
-  `<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="${radius}" fill="${theme.panel}" stroke="${theme.border}"/>`;
+  `<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="${theme.radius ?? radius}" fill="${theme.panel}" stroke="${theme.border}"/>`;
 
 export const text = (x, y, content, { size = 14, fill, cls = 'sans', weight = 400, anchor = 'start', extra = '' } = {}) =>
   `<text x="${x}" y="${y}" class="${cls}" font-size="${size}" font-weight="${weight}" fill="${fill}" text-anchor="${anchor}"${extra}>${esc(content)}</text>`;

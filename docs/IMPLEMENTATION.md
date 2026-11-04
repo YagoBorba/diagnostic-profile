@@ -1,28 +1,41 @@
 # Implementation evidence
 
-The approved scope is in [ROADMAP.md](ROADMAP.md). Tasks remain unchecked until the described behavior and relevant verification are complete. An implemented code path does not count as a completed live accessibility, public distribution or user study check.
+The approved scope is in [ROADMAP.md](ROADMAP.md). Checked tasks describe implemented behavior with evidence. Public publication, a real screen-reader session and rendered GitHub compatibility are not implied by unit tests.
 
-## Reliability batch
+## Gitflow
 
-PR: https://github.com/YagoBorba/diagnostic-profile/pull/3
+The maintainer selected the BorbaCarLabs convention: English Conventional Commits without emojis, supporting branches from develop, merge commits after green CI, releases through release/X.Y.Z to main with a tag and a back-merge to develop.
 
-- FIX-01, FIX-02: repository/language pagination, including a synthetic 101-repository test.
-- FIX-03, FIX-04, FIX-11: owner/repository identity, explicit project lookup and primary-language metadata.
-- FIX-05, FIX-06, FIX-07: type, bounds and output filename validation.
-- FIX-08, FIX-09: escaped asset attributes and true zero contribution peak.
-- REL-01, REL-02, REL-03: request timeout, bounded transient retries and specific API errors.
-- QA-01 and part of QA-02: regression cases for data, input and API boundaries.
-- DATA-01, DATA-02 and DATA-09: documented periods and metric meaning; visual labels still need review.
+- [PR #3 — reliability](https://github.com/YagoBorba/diagnostic-profile/pull/3), merged.
+- [PR #5 — conventions and roadmap](https://github.com/YagoBorba/diagnostic-profile/pull/5), merged.
+- [PR #7 — schema, CLI and transactional output](https://github.com/YagoBorba/diagnostic-profile/pull/7), merged.
+- [Issue #8 — Studio](https://github.com/YagoBorba/diagnostic-profile/issues/8), current delivery.
 
-Evidence: 31 local tests pass; deterministic previews have no content drift. A read-only live request loaded 8 public owned non-fork repositories and 5 public pinned repositories for YagoBorba. The test fixture remains fictional.
+## Reliability and setup
 
-## Repository conventions batch
+- Repository/language pagination, correct foreign project identities and explicit project lookup.
+- Type/length/range/URL validation and filename collision checks.
+- Bounded timeout/retry handling and specific API errors.
+- Version-1 schema, backwards-compatible unversioned configs and unknown-field warnings.
+- init, validate, doctor, catalogs, dry-run and structured JSON output.
+- Staged output with rollback, locking, manifests and preservation of unrelated/edited files.
+- Node 22/24 on Linux/Windows; 37 tests passed in all four jobs before the Studio batch.
 
-- OSS-01, OSS-02, OSS-03, OSS-04: contribution instructions, issue/PR templates and tracked roadmap.
-- SEC-07: private security-report instructions; reporting feature availability and stable support versions still need publication review.
+A prior read-only live request loaded 8 public owned non-fork repositories and 5 public pinned projects for YagoBorba. No private payload was committed.
 
-Gitflow follows BorbaCarLabs: supporting branches from develop, Conventional Commits in English without emojis, merge commits after green CI, release branches to main followed by tags and a back-merge.
+## Studio verification — 2026-11-04
 
-## Pending delivery
+- Six presets/palettes and three families use the shared render engine.
+- Registered blocks have ordered unique instances; visibility, title, grouping and incorporation are configurable.
+- Skills, learning/building, calendar, milestone and divider blocks are available.
+- Narrow main/project variants, custom colors, contrast feedback and motion controls are included.
+- Browser checks covered preset selection, name/theme/layout changes, block arrow reordering, favorites, JSON reimport and ZIP download.
+- The downloaded 26-file ZIP was opened with an independent implementation; its selected theme/family/layout/order matched the displayed configuration, and fictional SVGs stayed under preview/.
+- At 390 px the document/editor stayed within viewport width. This is a responsive layout check, not a screen-reader or device usability study.
+- JSON Schema, XML, ZIP, workflow destinations, configuration round-trips and grapheme wrapping are covered by the 53-test suite.
+- Static module syntax, JSON and local documentation links are checked; the Studio build is included in CI.
+- Presets/widgets/palettes have deterministic committed fixture previews.
 
-The visual configurator, expanded presets, widgets, schema, atomic output, release publication and external integrations have not been delivered by these batches. See the roadmap for acceptance criteria and priorities.
+## Pending
+
+Public distribution is not complete: the repository remains private, the installation workflow is explicitly pre-release, and no Marketplace release or public Pages deployment has been claimed. External integrations, additional visual families, full localization, per-widget visual overrides, selectable telemetry metrics, live authenticated previews, real screen-reader checks and community remix submissions remain on the roadmap.

@@ -15,6 +15,9 @@
   "scripts": {
     "build": "node src/cli.mjs",
     "preview": "node scripts/preview.mjs",
+    "studio": "node scripts/studio.mjs --serve",
+    "build:studio": "node scripts/studio.mjs",
+    "check": "node scripts/check.mjs",
     "test": "node --test \"test/*.test.mjs\""
   },
   "keywords": [
@@ -25,6 +28,9 @@
     "profile-readme"
   ],
   "devDependencies": {
-    "saxes": "^6.0.0"
+    "ajv": "^8.20.0",
+    "fflate": "^0.8.3",
+    "saxes": "^6.0.0",
+    "yaml": "^2.9.1"
   }
 }
