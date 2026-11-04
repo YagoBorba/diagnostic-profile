@@ -76,6 +76,7 @@ export function normalizeDesign(input, errors) {
   const branch = text(destination.branch, 'output', 100, 'destination.branch');
   if (repository && !/^[a-z\d][a-z\d-]*\/[a-z\d_.-]+$/i.test(repository)) errors.push('"destination.repository" must be owner/repository');
   if (!/^[a-z\d][a-z\d._/-]*$/i.test(branch) || branch.includes('..') || branch.includes('//') || branch.endsWith('/') || branch.endsWith('.lock')) errors.push('"destination.branch" must be a valid branch path');
+  if (branch === 'HEAD' || branch.endsWith('.') || branch.split('/').some((part) => part.startsWith('.') || part.endsWith('.lock'))) errors.push('"destination.branch" contains a reserved or invalid Git ref component');
   if (['main', 'master', 'develop'].includes(branch.toLowerCase())) errors.push('"destination.branch" must be a dedicated asset branch, not main, master or develop');
   return { appearance, layout, content, widgets, destination: { repository, branch } };
 }

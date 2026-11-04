@@ -9,7 +9,7 @@ The maintainer selected the BorbaCarLabs convention: English Conventional Commit
 - [PR #3 — reliability](https://github.com/YagoBorba/diagnostic-profile/pull/3), merged.
 - [PR #5 — conventions and roadmap](https://github.com/YagoBorba/diagnostic-profile/pull/5), merged.
 - [PR #7 — schema, CLI and transactional output](https://github.com/YagoBorba/diagnostic-profile/pull/7), merged.
-- [Issue #8 — Studio](https://github.com/YagoBorba/diagnostic-profile/issues/8), current delivery.
+- [PR #9 — Studio](https://github.com/YagoBorba/diagnostic-profile/pull/9), merged after all four CI jobs passed.
 
 ## Reliability and setup
 
@@ -32,10 +32,12 @@ A prior read-only live request loaded 8 public owned non-fork repositories and 5
 - Browser checks covered preset selection, name/theme/layout changes, block arrow reordering, favorites, JSON reimport and ZIP download.
 - The downloaded 26-file ZIP was opened with an independent implementation; its selected theme/family/layout/order matched the displayed configuration, and fictional SVGs stayed under preview/.
 - At 390 px the document/editor stayed within viewport width. This is a responsive layout check, not a screen-reader or device usability study.
-- JSON Schema, XML, ZIP, workflow destinations, configuration round-trips and grapheme wrapping are covered by the 53-test suite.
+- JSON Schema, XML, ZIP, workflow destinations, configuration round-trips and grapheme wrapping are covered by the 54-test suite.
 - Static module syntax, JSON and local documentation links are checked; the Studio build is included in CI.
 - Presets/widgets/palettes have deterministic committed fixture previews.
 
 ## Pending
 
 Public distribution is not complete: the repository remains private, the installation workflow is explicitly pre-release, and no Marketplace release or public Pages deployment has been claimed. External integrations, additional visual families, full localization, per-widget visual overrides, selectable telemetry metrics, live authenticated previews, real screen-reader checks and community remix submissions remain on the roadmap.
+
+Destination-ref validation also checks reserved Git names/components against git check-ref-format; see issue #10.

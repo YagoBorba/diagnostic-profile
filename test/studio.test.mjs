@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
 import Ajv2020 from 'ajv/dist/2020.js';
 import { SaxesParser } from 'saxes';
 import { unzipSync, strFromU8 } from 'fflate';
@@ -139,6 +140,19 @@ test('generated workflows preserve destination and require credentials only thro
   assert.equal(publish.with.keep_history, true);
   assert.match(publish.env.GITHUB_TOKEN, /secrets.PROFILE_PUBLISH_TOKEN/);
   for (const branch of ['main', 'develop', 'master', '../main']) assert.throws(() => normalizeConfig({ login: 'a', destination: { branch } }), /destination.branch/);
+});
+
+test('destination branch validation agrees with Git for reserved path components', () => {
+  for (const branch of ['topic/.hidden', 'topic/a.lock/child', 'name.', 'HEAD']) {
+    const git = spawnSync('git', ['check-ref-format', '--branch', branch], { encoding: 'utf8' });
+    assert.notEqual(git.status, 0, branch + ' must be rejected by Git');
+    assert.throws(() => normalizeConfig({ login: 'a', destination: { branch } }), /destination.branch/);
+  }
+  for (const branch of ['profile-output', 'assets/2026.11', 'topic/project-lock']) {
+    const git = spawnSync('git', ['check-ref-format', '--branch', branch], { encoding: 'utf8' });
+    assert.equal(git.status, 0, git.stderr);
+    assert.equal(normalizeConfig({ login: 'a', destination: { branch } }).destination.branch, branch);
+  }
 });
 test('long words and grapheme clusters wrap without breaking emoji or exceeding column limits', () => {
   for (const value of ['longword'.repeat(20), '山田開発者'.repeat(10), '👩‍💻'.repeat(20), 'e\u0301'.repeat(40)]) {
