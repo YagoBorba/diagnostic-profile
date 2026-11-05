@@ -230,7 +230,11 @@
         "minimal",
         "opensource",
         "student",
-        "portfolio"
+        "portfolio",
+        "resume",
+        "researcher",
+        "maker",
+        "community"
       ],
       "description": "Versioned preset; explicit configuration overrides its defaults."
     },

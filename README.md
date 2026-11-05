@@ -33,13 +33,17 @@ It started as the profile of [YagoBorba](https://github.com/YagoBorba) after the
 
 - **No external image services.** Assets are plain SVG files served from your own repository.
 - **Dark and light variants** for every widget, switched with `<picture>` so they follow the viewer's GitHub theme.
-- **Accessible by default.** Every SVG ships with a `<title>` and a `<desc>` that spell out its data, and every snippet image has alt text.
+- **Text alternatives.** SVGs include title/description and snippet images include alt text. An optional text summary complements the images; real GitHub screen-reader verification remains pending.
 - **Motion that respects the viewer.** Animations stop under `prefers-reduced-motion`.
 - **Zero dependencies.** Plain Node.js 22, nothing to install.
 
+## Start here
+
+Create a plain Markdown README in the Studio without a token or installation, or choose SVGs with Action for styled panels and live metrics. Follow the [beginner guide](docs/GETTING_STARTED.md). The hosted Studio and Action repository are currently private; public automated installation is still pre-release. See the [product review and free hosting plan](docs/PRODUCT_REVIEW.md).
+
 ## Profile Studio
 
-Build a profile visually with six presets, six palettes and three families: Diagnostic, Terminal and Minimal. Edit profile fields, projects and contacts, reorder blocks, compare styles and export matching configuration, snippet and workflow.
+Build a profile visually with ten presets, six palettes and three families: Diagnostic, Terminal and Minimal. Edit profile fields, projects and contacts, reorder blocks, compare styles and export a standalone README or matching SVG configuration, snippet and workflow. Search templates by goal and clear the fictional sample before publishing.
 
     npm ci
     npm run studio

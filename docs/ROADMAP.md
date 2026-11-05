@@ -1,7 +1,9 @@
 # Diagnostic Profile — roteiro de evolução
 
 Data: 31/10/2026. Base técnica: análise da branch develop, commit 605ef7d.
-Atualizado em 04/11/2026. Este documento acompanha o roteiro aprovado: [x] indica comportamento implementado e verificado; [ ] indica trabalho pendente. As evidências e os PRs estão em [IMPLEMENTATION.md](IMPLEMENTATION.md). A integração do lote corrente depende da CI.
+Atualizado em 05/11/2026. Este documento acompanha o roteiro aprovado: [x] indica comportamento implementado e verificado; [ ] indica trabalho pendente. As evidências e os PRs estão em [IMPLEMENTATION.md](IMPLEMENTATION.md). A integração do lote corrente depende da CI.
+
+A revisão atual de usabilidade e do site gratuito está em [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md); o caminho sem automação está em [GETTING_STARTED.md](GETTING_STARTED.md). O workflow de Pages foi preparado, mas não publicado.
 
 ## Objetivo do produto
 
@@ -211,7 +213,7 @@ Referência de agendamento: https://docs.github.com/en/actions/reference/workflo
 - [x] SEC-06 · P1 · E — Fixar Actions externas por SHA revisado e manter atualização automatizada.
 - [x] SEC-07 · P1 · E — Criar SECURITY.md com canal privado de reporte e versões suportadas.
 - [ ] SEC-08 · P1 · E — Proteger branch de release e exigir as verificações definidas antes de publicar.
-- [ ] SEC-09 · P1 · E — Documentar dados locais, dados públicos e serviços externos usados pelo configurador.
+- [x] SEC-09 · P1 · E — Documentar dados locais, dados públicos e serviços externos usados pelo configurador.
 - [ ] SEC-10 · P2 · E — Exigir sanitização de SVG e licenças de ícones/temas aceitos da comunidade; não executar temas como código remoto.
 - [ ] SEC-11 · P3 · E — Avaliar OAuth ou backend somente se recursos de dados reais exigirem; projetar expiração, revogação e privilégio mínimo antes de implementar.
 
@@ -240,8 +242,8 @@ Referência para SHA de Actions: https://docs.github.com/en/actions/reference/se
 - [x] DOC-02 · P1 · E — Documentar cada opção, tipo, limite, padrão e exemplo de configuração.
 - [x] DOC-03 · P1 · E — Separar guias de iniciante, personalização e referência avançada.
 - [x] DOC-04 · P1 · E — Criar galeria com imagens e acesso direto à configuração de cada exemplo.
-- [ ] DOC-05 · P1 · E — Explicar como publicar assets e incorporá-los sem copiar tokens temporários de imagens privadas.
-- [ ] DOC-06 · P1 · E — Criar troubleshooting por sintoma: imagem quebrada, dados antigos, token, schedule e permissões.
+- [x] DOC-05 · P1 · E — Explicar como publicar assets e incorporá-los sem copiar tokens temporários de imagens privadas.
+- [x] DOC-06 · P1 · E — Criar troubleshooting por sintoma: imagem quebrada, dados antigos, token, schedule e permissões.
 - [x] DOC-07 · P1 · E — Explicar as definições e limitações das métricas e das animações.
 - [ ] DOC-08 · P1 · E — Incluir exemplos com usuário sem contribuições, sem projetos e sem contatos.
 - [x] DOC-09 · P1 · E — Documentar acessibilidade, idioma e uso em dispositivos menores.

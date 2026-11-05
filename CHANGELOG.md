@@ -4,6 +4,10 @@
 
 ### Studio and personalization
 
+- Generate standalone Markdown READMEs without a token, Action or fictional statistics; download directly or as a two-file ZIP.
+- Add Resume, Research notebook, Maker bench and Community templates, Portuguese gallery guidance, goal filters and accent-insensitive search.
+- Add sample-content clearing, a beginner guide, product review and an opt-in release-branch Pages workflow.
+
 - Add a browser Studio with six presets, six palettes, three visual families and shared-engine previews.
 - Add configurable blocks, narrow panels/project cards, custom colors, alignment, motion and incorporation formats.
 - Add skills, learning/building, calendar, milestone and divider widgets.

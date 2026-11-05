@@ -26,7 +26,7 @@
       <div>
         <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> O SEU README, COM IDENTIDADE</p>
         <h1>Seu perfil.<br><span>Do seu jeito.</span></h1>
-        <p class="intro">Escolha um ponto de partida, combine estilos e organize seus blocos. Veja o resultado antes de colocar no GitHub.</p>
+        <p class="intro">Escolha um modelo, preencha seu perfil e baixe um README pronto. Se quiser métricas e SVGs personalizados, configure a atualização pelo GitHub Actions.</p>
       </div>
       <div class="hero-note">
         <span class="note-index">01 — 02 — 03</span>
@@ -40,6 +40,11 @@
         <div><p class="eyebrow">01 / PONTO DE PARTIDA</p><h2 id="gallery-title">Encontre a sua frequência.</h2></div>
         <p>Todos os modelos continuam editáveis.</p>
       </div>
+      <div class="gallery-filters">
+        <label>Buscar modelo<input id="preset-search" type="search" placeholder="Projetos, currículo, estudos…" maxlength="80"></label>
+        <label>Seu objetivo<select id="preset-category"><option value="all">Todos os modelos</option><option value="career">Carreira e portfólio</option><option value="learning">Estudo e pesquisa</option><option value="community">Open source e comunidade</option><option value="creative">Identidade técnica</option></select></label>
+      </div>
+      <p id="gallery-status" class="help" role="status" aria-live="polite"></p>
       <div class="preset-grid" id="presets" aria-label="Modelos de perfil"></div>
     </section>
 
@@ -63,6 +68,8 @@
 
           <div id="panel-profile" role="tabpanel" aria-labelledby="tab-profile">
             <label>Login do GitHub<input id="login" maxlength="39" autocomplete="off" spellcheck="false"></label>
+            <button id="clear-example" class="quiet full">Limpar textos de exemplo</button>
+            <p class="help">Começamos com Ada, uma pessoa fictícia. Troque também os projetos, links e contatos antes de publicar.</p>
             <label>Nome de exibição<input id="name" maxlength="120"></label>
             <label>Uma frase sobre você<textarea id="headline" rows="2" maxlength="200"></textarea></label>
             <label>Áreas de foco <small>Até 6, separadas por vírgula</small><input id="tags" maxlength="300"></label>
@@ -150,14 +157,17 @@
     </section>
 
     <section id="export" class="export-section" aria-labelledby="export-title">
-      <div class="export-copy"><p class="eyebrow">03 / LEVE PARA O GITHUB</p><h2 id="export-title">Pronto para ser seu.</h2><p>Baixe os arquivos e siga os passos. Você mantém o controle dos assets no seu repositório.</p>
-        <ol class="install-steps"><li>Adicione a configuração e o workflow ao seu repositório de perfil.</li><li>Confira o destino, as permissões e a referência da Action.</li><li>Execute o workflow e incorpore o snippet no README.</li></ol>
-        <p class="help">Versão em desenvolvimento: a Action precisa estar acessível ao repositório que a utiliza. O kit inclui instruções e previews fictícios separados dos arquivos de instalação.</p>
+      <div class="export-copy"><p class="eyebrow">03 / LEVE PARA O GITHUB</p><h2 id="export-title">Pronto para ser seu.</h2>
+        <label>Como você quer usar?<select id="export-mode"><option value="readme">README pronto, sem automação</option><option value="action">SVGs e métricas com Action</option></select></label>
+        <p id="export-description">Baixe um README em Markdown com seus textos e links. Não precisa de token ou instalação. As cores e animações do preview são exclusivas da opção SVG; este README usa a aparência do GitHub.</p>
+        <ol class="install-steps" id="install-steps"><li>Revise os textos, projetos e contatos de exemplo.</li><li>Abra ou crie seu repositório público login/login.</li><li>Copie o README.md para a raiz e salve no GitHub.</li></ol>
+        <p class="help" id="export-limitations">Não inclui métricas ou calendários. Revise os textos de exemplo. Os textos são atualizados manualmente. O ZIP contém o README e as instruções.</p>
+        <p class="help">O site não escreve na sua conta. Rascunhos ficam neste navegador; links compartilhados incluem os textos e contatos. O provedor de hospedagem pode registrar acessos.</p>
       </div>
       <div class="export-panel">
-        <div class="export-tabs"><button id="show-config" aria-pressed="true">Configuração</button><button id="show-snippet" aria-pressed="false">Snippet</button><button id="show-workflow" aria-pressed="false">Workflow</button></div>
+        <div class="export-tabs"><button id="show-readme" aria-pressed="true">README pronto</button><button id="show-config" aria-pressed="false">JSON</button><button id="show-snippet" aria-pressed="false" hidden>Snippet</button><button id="show-workflow" aria-pressed="false" hidden>Workflow</button></div>
         <pre id="code" tabindex="0" aria-label="Código para exportação"></pre>
-        <div class="export-actions"><button id="copy" class="quiet">Copiar código</button><button id="download" class="primary">Baixar kit ZIP ↗</button></div>
+        <div class="export-actions"><button id="copy" class="quiet">Copiar código</button><button id="download-readme" class="quiet">Baixar README.md</button><button id="download" class="primary">Baixar kit ZIP ↗</button></div>
         <div class="secondary-actions"><button id="import" class="text-button">Importar JSON</button><button id="save-json" class="text-button">Baixar JSON</button><button id="share" class="text-button">Compartilhar estilo</button><button id="favorite" class="text-button">Salvar favorito</button></div>
         <p class="help">Links de estilo incluem seus textos e contatos. Confira antes de compartilhar. Não inclua credenciais.</p>
         <input id="import-file" type="file" accept=".json,application/json" hidden>
