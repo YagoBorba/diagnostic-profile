@@ -44,11 +44,13 @@ Destination-ref validation also checks reserved Git names/components against git
 
 ## Usability and free hosting review — 2026-11-05
 
-- Issue #12 tracks the standalone README flow and the public launch assessment.
+- [PR #13](https://github.com/YagoBorba/diagnostic-profile/pull/13) passed all four CI jobs and was integrated into develop with a merge commit. Issue #12 tracks the standalone README flow and the public launch assessment.
 - Ten presets now include Resume, Research notebook, Maker bench and Community. Portuguese gallery descriptions expose their block order, goal filters and accent-insensitive search.
 - Standalone Markdown export is the default. It uses declared content only, skips metric/calendar/timestamp widgets and downloads README.md directly or in a two-file ZIP. The SVG/Action kit remains a separate option.
 - Browser QA covered sample clearing, a new manual profile, the downloaded ZIP contents, filters/no results, export-mode switching, a project subpath and a 390 px viewport without horizontal overflow.
 - GitHub's Markdown API rendered a hostile-text sample as escaped prose and an encoded HTTPS destination. This verifies the text renderer, not the full SVG embedding or screen-reader experience on a profile page.
-- The suite has 60 passing tests, including new Markdown safety, empty/data-only content, ZIP and Pages publication-policy checks. Schema/XML checks also cover the four new presets across every palette.
+- The suite has 61 passing tests, including new Markdown safety, empty/data-only content, ZIP and Pages publication-policy checks. Schema/XML checks also cover the four new presets across every palette.
 - The opt-in Pages workflow is restricted to main, uses pinned Actions and has not been executed. No repository or Site audience was changed.
+- Issue #14 corrects the diagnostic telemetry heading, per-metric period labels and text alternative: contributions/commits/PRs/issues cover 12 months; stars/repos/followers are current totals. The new regression parses both SVG modes. Desktop inspection checked the additional labels; DATA-01 is implemented.
+- npm audit reported zero known vulnerabilities on 2026-11-05.
 - The beginner guide and [product review](PRODUCT_REVIEW.md) describe installation, troubleshooting, privacy, launch blockers and acceptance criteria.

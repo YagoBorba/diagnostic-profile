@@ -25,6 +25,25 @@ const schema = JSON.parse(readFileSync(new URL('../schema/diagnostic-profile.sch
 const validateSchema = new Ajv2020().compile(schema);
 const input = (overrides = {}) => ({ ...example, ...overrides, content: { skills: ['Go', 'Rust'], learning: ['Distributed systems'], building: ['A tool'], timeline: ['2026 · First project'] } });
 
+test('diagnostic telemetry distinguishes period activity from current snapshot totals', () => {
+  const config = normalizeConfig(input());
+  const files = buildAssets(config, summarize(user), now);
+  for (const mode of ['dark', 'light']) {
+    const svg = files['telemetry-' + mode + '.svg'];
+    const parser = new SaxesParser();
+    const text = [];
+    parser.on('text', (value) => text.push(value));
+    parser.write(svg).close();
+    const labels = text.join(' ');
+    assert.match(labels, /GITHUB OVERVIEW/);
+    assert.match(labels, /CONTRIBUTIONS · 12 MO/);
+    for (const name of ['COMMITS', 'PULL REQUESTS', 'ISSUES']) assert.match(labels, new RegExp(name + ' LAST 12 MONTHS'));
+    for (const name of ['STARS', 'PUBLIC REPOS', 'FOLLOWERS']) assert.match(labels, new RegExp(name + ' CURRENT TOTAL'));
+    assert.match(labels, /issues in the last 12 months\. Current totals:/);
+    assert.doesNotMatch(labels, /STARS EARNED|GitHub telemetry for the last 12 months/);
+  }
+});
+
 test('every preset and palette exports schema-valid configs and well-formed SVGs', () => {
   for (const preset of Object.keys(PRESETS)) {
     for (const theme of paletteNames) {
