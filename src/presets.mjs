@@ -17,6 +17,32 @@ export const PRESETS = {
   portfolio: { name: 'Portfolio', description: 'Project cards and milestones in a neutral style.', version: 1,
     config: { theme: 'monochrome', appearance: { family: 'minimal', motion: 'none' }, layout: { type: 'grid' },
       widgets: widgets('header', 'projects', 'timeline', 'contacts', 'footer') } },
+  resume: { name: 'Resume', description: 'Text-first career summary with skills and milestones.', version: 1,
+    config: { theme: 'monochrome', appearance: { family: 'minimal', motion: 'none', decorations: false }, layout: { type: 'standard', projectColumns: 1, textSummary: true },
+      widgets: widgets('header', 'skills', 'timeline', 'projects', 'contacts') } },
+  researcher: { name: 'Research notebook', description: 'Research interests, ongoing work and a chronological record.', version: 1,
+    config: { theme: 'ice', appearance: { family: 'minimal', motion: 'none', border: 'square' }, layout: { type: 'standard', projectColumns: 1 },
+      widgets: widgets('header', 'now', 'timeline', 'projects', 'contacts') } },
+  maker: { name: 'Maker bench', description: 'A compact workbench for experiments and technical projects.', version: 1,
+    config: { theme: 'ember', appearance: { family: 'terminal', motion: 'none', border: 'square' }, layout: { type: 'compact', projectColumns: 1 },
+      widgets: widgets('header', 'skills', 'now', 'projects', 'contacts') } },
+  community: { name: 'Community', description: 'Contribution activity, projects and ways to collaborate.', version: 1,
+    config: { theme: 'phosphor', appearance: { family: 'diagnostic', motion: 'subtle', decorations: false }, layout: { type: 'grid', textSummary: true },
+      widgets: widgets('header', 'now', 'projects', 'heatmap', 'contacts', 'footer') } },
+};
+
+// Studio copy explains the intended composition, independently of palette/family.
+export const PRESET_GUIDE = {
+  diagnostic: { category: 'creative', name: 'Console diagnóstico', description: 'Painel de instrumentos para quem quer uma identidade técnica marcante.' },
+  terminal: { category: 'creative', name: 'Terminal', description: 'Composição compacta com o que você faz, projetos e métricas.' },
+  minimal: { category: 'career', name: 'Essencial', description: 'Apresentação direta com projetos, tecnologias e contatos.' },
+  opensource: { category: 'community', name: 'Open source', description: 'Destaque para repositórios, calendário e atividade pública.' },
+  student: { category: 'learning', name: 'Jornada de aprendizado', description: 'O que você estuda, constrói e pratica, mesmo sem muitas contribuições.' },
+  portfolio: { category: 'career', name: 'Portfólio', description: 'Projetos em grade e marcos profissionais preenchidos por você.' },
+  resume: { category: 'career', name: 'Currículo', description: 'Tecnologias e trajetória primeiro; sem depender de números de popularidade.' },
+  researcher: { category: 'learning', name: 'Caderno de pesquisa', description: 'Interesses, trabalho em andamento e marcos em uma coluna.' },
+  maker: { category: 'creative', name: 'Bancada maker', description: 'Experimentos e projetos técnicos em uma composição estreita.' },
+  community: { category: 'community', name: 'Comunidade', description: 'O que você constrói, onde contribui e como colaborar.' },
 };
 const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
 function clone(value) {

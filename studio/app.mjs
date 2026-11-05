@@ -1,5 +1,5 @@
 import { normalizeConfig } from '../src/config.mjs';
-import { resolvePreset, PRESETS } from '../src/presets.mjs';
+import { resolvePreset, PRESETS, PRESET_GUIDE } from '../src/presets.mjs';
 import { buildAssets } from '../src/build.mjs';
 import { summarize } from '../src/stats.mjs';
 import { resolveTheme, paletteNames } from '../src/themes.mjs';
@@ -9,6 +9,7 @@ import { exportConfig, encodeConfig, decodeConfig, zipFiles } from '../src/trans
 import { generateWorkflow } from '../src/workflow.mjs';
 import { configWarnings } from '../src/config-warnings.mjs';
 import { createInstallationKit } from '../src/kit.mjs';
+import { generateReadme, createReadmeKit } from '../src/readme.mjs';
 
 const $ = (id) => document.getElementById(id);
 const clone = (value) => structuredClone(value);
@@ -20,7 +21,7 @@ const [example, user] = await Promise.all(['../examples/diagnostic-profile.json'
   if (!response.ok) throw new Error('Não foi possível carregar os dados fictícios.');
   return response.json();
 }));
-let state = clone(example), selected = 'diagnostic', previewMode = 'dark', codeTab = 'config';
+let state = clone(example), selected = 'diagnostic', previewMode = 'dark', codeTab = 'readme', exportMode = 'readme';
 let lastValid, files, baselineState, renderTimer, toastTimer, manualProjects = clone(example.projects);
 let undo = [], redo = [], previewUrls = [], galleryUrls = [];
 const storage = {
@@ -111,7 +112,13 @@ function drawPreview(target, configuration, data, mode) {
 }
 function renderCode() {
   if (!lastValid || !files) return;
-  $('code').textContent = codeTab === 'config' ? json(exportConfig(state)) : codeTab === 'snippet' ? files['README.snippet.md'] : generateWorkflow(state);
+  const readme = generateReadme(lastValid);
+  const code = codeTab === 'readme' ? readme : codeTab === 'config' ? json(exportConfig(lastValid)) : codeTab === 'snippet' ? files['README.snippet.md'] : generateWorkflow(lastValid);
+  $('code').textContent = code || 'Habilite a apresentação ou um bloco com conteúdo para gerar o README.';
+  const invalid = !$('errors').hidden;
+  $('copy').disabled = invalid || !code.trim();
+  $('download-readme').disabled = invalid || !readme.trim();
+  $('download').disabled = invalid || (exportMode === 'readme' && !readme.trim());
 }
 function fieldErrors(error) {
   document.querySelectorAll('.field-error').forEach((el) => el.remove());
@@ -147,7 +154,7 @@ function render() {
     if (baselineState) drawPreview($('baseline'), normalizeConfig(baselineState), summarize(user, normalizeConfig(baselineState).telemetry), previewMode);
     oldUrls.forEach((url) => URL.revokeObjectURL(url));
     lastValid = config; $('errors').hidden = true; fieldErrors();
-    ['download', 'save-json', 'share', 'copy', 'favorite'].forEach((id) => { $(id).disabled = false; });
+    ['download', 'download-readme', 'save-json', 'share', 'copy', 'favorite'].forEach((id) => { $(id).disabled = false; });
     if (!config.widgets.some((w) => w.enabled)) { $('render-status').textContent = 'Adicione ou habilite um bloco para montar seu perfil.'; }
     else $('render-status').textContent = Object.keys(files).filter((n) => n.endsWith('.svg')).length + ' SVGs · ' + Math.round(performance.now() - start) + ' ms · preview fictício';
     themeSwatches(config); renderCode();
@@ -156,7 +163,7 @@ function render() {
   } catch (error) {
     fieldErrors(error);
     $('errors').textContent = 'Revise a configuração:\n' + error.message; $('errors').hidden = false;
-    ['download', 'save-json', 'share', 'copy', 'favorite'].forEach((id) => { $(id).disabled = true; });
+    ['download', 'download-readme', 'save-json', 'share', 'copy', 'favorite'].forEach((id) => { $(id).disabled = true; });
     $('render-status').textContent = 'O último preview válido foi mantido.';
   }
   $('undo').disabled = !undo.length; $('redo').disabled = !redo.length;
@@ -263,18 +270,20 @@ function applyPreset(id) {
   }, true);
 }
 function drawGallery() {
-  for (const [id, preset] of Object.entries(PRESETS)) {
+  for (const id of Object.keys(PRESETS)) {
+    const guide = PRESET_GUIDE[id];
     const config = normalizeConfig({ ...example, theme: undefined, preset: id });
     const data = summarize(user, config.telemetry);
     const assets = buildAssets(config, data, sampleDate);
     const header = config.widgets.find((w) => w.type === 'header');
-    const card = button('', () => { applyPreset(id); $('workspace').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }, 'Usar modelo ' + preset.name);
-    card.className = 'preset-card'; card.dataset.preset = id; card.setAttribute('aria-pressed', String(id === selected));
+    const card = button('', () => { applyPreset(id); $('workspace').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); }, 'Usar modelo ' + guide.name);
+    card.className = 'preset-card'; card.dataset.preset = id; card.dataset.category = guide.category;
+    card.dataset.search = (guide.name + ' ' + guide.description + ' ' + config.widgets.map((w) => labels[w.type]).join(' ')).toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, ''); card.setAttribute('aria-pressed', String(id === selected));
     const thumb = element('div', undefined, 'preset-thumb'), img = element('img');
     const url = URL.createObjectURL(new Blob([assets[header.id + '-dark.svg']], { type: 'image/svg+xml' })); galleryUrls.push(url);
     img.src = url; img.alt = ''; thumb.append(img);
     const info = element('div', undefined, 'preset-info'), copy = element('div');
-    copy.append(element('strong', preset.name), element('small', preset.description));
+    copy.append(element('strong', guide.name), element('small', guide.description), element('span', config.widgets.map((w) => labels[w.type]).join(' → '), 'preset-blocks'));
     info.append(copy, element('span', '↗', 'preset-arrow')); card.append(thumb, info); $('presets').append(card);
   }
 }
@@ -325,8 +334,8 @@ $('undo').addEventListener('click', () => { if (!undo.length) return; redo.push(
 $('redo').addEventListener('click', () => { if (!redo.length) return; undo.push(clone(state)); state = redo.pop(); updateForms(); render(); });
 $('random').addEventListener('click', () => { const motion = lastValid?.appearance.motion ?? 'none'; const ids = Object.keys(PRESETS); applyPreset(ids[Math.floor(Math.random() * ids.length)]); state.theme = paletteNames[Math.floor(Math.random() * paletteNames.length)]; state.appearance ??= {}; state.appearance.motion = motion; updateForms(); render(); });
 $('reset').addEventListener('click', () => mutate(() => { state = clone(example); selected = 'diagnostic'; history.replaceState(null, '', location.pathname + location.search); }, true));
-for (const tab of ['config', 'snippet', 'workflow']) $('show-' + tab).addEventListener('click', () => { codeTab = tab; ['config', 'snippet', 'workflow'].forEach((t) => $('show-' + t).setAttribute('aria-pressed', String(t === tab))); renderCode(); });
-$('copy').addEventListener('click', () => { render(); if ($('errors').hidden) copyText($('code').textContent); });
+for (const tab of ['readme', 'config', 'snippet', 'workflow']) $('show-' + tab).addEventListener('click', () => { codeTab = tab; ['readme', 'config', 'snippet', 'workflow'].forEach((t) => $('show-' + t).setAttribute('aria-pressed', String(t === tab))); renderCode(); });
+$('copy').addEventListener('click', () => { render(); if ($('errors').hidden && !$('copy').disabled) copyText($('code').textContent); });
 $('save-json').addEventListener('click', () => { try { download('diagnostic-profile.json', json(exportConfig(state)), 'application/json'); } catch (error) { render(); toast(error.message); } });
 $('share').addEventListener('click', () => { try { copyText(location.origin + location.pathname + '#config=' + encodeConfig(state)); } catch (error) { toast(error.message); } });
 $('import').addEventListener('click', () => $('import-file').click());
@@ -352,10 +361,56 @@ $('favorite').addEventListener('click', () => {
 });
 $('download').addEventListener('click', () => {
   try {
-    const kit = createInstallationKit(state, user, sampleDate);
-    download('diagnostic-profile-kit.zip', zipFiles(kit), 'application/zip');
-    toast('Kit gerado. Os SVGs de preview usam dados fictícios.');
+    const kit = exportMode === 'readme' ? createReadmeKit(state) : createInstallationKit(state, user, sampleDate);
+    download(exportMode === 'readme' ? 'diagnostic-profile-readme.zip' : 'diagnostic-profile-kit.zip', zipFiles(kit), 'application/zip');
+    toast(exportMode === 'readme' ? 'README gerado. Revise os textos antes de publicar.' : 'Kit gerado. Os SVGs de preview usam dados fictícios.');
   } catch (error) { render(); toast(error.message); }
 });
-drawGallery(); updateForms(); drawFavorites(); render();
+function filterGallery() {
+  const query = $('preset-search').value.toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  let count = 0;
+  document.querySelectorAll('.preset-card').forEach((card) => {
+    card.hidden = !card.dataset.search.includes(query) || ($('preset-category').value !== 'all' && card.dataset.category !== $('preset-category').value);
+    if (!card.hidden) count++;
+  });
+  $('gallery-status').textContent = count ? count + (count === 1 ? ' modelo encontrado.' : ' modelos encontrados.') + ' A lista de blocos mostra a composição de cada um.' : 'Nenhum modelo encontrado. Tente outro termo ou objetivo.';
+}
+$('preset-search').addEventListener('input', filterGallery);
+$('preset-category').addEventListener('change', filterGallery);
+$('clear-example').addEventListener('click', () => {
+  mutate(() => {
+    if (state.login === example.login) state.login = '';
+    state.header = { name: '', headline: '', tags: [], readouts: [] };
+    state.projects = 'pinned'; manualProjects = [];
+    state.contacts = []; state.content = { skills: [], learning: [], building: [], timeline: [] };
+    state.footer = { message: '' }; delete state.assetsBaseUrl;
+  }, true);
+  $('login').focus();
+  toast('Textos de exemplo removidos. Preencha seu perfil e os blocos que quiser usar.');
+});
+$('download-readme').addEventListener('click', () => {
+  try { download('README.md', createReadmeKit(state)['README.md'], 'text/markdown;charset=utf-8'); }
+  catch (error) { render(); toast(error.message); }
+});
+$('export-mode').addEventListener('change', () => {
+  exportMode = $('export-mode').value;
+  const simple = exportMode === 'readme';
+  codeTab = simple ? 'readme' : 'snippet';
+  for (const tab of ['readme', 'config', 'snippet', 'workflow']) {
+    $('show-' + tab).hidden = simple ? ['snippet', 'workflow'].includes(tab) : tab === 'readme';
+    $('show-' + tab).setAttribute('aria-pressed', String(tab === codeTab));
+  }
+  $('download-readme').hidden = !simple;
+  $('export-description').textContent = simple
+    ? 'Baixe um README em Markdown com seus textos e links. Não precisa de token ou instalação. As cores e animações do preview são exclusivas da opção SVG; este README usa a aparência do GitHub.'
+    : 'Exporte a configuração, o snippet e o workflow para gerar SVGs com dados reais no seu repositório.';
+  $('export-limitations').textContent = simple
+    ? 'Não inclui métricas ou calendários. Revise os textos de exemplo. Os textos são atualizados manualmente. O ZIP contém o README e as instruções.'
+    : 'Pré-lançamento: a Action precisa estar acessível ao repositório que a utiliza. Os SVGs de preview são fictícios e ficam separados. Ainda não há versão pública estável.';
+  $('install-steps').replaceChildren(...(simple
+    ? ['Revise os textos, projetos e contatos de exemplo.', 'Abra ou crie seu repositório público ' + (lastValid?.login || 'login') + '/' + (lastValid?.login || 'login') + '.', 'Copie o README.md para a raiz e salve no GitHub.']
+    : ['Adicione a configuração e o workflow ao repositório de perfil.', 'Confira o destino, as permissões e a referência da Action.', 'Execute o workflow e incorpore o snippet no README.']).map((text) => element('li', text)));
+  renderCode();
+});
+drawGallery(); filterGallery(); updateForms(); drawFavorites(); render();
 window.addEventListener('beforeunload', () => [...previewUrls, ...galleryUrls].forEach((url) => URL.revokeObjectURL(url)));

@@ -10,6 +10,10 @@ Every preview below uses the same fictional Ada Mercer profile. Change the prese
 | Open source — repositories and contribution calendar | ![Open source](preview/preset-opensource-dark.svg) |
 | Learning journey — skills and work in progress | ![Learning journey](preview/preset-student-dark.svg) |
 | Portfolio — projects and manually supplied milestones | ![Portfolio](preview/preset-portfolio-dark.svg) |
+| Resume — skills and milestones before projects | ![Resume](preview/preset-resume-dark.svg) |
+| Research notebook — ongoing work and a chronological record | ![Research notebook](preview/preset-researcher-dark.svg) |
+| Maker bench — narrow technical workbench | ![Maker bench](preview/preset-maker-dark.svg) |
+| Community — current work, projects and collaboration | ![Community](preview/preset-community-dark.svg) |
 
 Example configuration:
 

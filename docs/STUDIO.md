@@ -11,16 +11,16 @@ Open the printed Local URL. npm run build:studio writes a static website to dist
 
 ## Create a profile
 
-1. Choose Diagnostic console, Terminal, Minimal, Open source, Learning journey or Portfolio.
+1. Search or filter ten templates by career, learning, community or technical identity. Each card explains its block order. Resume, Research notebook, Maker bench and Community join the original six templates.
 2. Edit login, name, bio, focus tags and readouts. Replace fictional sample names, projects, contacts and locations before installing.
 3. Choose a palette independently of the visual family. Adjust per-mode colors, borders, motion and layout.
 4. Add, hide or reorder blocks. Arrow buttons are available alongside drag-and-drop.
 5. Compare with a reference, inspect mobile width and check both modes.
-6. Export the configuration and installation kit.
+6. Choose a standalone Markdown README (default) or the SVG installation kit. The plain README uses declared content only and omits data-dependent widgets; it does not reproduce SVG colors/animation. Download README.md directly or a ZIP with installation instructions. See the [beginner guide](GETTING_STARTED.md).
 
 Blocks: header, contacts, projects, telemetry, spectrum, footer, skills, currently learning/building, contribution calendar, milestones and divider. Skills and milestones are supplied manually, without inferred skill levels.
 
-## Installation kit
+## SVG installation kit
 
 The ZIP contains diagnostic-profile.json, .github/workflows/profile.yml, README.snippet.md and INSTALL.txt. The separate preview/ folder contains FICTIONAL SVGs rather than real GitHub statistics.
 
@@ -40,6 +40,8 @@ The Action currently uses the documented develop pre-release reference and must 
 - Reduced-motion CSS is included in the Studio and SVGs.
 
 Studio controls use Brazilian Portuguese; generated system labels currently use English. Custom profile text is preserved as supplied. Additional locales remain planned.
+
+The free static hosting plan, privacy details and launch blockers are documented in the [product review](PRODUCT_REVIEW.md). The prepared Pages workflow is manual and restricted to released main; it has not been deployed.
 
 ## Save and share
 
