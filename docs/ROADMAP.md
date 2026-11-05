@@ -43,7 +43,7 @@ Concluído quando: os problemas reproduzidos têm testes de regressão e nenhum 
 
 ## 2. Precisão e significado dos dados
 
-- [ ] DATA-01 · P0 · E — Diferenciar métricas dos últimos 12 meses de totais atuais, como seguidores e estrelas.
+- [x] DATA-01 · P0 · E — Diferenciar métricas dos últimos 12 meses de totais atuais, como seguidores e estrelas.
 - [x] DATA-02 · P0 · E — Documentar o que entra e o que fica fora de cada métrica, incluindo forks, arquivos de marcação e repositórios privados.
 - [ ] DATA-03 · P0 · V — Verificar contribuição pública/privada com tokens e permissões reais; ajustar as instruções do README com base nos resultados.
 - [ ] DATA-04 · P1 · E — Expor filtros para incluir/excluir repositórios, forks, arquivados e linguagens, mantendo padrões documentados.

@@ -17,6 +17,8 @@
 
 ### Fixed
 
+- Distinguish 12-month activity from current stars, repository and follower totals in diagnostic telemetry and its text alternative.
+
 - Reject invalid Git destination refs before exporting a publication workflow.
 
 - Paginate public repositories and repository languages instead of silently truncating profile totals.

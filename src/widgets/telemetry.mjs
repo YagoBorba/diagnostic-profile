@@ -31,7 +31,7 @@ ${ticks.join('')}
 </g>
 <circle cx="${cx}" cy="${cy}" r="7" fill="${theme.panel}" stroke="${theme.signal}" stroke-width="3"/>
 ${text(cx, cy + 62, fmt(value), { size: 40, weight: 700, fill: theme.text, anchor: 'middle' })}
-${text(cx, cy + 84, 'CONTRIBUTIONS', { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle', extra: ' letter-spacing="1.5"' })}
+${text(cx, cy + 84, 'CONTRIBUTIONS · 12 MO', { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle', extra: ' letter-spacing="1.5"' })}
 ${text(cx - r * 0.87, cy + r * 0.5 + 26, '0', { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle' })}
 ${text(cx + r * 0.87, cy + r * 0.5 + 26, fmt(max), { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle' })}`;
   return { markup, swing: sweep * ratio };
@@ -39,21 +39,22 @@ ${text(cx + r * 0.87, cy + r * 0.5 + 26, fmt(max), { cls: 'mono', size: 11, fill
 
 function readouts(theme, totals) {
   const metrics = [
-    ['COMMITS', totals.commits],
-    ['PULL REQUESTS', totals.pullRequests],
-    ['ISSUES', totals.issues],
-    ['STARS EARNED', totals.stars],
-    ['PUBLIC REPOS', totals.repositories],
-    ['FOLLOWERS', totals.followers],
+    ['COMMITS', totals.commits, 'LAST 12 MONTHS'],
+    ['PULL REQUESTS', totals.pullRequests, 'LAST 12 MONTHS'],
+    ['ISSUES', totals.issues, 'LAST 12 MONTHS'],
+    ['STARS', totals.stars, 'CURRENT TOTAL'],
+    ['PUBLIC REPOS', totals.repositories, 'CURRENT TOTAL'],
+    ['FOLLOWERS', totals.followers, 'CURRENT TOTAL'],
   ];
   return metrics
-    .map(([label, value], index) => {
+    .map(([label, value, period], index) => {
       const x = 372 + (index % 3) * 164;
       const y = 76 + Math.floor(index / 3) * 104;
       return `<rect x="${x}" y="${y}" width="152" height="92" rx="8" fill="${theme.inset}" stroke="${theme.border}"/>` +
         `<rect x="${x}" y="${y + 18}" width="3" height="16" fill="${theme.accent}"/>` +
         text(x + 16, y + 31, label, { cls: 'mono', size: 11, fill: theme.muted, extra: ' letter-spacing="1"' }) +
-        text(x + 16, y + 74, fmt(value), { cls: 'mono', size: 34, weight: 700, fill: theme.text });
+        text(x + 16, y + 47, period, { cls: 'mono', size: 9, fill: theme.muted }) +
+        text(x + 16, y + 80, fmt(value), { cls: 'mono', size: 30, weight: 700, fill: theme.text });
     })
     .join('');
 }
@@ -110,7 +111,7 @@ export function renderTelemetry(theme, data, stamp) {
 
   const body = `
 ${panel(WIDTH, HEIGHT, theme)}
-${text(32, 34, 'TELEMETRY  //  LAST 12 MONTHS', { cls: 'mono', size: 13, fill: theme.muted, extra: ' letter-spacing="1"' })}
+${text(32, 34, 'TELEMETRY  //  GITHUB OVERVIEW', { cls: 'mono', size: 13, fill: theme.muted, extra: ' letter-spacing="1"' })}
 ${text(WIDTH - 32, 34, `SOURCE GITHUB GRAPHQL API  ·  ${stamp}`, { cls: 'mono', size: 12, fill: theme.muted, anchor: 'end' })}
 <line x1="0" y1="52" x2="${WIDTH}" y2="52" stroke="${theme.border}"/>
 ${dial.markup}
@@ -132,8 +133,8 @@ ${languageMix(theme, languages)}
   return document({
     width: WIDTH,
     height: HEIGHT,
-    title: 'GitHub telemetry for the last 12 months',
-    desc: `${fmt(totals.contributions)} contributions, ${fmt(totals.commits)} commits, ${fmt(totals.pullRequests)} pull requests, ${fmt(totals.issues)} issues, ${fmt(totals.stars)} stars earned, ${totals.repositories} public repositories, ${totals.followers} followers. Current streak ${streaks.current} days, longest ${streaks.longest} days. Language mix: ${languageSummary || 'no data'}.`,
+    title: 'GitHub overview: contribution period and current totals',
+    desc: `${fmt(totals.contributions)} contributions, ${fmt(totals.commits)} commits, ${fmt(totals.pullRequests)} pull requests, ${fmt(totals.issues)} issues in the last 12 months. Current totals: ${fmt(totals.stars)} stars, ${totals.repositories} public repositories, ${totals.followers} followers. Current streak ${streaks.current} days, longest in the reported 12 months ${streaks.longest} days. Current language mix by public code size: ${languageSummary || 'no data'}.`,
     css,
     body,
   });
