@@ -78,3 +78,10 @@ test('manual kit never imports fictional API data, statistics or credentials and
   assert.equal(profile.warnings.length, 2);
   assert.throws(() => createVisualKit({ login: 'a', widgets: [{ type: 'telemetry' }] }, now), /bloco/);
 });
+
+test('every family can export a manual header without fabricated contribution numbers', () => {
+  for (const family of Object.keys(FAMILIES)) for (const locale of ['en', 'pt-BR']) {
+    const files = createVisualKit({ login: 'my-user', locale, appearance: { family }, widgets: [{ type: 'header' }] }, now);
+    assert.doesNotMatch(Object.values(files).join('\n'), /NaN|undefined|Infinity|0 CONTRIBUTIONS|0 CONTRIBUIÇÕES/);
+  }
+});

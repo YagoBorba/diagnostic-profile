@@ -38,7 +38,7 @@ export function renderWorld({ type, theme, config, data, now, project, repo, ind
     desc = [name, config.header.headline ?? data.bio ?? '', ...config.header.readouts.map((r) => r.label + ': ' + r.value)].join('. ');
   } else if (type === 'projects') {
     label = t(locale, family) + ' ' + String(index + 1).padStart(2, '0');
-    if (family === 'radio') line('SIDE ' + (index % 2 ? 'B' : 'A') + ' / ' + String(index + 1).padStart(2, '0'), 13, theme.signal);
+    if (family === 'radio') line((locale === 'pt-BR' ? 'LADO ' : 'SIDE ') + (index % 2 ? 'B' : 'A') + ' / ' + String(index + 1).padStart(2, '0'), 13, theme.signal);
     if (family === 'fieldbook') line(project.kind, 13, theme.muted);
     line(project.title, family === 'herbarium' ? 30 : 26, theme.text, 14);
     if (family !== 'fieldbook') line(project.kind, 13, theme.accent);

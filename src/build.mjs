@@ -3,6 +3,7 @@ import { renderSnippet } from './snippet.mjs';
 import { resolveTheme } from './themes.mjs';
 import { applyAppearance } from './design.mjs';
 import { getFamily } from './families.mjs';
+import { blockDescription } from './accessibility.mjs';
 
 export const MODES = ['dark', 'light'];
 
@@ -21,7 +22,7 @@ export function buildAssets(config, data, now = new Date()) {
     const section = { ...widget, items: [] };
     const item = (name, alt, url, width = '100%') => section.items.push({ name, alt, url, width });
     if (widget.type === 'projects') {
-      projects.forEach((p) => item((widget.id === 'projects' ? 'project' : widget.id) + '-' + p.slug, p.title + (p.summary ? ': ' + p.summary : ''), p.url,
+      projects.forEach((p) => item((widget.id === 'projects' ? 'project' : widget.id) + '-' + p.slug, config.locale === 'pt-BR' ? blockDescription('projects', config, data, { project: p }) : p.title + (p.summary ? ': ' + p.summary : ''), p.url,
         config.layout.type === 'compact' || config.layout.projectColumns === 1 ? '100%' : '49%'));
     } else if (widget.type === 'contacts') {
       config.contacts.forEach((c) => item((widget.id === 'contacts' ? 'contact' : widget.id) + '-' + c.id, c.label, c.url, family.world ? '360' : '220'));
@@ -34,10 +35,10 @@ export function buildAssets(config, data, now = new Date()) {
         widget.type === 'skills' ? 'Technologies declared by the profile owner: ' + config.content.skills.join(', ') :
         widget.type === 'now' ? 'Learning: ' + config.content.learning.join(', ') + '. Building: ' + config.content.building.join(', ') :
         widget.type === 'timeline' ? config.content.timeline.join('. ') : widget.title || 'Section divider';
-      item(widget.id, description);
+      item(widget.id, config.locale === 'pt-BR' ? blockDescription(widget.type, config, data, { stamp }) : description);
     }
     for (const mode of MODES) {
-      const theme = resolveTheme(config.theme, mode, config.appearance);
+      const theme = { ...resolveTheme(config.theme, mode, config.appearance), locale: config.locale };
       if (widget.type === 'projects') {
         projects.forEach((p, i) => {
           const fullName = p.repo.includes('/') ? p.repo : config.login + '/' + p.repo;

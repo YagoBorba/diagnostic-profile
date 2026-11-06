@@ -24,7 +24,7 @@ export function createReadmeKit(input) {
   const readme = generateReadme(input);
   if (!readme.trim()) throw new Error('Habilite a apresentação ou um bloco com conteúdo para gerar o README.');
   const config = normalizeConfig(input);
-  return {
+  const files = {
     'README.md': readme,
     'INSTALL.txt': [
       'README SEM AUTOMAÇÃO',
@@ -39,4 +39,14 @@ export function createReadmeKit(input) {
       'https://docs.github.com/en/account-and-profile/how-tos/profile-customization/managing-your-profile-readme',
     ].join('\n') + '\n',
   };
+  if (config.locale === 'en') files['INSTALL.txt'] = [
+    'README WITHOUT AUTOMATION',
+    '1. Review all sample text, projects and contacts.',
+    '2. Create or open your public ' + config.login + '/' + config.login + ' repository.',
+    '3. Merge README.md into the file at the repository root and save.',
+    'No token, Node.js, Action or image server is required.',
+    'This Markdown uses declared text only and follows GitHub appearance. Update it manually.',
+    'Credits: Yago Borba · https://github.com/YagoBorba/diagnostic-profile',
+  ].join('\n') + '\n';
+  return files;
 }

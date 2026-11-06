@@ -10,7 +10,7 @@ function within(parent, path) {
   return rel !== '' && !rel.startsWith('..') && !isAbsolute(rel);
 }
 
-export async function writeAssets(output, files, metadata = {}, { beforePublish } = {}) {
+export async function writeAssets(output, files, metadata = {}, { beforePublish, force = false } = {}) {
   const destination = resolve(output);
   const cwd = resolve('.');
   if (destination === cwd || within(destination, cwd)) throw new Error('Output directory cannot be the project directory or its parent');
@@ -42,6 +42,16 @@ export async function writeAssets(output, files, metadata = {}, { beforePublish 
     let previous;
     try { previous = JSON.parse(await readFile(join(staging, 'manifest.json'), 'utf8')); }
     catch (error) { if (error.code !== 'ENOENT' && !(error instanceof SyntaxError)) throw error; }
+    if (!force && metadata.inputHash && previous?.generator === 'diagnostic-profile' && previous.inputHash === metadata.inputHash && previous.files &&
+      JSON.stringify(Object.keys(files).sort()) === JSON.stringify(Object.keys(previous.files).sort())) {
+      let intact = true;
+      for (const [name, hash] of Object.entries(previous.files)) {
+        if (!validName(name)) { intact = false; break; }
+        const path = join(staging, name), info = await stat(path);
+        if (!info?.isFile() || info.isSymbolicLink() || digest(await readFile(path)) !== hash) { intact = false; break; }
+      }
+      if (intact) return { ...previous, unchanged: true };
+    }
     if (previous?.generator === 'diagnostic-profile' && previous.files) {
       for (const [name, hash] of Object.entries(previous.files)) {
         if (!validName(name) || Object.hasOwn(files, name)) continue;

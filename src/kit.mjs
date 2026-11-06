@@ -21,6 +21,15 @@ export function createInstallationKit(input, fixture, now = new Date()) {
       'Docs: https://github.com/YagoBorba/diagnostic-profile',
     ].join('\n') + '\n',
   };
+  if (config.locale === 'pt-BR') files['INSTALL.txt'] = [
+    'DIAGNOSTIC PROFILE — KIT COM ACTION',
+    '1. Envie diagnostic-profile.json e .github/workflows/profile.yml ao repositório do seu perfil.',
+    '2. Confira a referência da Action, as permissões e a branch dedicada aos assets.',
+    '3. Execute o workflow para gerar dados reais e incorpore README.snippet.md ao seu README.',
+    'Outro repositório de destino exige PROFILE_PUBLISH_TOKEN com acesso de escrita nesse destino.',
+    'A pasta preview/ contém dados FICTÍCIOS. Não publique esses SVGs como estatísticas reais.',
+    'Créditos: Yago Borba · https://github.com/YagoBorba/diagnostic-profile',
+  ].join('\n') + '\n';
   for (const [name, content] of Object.entries(assets)) if (name.endsWith('.svg')) files['preview/' + name] = content;
   return files;
 }

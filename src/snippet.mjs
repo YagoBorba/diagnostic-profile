@@ -1,4 +1,5 @@
 import { CREDITS } from './credits.mjs';
+import { t, number } from './i18n.mjs';
 
 const attr = (v) => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const markdownText = (v) => String(v).replace(/[\\[\]]/g, '\\$&').replace(/[\r\n]+/g, ' ');
@@ -22,12 +23,13 @@ export function renderSnippet(config, data, projects, sections) {
   };
   const output = [];
   for (const section of sections) {
-    const heading = section.title || (section.type === 'projects' ? 'Featured projects' : section.type === 'telemetry' ? 'Telemetry' : '');
+    const heading = section.title || (config.locale === 'pt-BR' ? (['projects', 'telemetry'].includes(section.type) ? t(config.locale, section.type) : '') : (section.type === 'projects' ? 'Featured projects' : section.type === 'telemetry' ? 'Telemetry' : ''));
     if (config.layout.headings && heading) output.push('## ' + markdownText(heading));
     const content = section.items.map(image).join('\n');
     output.push(config.layout.markup === 'picture' && ['projects', 'contacts'].includes(section.type) ?
       '<p align="' + config.layout.align + '">\n' + content + '\n</p>' : content);
     if (section.type === 'telemetry' && config.layout.textSummary) output.push(
+      config.locale === 'pt-BR' ? number(config.locale, data.totals.contributions) + ' contribuições no calendário consultado; ' + number(config.locale, data.totals.stars) + ' estrelas atuais; ' + number(config.locale, data.totals.repositories) + ' repositórios públicos próprios sem forks; ' + number(config.locale, data.totals.followers) + ' seguidores atuais.' :
       data.totals.contributions + ' contributions in the reported calendar; ' + data.totals.stars + ' current stars; ' +
       data.totals.repositories + ' public owned non-fork repositories; ' + data.totals.followers + ' current followers.',
     );

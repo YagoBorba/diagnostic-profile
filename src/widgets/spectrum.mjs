@@ -1,3 +1,4 @@
+import { legacyLabel, number } from '../i18n.mjs';
 import { document, fmt, panel, text } from '../svg.mjs';
 
 const WIDTH = 1200;
@@ -27,7 +28,7 @@ export function renderSpectrum(theme, weekly) {
   const months = weekly
     .map((week, index) => {
       if (!week.start) return '';
-      const month = new Date(`${week.start}T00:00:00Z`).toLocaleString('en-US', { month: 'short', timeZone: 'UTC' }).toUpperCase();
+      const month = new Date(`${week.start}T00:00:00Z`).toLocaleString(theme.locale ?? 'en-US', { month: 'short', timeZone: 'UTC' }).toUpperCase();
       if (month === lastMonth) return '';
       lastMonth = month;
       if (index > weekly.length - 3) return '';
@@ -42,8 +43,8 @@ export function renderSpectrum(theme, weekly) {
   const active = weekly.filter((week) => week.count > 0).length;
   const body = `
 ${panel(WIDTH, HEIGHT, theme)}
-${text(32, 34, 'SPECTRUM  //  CONTRIBUTIONS PER WEEK  //  LOG SCALE', { cls: 'mono', size: 13, fill: theme.muted, extra: ' letter-spacing="1"' })}
-${text(WIDTH - 32, 34, `PEAK ${fmt(peak)}  ·  ACTIVE WEEKS ${active}/${weekly.length}`, { cls: 'mono', size: 12, fill: theme.muted, anchor: 'end' })}
+${text(32, 34, legacyLabel(theme.locale, 'SPECTRUM  //  CONTRIBUTIONS PER WEEK  //  LOG SCALE'), { cls: 'mono', size: 13, fill: theme.muted, extra: ' letter-spacing="1"' })}
+${text(WIDTH - 32, 34, `${legacyLabel(theme.locale, 'PEAK')} ${number(theme.locale ?? 'en', peak)}  ·  ${legacyLabel(theme.locale, 'ACTIVE WEEKS')} ${active}/${weekly.length}`, { cls: 'mono', size: 12, fill: theme.muted, anchor: 'end' })}
 <line x1="0" y1="52" x2="${WIDTH}" y2="52" stroke="${theme.border}"/>
 ${guides}
 ${bars}
