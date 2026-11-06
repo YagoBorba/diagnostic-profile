@@ -1,5 +1,5 @@
 const known = {
-  '': ['$schema', 'schemaVersion', 'preset', 'presetVersion', 'login', 'theme', 'assetsBaseUrl', 'header', 'projects', 'contacts', 'telemetry', 'footer', 'appearance', 'layout', 'content', 'widgets', 'destination'],
+  '': ['$schema', 'schemaVersion', 'locale', 'preset', 'presetVersion', 'login', 'theme', 'assetsBaseUrl', 'header', 'projects', 'contacts', 'telemetry', 'footer', 'appearance', 'layout', 'content', 'widgets', 'destination'],
   appearance: ['family', 'motion', 'border', 'density', 'decorations', 'colors'],
   layout: ['type', 'mode', 'markup', 'projectColumns', 'headings', 'textSummary', 'align'],
   colors: ['dark', 'light'],
