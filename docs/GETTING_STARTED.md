@@ -10,7 +10,7 @@
 
 O README simples usa a aparência do Markdown do GitHub. Paletas, animações, larguras e cartões SVG pertencem ao outro modo. Métricas, calendários e timestamps de demonstração não entram no README simples. Textos de exemplo entram se você não os substituir; revise os contatos e links antes de publicar.
 
-O Studio hospedado deste projeto ainda é privado. Para executá-lo a partir de um clone autorizado:
+Abra o [Studio público gratuito](https://yagoborba.github.io/diagnostic-profile/), sem login. Para executar localmente a partir do repositório público:
 
     npm ci
     npm run studio
@@ -21,7 +21,7 @@ As condições do perfil README estão na [documentação oficial do GitHub](htt
 
 ## Com SVGs e métricas atualizadas
 
-Escolha **SVGs e métricas com Action** para exportar JSON, snippet e workflow. Siga o INSTALL.txt e a referência de [instalação e permissões](../README.md). O motor roda no seu repositório, não no navegador. A Action ainda está em pré-lançamento e seu repositório precisa poder acessá-la; não há tag estável pública nesta revisão.
+Escolha **SVGs e métricas com Action** para exportar JSON, snippet e workflow. Siga o INSTALL.txt e a referência de [instalação e permissões](../README.md). O motor roda no seu repositório, não no navegador. A Action pública usa a versão v0.1.0. Consulte as [notas de lançamento e atualização](RELEASE.md).
 
 Os previews fictícios do ZIP não são suas estatísticas e ficam em preview/. Execute o workflow para gerar os assets reais. Para que visitantes vejam as imagens, o destino dos assets precisa ser acessível publicamente. Uma branch chamada output em repositório privado continua privada. Não copie URLs temporárias autenticadas de imagens privadas: elas não são uma publicação pública durável.
 
@@ -36,7 +36,7 @@ Use os URLs calculados no snippet para o destino escolhido. Para outra conta/rep
 | O README não tem as cores do preview | O modo simples é Markdown; escolha SVGs com Action para os visuais do preview. |
 | Tecnologias ou trajetória sumiram | Preencha os itens em Conteúdo pessoal e habilite os blocos correspondentes. |
 | Não consigo baixar | Corrija os campos destacados; mantenha ao menos apresentação ou outro bloco com conteúdo. |
-| Action não encontrada ou acesso negado | Confira a referência, acesso ao repositório privado e permissões. O projeto ainda não tem versão estável pública. |
+| Action não encontrada ou acesso negado | Confira a referência YagoBorba/diagnostic-profile@v0.1.0, as permissões de Actions e os secrets necessários. |
 | SVG aparece quebrado | Confira execução concluída, branch/destino, nomes e acesso público aos assets; não use URLs autenticadas temporárias. |
 | Dados não mudaram | Confira a última execução e os logs, agendamento na branch padrão e cache das imagens. Schedules podem atrasar; rode manualmente para investigar. |
 | Falha de token ou de publicação | Separe leitura dos dados da escrita no destino; confira permissões e secrets da Action sem colar tokens em issues. |

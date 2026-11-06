@@ -15,7 +15,7 @@ export const DEFAULT_WIDGETS = ['header', 'contacts', 'projects', 'telemetry', '
 export const SCHEMA_VERSION = 1;
 export function starterConfig(login) {
   return {
-    $schema: 'https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/develop/schema/diagnostic-profile.schema.json',
+    $schema: 'https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/v0.1.0/schema/diagnostic-profile.schema.json',
     schemaVersion: SCHEMA_VERSION, login, theme: 'amber',
     header: { headline: 'Building useful things', tags: ['OPEN SOURCE'] },
     projects: 'pinned', contacts: [],

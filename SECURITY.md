@@ -1,6 +1,6 @@
 # Security policy
 
-This project is currently pre-release. Only the latest development version receives fixes until a stable support policy is published.
+Version 0.1.x receives security fixes on a best-effort basis. Report against the latest patch release; older minor versions are unsupported. Fixes follow the documented hotfix/release flow.
 
 Do not include tokens or private profile data in public issues. Use GitHub's private vulnerability reporting option when available. If it is unavailable, email the maintainer at yagoaborba@hotmail.com with the affected version, reproduction steps and impact.
 

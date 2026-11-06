@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-05
+
+First public release: free Studio, ten templates, plain README export, versioned SVG Action and minimal linked attribution to Yago Borba and this repository. npm and Marketplace publication are not part of this release.
+
 - Keep minimal linked credits for Yago Borba and Diagnostic Profile in the Studio footer and both README export formats, independently of optional profile blocks.
 
 ### Studio and personalization

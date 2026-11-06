@@ -26,7 +26,7 @@ The ZIP contains diagnostic-profile.json, .github/workflows/profile.yml, README.
 
 The generated workflow matches the selected asset repository/branch. main, master and develop cannot be asset branches; the workflow also checks the actual default branch. A different repository requires the PROFILE_PUBLISH_TOKEN secret with appropriate write access.
 
-The Action currently uses the documented develop pre-release reference and must be accessible from the calling repository. Public source distribution, stable releases and Marketplace publication remain release tasks.
+The public Action uses v0.1.0. The free public Studio is available at https://yagoborba.github.io/diagnostic-profile/. Marketplace and npm distribution are not included; see [release instructions](RELEASE.md).
 
 ## Layout behavior
 
@@ -41,7 +41,7 @@ The Action currently uses the documented develop pre-release reference and must 
 
 Studio controls use Brazilian Portuguese; generated system labels currently use English. Custom profile text is preserved as supplied. Additional locales remain planned.
 
-The free static hosting plan, privacy details and launch blockers are documented in the [product review](PRODUCT_REVIEW.md). The prepared Pages workflow is manual and restricted to released main; it has not been deployed.
+The free static hosting plan, privacy details and launch blockers are documented in the [product review](PRODUCT_REVIEW.md). The Pages workflow is manual and restricted to released main. Deployment results are visible in the repository Actions and Pages settings.
 
 ## Save and share
 

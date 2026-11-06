@@ -1,0 +1,63 @@
+name: Verify released profile Action
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-smoke
+  cancel-in-progress: false
+
+jobs:
+  smoke:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Prepare public demo configuration
+        env:
+          PROFILE_LOGIN: YagoBorba
+        run: |
+          node --input-type=module <<'NODE'
+          import { writeFileSync } from 'node:fs';
+          const config = {
+            schemaVersion: 1,
+            login: process.env.PROFILE_LOGIN,
+            preset: 'minimal',
+            header: { headline: 'Diagnostic Profile — public Action verification' },
+            projects: 'pinned',
+            destination: { repository: process.env.GITHUB_REPOSITORY, branch: 'demo-assets' },
+          };
+          writeFileSync(process.env.RUNNER_TEMP + '/profile-smoke.json', JSON.stringify(config));
+          NODE
+      - name: Generate with the released Action
+        uses: YagoBorba/diagnostic-profile@v0.1.0
+        with:
+          config: ${{ runner.temp }}/profile-smoke.json
+          output_dir: dist/smoke
+      - name: Verify real output and credits
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync, readdirSync } from 'node:fs';
+          const manifest = JSON.parse(readFileSync('dist/smoke/manifest.json', 'utf8'));
+          assert.equal(manifest.source, 'github');
+          assert.equal(manifest.login, 'YagoBorba');
+          const snippet = readFileSync('dist/smoke/README.snippet.md', 'utf8');
+          assert.ok(snippet.includes('https://github.com/YagoBorba/diagnostic-profile'));
+          assert.ok(snippet.includes('>Yago Borba</a>'));
+          assert.ok(readdirSync('dist/smoke').some((name) => name.endsWith('.svg')));
+          console.log('Released Action generated real public profile data with attribution.');
+          NODE
+      - name: Publish public demo assets
+        uses: crazy-max/ghaction-github-pages@df5cc2bfa78282ded844b354faee141f06b41865 # v4
+        with:
+          target_branch: demo-assets
+          build_dir: dist/smoke
+          keep_history: true
+          allow_empty_commit: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
