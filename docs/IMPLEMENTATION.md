@@ -38,7 +38,7 @@ A prior read-only live request loaded 8 public owned non-fork repositories and 5
 
 ## Pending
 
-Public distribution is not complete: the repository remains private, the installation workflow is explicitly pre-release, and no Marketplace release or public Pages deployment has been claimed. External integrations, additional visual families, full localization, per-widget visual overrides, selectable telemetry metrics, live authenticated previews, real screen-reader checks and community remix submissions remain on the roadmap.
+Historical state before release 0.1.0: the repository was private and workflows used develop. The public source and versioned Action are now part of [release 0.1.0](RELEASE.md). Marketplace is not included. External integrations, additional visual families, full localization, per-widget visual overrides, selectable telemetry metrics, live authenticated previews, real screen-reader checks and community remix submissions remain on the roadmap.
 
 Destination-ref validation also checks reserved Git names/components against git check-ref-format; see issue #10.
 

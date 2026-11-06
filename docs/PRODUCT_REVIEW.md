@@ -1,12 +1,12 @@
 # Revisão do produto e plano de lançamento
 
-Revisão de 05/11/2026. Escopo: código, configuração, coleta de dados, geração de arquivos, Studio, documentação, CI e jornada de instalação. Trata-se de avaliação técnica com testes internos; ainda não é uma pesquisa com usuários externos.
+Revisão de 05/11/2026, feita antes do lançamento público. O estado atual e o endereço público estão em [RELEASE.md](RELEASE.md). As observações de privacidade abaixo descrevem o momento da revisão original. Escopo: código, configuração, coleta de dados, geração de arquivos, Studio, documentação, CI e jornada de instalação. Trata-se de avaliação técnica com testes internos; ainda não é uma pesquisa com usuários externos.
 
 ## Veredito
 
-O projeto é utilizável para experimentar estilos, compor blocos e exportar uma configuração. Esta entrega acrescenta um caminho utilizável para iniciantes: gerar um README em Markdown diretamente no navegador, sem instalar ferramentas. A automação de métricas continua em pré-lançamento: o repositório da Action é privado, falta uma versão estável publicada e falta validar a instalação em outro repositório.
+O projeto é utilizável para experimentar estilos, compor blocos e exportar uma configuração. A revisão inicial acrescentou um caminho utilizável para iniciantes: gerar um README em Markdown diretamente no navegador, sem instalar ferramentas. A automação de métricas continua em pré-lançamento: o repositório da Action é privado, falta uma versão estável publicada e falta validar a instalação em outro repositório.
 
-O Studio hospedado atualmente tem acesso privado. Seu endereço não equivale a um serviço público disponível para qualquer visitante. Não foi alterada a visibilidade do site nem do repositório.
+No momento desta revisão inicial, o Studio hospedado tinha acesso privado. Seu endereço não equivale a um serviço público disponível para qualquer visitante. A publicação pública foi autorizada depois desta revisão e preparada na release 0.1.0.
 
 ## Dois caminhos de uso
 

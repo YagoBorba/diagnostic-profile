@@ -39,7 +39,7 @@ It started as the profile of [YagoBorba](https://github.com/YagoBorba) after the
 
 ## Start here
 
-Create a plain Markdown README in the Studio without a token or installation, or choose SVGs with Action for styled panels and live metrics. Follow the [beginner guide](docs/GETTING_STARTED.md). The hosted Studio and Action repository are currently private; public automated installation is still pre-release. See the [product review and free hosting plan](docs/PRODUCT_REVIEW.md).
+Create a plain Markdown README in the Studio without a token or installation, or choose SVGs with Action for styled panels and live metrics. Follow the [beginner guide](docs/GETTING_STARTED.md). Open the free [public Studio](https://yagoborba.github.io/diagnostic-profile/). The source and versioned Action are public. See the [product review and free hosting plan](docs/PRODUCT_REVIEW.md).
 
 ## Profile Studio
 
@@ -107,7 +107,7 @@ Pick one with the `theme` key. Each palette has a dark and a light variant.
 
 ## Quick Start
 
-This is a pre-release setup using the existing develop branch. The Action must be accessible from the calling repository; a stable public release is not yet published.
+For a plain README, use the [public Studio](https://yagoborba.github.io/diagnostic-profile/) without a token. For SVGs with updated public GitHub data, install the versioned Action below. See [release and rollback instructions](docs/RELEASE.md).
 
 1. In your profile repository (`<user>/<user>`), add a `diagnostic-profile.json`:
 
@@ -151,7 +151,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: YagoBorba/diagnostic-profile@develop
+      - uses: YagoBorba/diagnostic-profile@v0.1.0
         with:
           config: diagnostic-profile.json
           output_dir: dist
@@ -167,7 +167,7 @@ jobs:
 3. Run the workflow once, open `README.snippet.md` on the `output` branch and paste it into your `README.md`.
 
 > [!NOTE]
-> The default `GITHUB_TOKEN` only sees public activity. To include private contribution counts, create a fine-grained token with read access to your profile and pass it as `token`.
+> The default setup targets public GitHub data. Private contribution visibility depends on the account and token permissions and is not promised by this release. Keep tokens in Actions secrets; never paste them into Studio or exported JSON.
 
 ## Configuration Reference
 
@@ -224,7 +224,7 @@ node src/cli.mjs preview
 node src/cli.mjs --fixture test/fixtures/user.json --dry-run --json
 ```
 
-`init` creates a schema-enabled config and an example workflow, without replacing existing files unless `--force` is supplied. During pre-release development the generated workflow explicitly uses `@develop`; replace it with a reviewed release commit when one is published. The Action must be accessible from the calling repository.
+`init` creates a schema-enabled config and an example workflow, without replacing existing files unless `--force` is supplied. The generated workflow uses `@v0.1.0`; pin the tag's full commit SHA if you require an immutable reference. Review release notes before upgrading.
 
 Configuration without `schemaVersion` is interpreted as version 1; unsupported future versions fail before generating assets. [JSON Schema](schema/diagnostic-profile.schema.json) provides editor completion. CLI validation also reports misspelled/unknown fields. Precedence is `--login`, then file login, then `DP_LOGIN`, then defaults for optional fields.
 

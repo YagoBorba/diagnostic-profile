@@ -15,7 +15,7 @@ export function createInstallationKit(input, fixture, now = new Date()) {
       '1. Copy diagnostic-profile.json and .github/workflows/profile.yml into your profile repository.',
       '2. Review the Action reference, permissions and asset branch before running.',
       '3. Run the workflow to generate real GitHub data, then paste the snippet into your README.',
-      'The pre-release Action must be accessible from the calling repository.',
+      'This kit uses the public v0.1.0 Action. Review its release notes before updating.',
       'Publishing to another repository requires a PROFILE_PUBLISH_TOKEN secret with write access to that destination.',
       'The preview/ folder contains FICTIONAL data, not your GitHub statistics. Do not deploy it as real data.',
       'Docs: https://github.com/YagoBorba/diagnostic-profile',

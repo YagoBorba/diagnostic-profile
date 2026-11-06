@@ -406,7 +406,7 @@ $('export-mode').addEventListener('change', () => {
     : 'Exporte a configuração, o snippet e o workflow para gerar SVGs com dados reais no seu repositório.';
   $('export-limitations').textContent = simple
     ? 'Não inclui métricas ou calendários. Revise os textos de exemplo. Os textos são atualizados manualmente. O ZIP contém o README e as instruções.'
-    : 'Pré-lançamento: a Action precisa estar acessível ao repositório que a utiliza. Os SVGs de preview são fictícios e ficam separados. Ainda não há versão pública estável.';
+    : 'Action pública v0.1.0. O workflow busca os dados reais; os SVGs de preview são fictícios e ficam separados. Confira os arquivos e as permissões antes de instalar.';
   $('install-steps').replaceChildren(...(simple
     ? ['Revise os textos, projetos e contatos de exemplo.', 'Abra ou crie seu repositório público ' + (lastValid?.login || 'login') + '/' + (lastValid?.login || 'login') + '.', 'Copie o README.md para a raiz e salve no GitHub.']
     : ['Adicione a configuração e o workflow ao repositório de perfil.', 'Confira o destino, as permissões e a referência da Action.', 'Execute o workflow e incorpore o snippet no README.']).map((text) => element('li', text)));
