@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="796" viewBox="0 0 360 796" role="img" aria-labelledby="title desc">
+<title id="title">Inventário de Exploração</title>
+<desc id="desc">Composição de apresentação, projeto e contato. Dados fictícios.</desc>
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<svg x="0" y="0" xmlns="http://www.w3.org/2000/svg" width="360" height="252" viewBox="0 0 360 252" role="img" aria-hidden="true">
+
+
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+.editorial{font-family:Georgia,"Times New Roman",serif}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<path d="M9 1H351V9H359V243H351V251H9V243H1V9H9Z" fill="#0f141b" stroke="#ff7b5c" stroke-width="2"/><path d="M10 57H350" stroke="#2a3441"/><rect x="300" y="24" width="8" height="8" fill="#a5d6ff"/><rect x="314" y="24" width="8" height="8" fill="#a5d6ff"/><rect x="328" y="24" width="8" height="8" fill="#a5d6ff"/><text x="28" y="30" class="mono" font-size="13" font-weight="400" fill="#ff7b5c" text-anchor="start">EXPLORAÇÃO / INVENTÁRIO</text><text x="28" y="98" class="mono" font-size="30" font-weight="400" fill="#e6edf3" text-anchor="start">Ada Mercer</text><text x="28" y="155.5" class="mono" font-size="18" font-weight="400" fill="#8b98a5" text-anchor="start">Platform Engineer ·</text><text x="28" y="181.6" class="mono" font-size="18" font-weight="400" fill="#8b98a5" text-anchor="start">Distributed Systems</text>
+</svg>
+<svg x="0" y="264" xmlns="http://www.w3.org/2000/svg" width="360" height="340" viewBox="0 0 360 340" role="img" aria-hidden="true">
+
+
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+.editorial{font-family:Georgia,"Times New Roman",serif}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<path d="M9 1H351V9H359V331H351V339H9V331H1V9H9Z" fill="#0f141b" stroke="#ff7b5c" stroke-width="2"/><path d="M10 57H350" stroke="#2a3441"/><rect x="300" y="24" width="8" height="8" fill="#a5d6ff"/><rect x="314" y="24" width="8" height="8" fill="#a5d6ff"/><rect x="328" y="24" width="8" height="8" fill="#a5d6ff"/><text x="28" y="30" class="mono" font-size="13" font-weight="400" fill="#ff7b5c" text-anchor="start">EXPLORAÇÃO / INVENTÁRIO 01</text><text x="28" y="98" class="mono" font-size="26" font-weight="400" fill="#e6edf3" text-anchor="start">FleetLink</text><text x="28" y="149.7" class="mono" font-size="13" font-weight="400" fill="#ff7b5c" text-anchor="start">Gateway · Telemetry</text><text x="28" y="178.54999999999998" class="mono" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">Fleet telemetry gateway that</text><text x="28" y="201.74999999999997" class="mono" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">streams vehicle data over MQTT</text><text x="28" y="224.94999999999996" class="mono" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">into a time-series store, with</text><text x="28" y="248.14999999999995" class="mono" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">backpressure, replay and per-</text><text x="28" y="281.34999999999997" class="mono" font-size="14" font-weight="400" fill="#a5d6ff" text-anchor="start">Go ▣ MQTT</text>
+</svg>
+<svg x="0" y="616" xmlns="http://www.w3.org/2000/svg" width="360" height="168" viewBox="0 0 360 168" role="img" aria-hidden="true">
+
+
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+.editorial{font-family:Georgia,"Times New Roman",serif}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<path d="M9 1H351V9H359V159H351V167H9V159H1V9H9Z" fill="#0f141b" stroke="#ff7b5c" stroke-width="2"/><path d="M10 57H350" stroke="#2a3441"/><rect x="300" y="24" width="8" height="8" fill="#a5d6ff"/><rect x="314" y="24" width="8" height="8" fill="#a5d6ff"/><rect x="328" y="24" width="8" height="8" fill="#a5d6ff"/><text x="28" y="30" class="mono" font-size="13" font-weight="400" fill="#ff7b5c" text-anchor="start">CONTATO</text><text x="28" y="98" class="mono" font-size="22" font-weight="400" fill="#ff7b5c" text-anchor="start">LinkedIn ↗</text>
+</svg>
+
+</svg>

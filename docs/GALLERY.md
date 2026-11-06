@@ -1,5 +1,7 @@
 # Preset gallery
 
+Version 0.2.0 adds six complete worlds, three-block thumbnails and manual SVG export. See [worlds and recipes](WORLDS.md) for complete compositions and the [beginner guide](GETTING_STARTED.md) for the three export formats.
+
 Every preview below uses the same fictional Ada Mercer profile. Change the preset without losing your profile fields; explicit configuration values override preset defaults. All templates have dark and light assets.
 
 | Preset | Dark example |

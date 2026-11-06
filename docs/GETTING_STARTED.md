@@ -1,45 +1,56 @@
 # Crie seu primeiro README
 
-## Sem instalação: README pronto
+Abra o [Studio público gratuito](https://yagoborba.github.io/diagnostic-profile/), sem login. Escolha o formato no início; o preview acompanha o que será exportado.
 
-1. Abra o Studio, escolha um modelo e clique em **Limpar textos de exemplo**.
-2. Preencha seu login do GitHub, nome e apresentação. Adicione projetos, tecnologias e contatos que quiser mostrar. Blocos vazios são omitidos no README simples.
-3. Em **Como você quer usar?**, mantenha **README pronto, sem automação**. Confira o texto na aba README pronto e clique em **Baixar README.md** ou copie o código. O ZIP inclui também INSTALL.txt.
-4. No GitHub, crie ou abra um repositório **público** com seu login como nome: por exemplo, para octocat, octocat/octocat. Coloque README.md na raiz. Se já existir um README, mescle o conteúdo para preservar o que deseja manter.
-5. Salve a alteração e abra seu perfil. Não precisa de Node, token ou workflow. Atualize os textos manualmente quando necessário.
+## Kit visual estático: estilo sem instalação
 
-O README simples usa a aparência do Markdown do GitHub. Paletas, animações, larguras e cartões SVG pertencem ao outro modo. Métricas, calendários e timestamps de demonstração não entram no README simples. Textos de exemplo entram se você não os substituir; revise os contatos e links antes de publicar.
+1. Escolha um mundo e clique em **Limpar textos de exemplo**.
+2. Preencha login, nome, apresentação, projetos e contatos. Projetos são informados manualmente; não há consulta ao GitHub neste formato.
+3. Confira o preview em claro/escuro. Use a composição Compacta para telas menores e revise os avisos de contraste.
+4. Baixe o ZIP, extraia e envie **README.md e a pasta assets/ inteira** para a raiz do seu repositório público login/login. Preserve os caminhos relativos; mescle o README existente antes de salvar.
+5. Visite seu perfil. Para mudar o conteúdo depois, importe diagnostic-profile.json no Studio e envie o kit atualizado.
 
-Abra o [Studio público gratuito](https://yagoborba.github.io/diagnostic-profile/), sem login. Para executar localmente a partir do repositório público:
+Não precisa de token, Node.js, Action ou servidor de imagens. Métricas, calendários e projetos fixados da API são omitidos. Revise todo conteúdo de exemplo antes de publicar. Os créditos a Yago Borba e ao projeto acompanham o README.
+
+## Markdown: textos e links
+
+Escolha README em Markdown para copiar ou baixar somente textos e links. Esse formato segue a aparência do GitHub, sem as formas/cores dos SVGs. O ZIP inclui README.md e INSTALL.txt. Blocos de dados automáticos não entram nesse modo; a atualização é manual.
+
+## Action: dados públicos atualizados
+
+Escolha SVGs e métricas com Action. Exporte JSON, workflow e snippet, confira permissões e execute o workflow no seu repositório. A referência pública é YagoBorba/diagnostic-profile@v0.2.0; use o SHA completo da tag se precisar de imutabilidade. Siga a [instalação completa](../README.md).
+
+O preview da Action usa dados **fictícios**. Os SVGs fictícios ficam separados em preview/ no ZIP; não publique esses arquivos como suas estatísticas. O workflow gera dados reais. Para outra conta/repositório de destino, configure PROFILE_PUBLISH_TOKEN com escrita naquele destino. Nunca coloque token no JSON, README, URL ou navegador.
+
+O destino de imagens precisa ser público para visitantes sem autenticação. Uma branch output em repositório privado continua privada. Não copie URLs temporárias autenticadas de imagens privadas.
+
+[Exemplo público de instalação](https://github.com/YagoBorba/diagnostic-profile-example) · [Workflows do projeto](https://github.com/YagoBorba/diagnostic-profile/actions).
+
+## Repositório do perfil e execução local
+
+No GitHub, o repositório deve ser público, ter o mesmo nome do seu login e conter README.md não vazio na raiz. Consulte as [condições oficiais](https://docs.github.com/en/account-and-profile/how-tos/profile-customization/managing-your-profile-readme), incluindo a restrição a contas gerenciadas.
+
+Para executar o Studio localmente:
 
     npm ci
     npm run studio
 
-Abra o endereço Local exibido pelo comando. O projeto ainda não oferece um pacote npm público para npx.
-
-As condições do perfil README estão na [documentação oficial do GitHub](https://docs.github.com/en/account-and-profile/how-tos/profile-customization/managing-your-profile-readme). Contas de usuários gerenciados não têm esse recurso.
-
-## Com SVGs e métricas atualizadas
-
-Escolha **SVGs e métricas com Action** para exportar JSON, snippet e workflow. Siga o INSTALL.txt e a referência de [instalação e permissões](../README.md). O motor roda no seu repositório, não no navegador. A Action pública usa a versão v0.1.0. Consulte as [notas de lançamento e atualização](RELEASE.md).
-
-Os previews fictícios do ZIP não são suas estatísticas e ficam em preview/. Execute o workflow para gerar os assets reais. Para que visitantes vejam as imagens, o destino dos assets precisa ser acessível publicamente. Uma branch chamada output em repositório privado continua privada. Não copie URLs temporárias autenticadas de imagens privadas: elas não são uma publicação pública durável.
-
-Use os URLs calculados no snippet para o destino escolhido. Para outra conta/repositório, configure PROFILE_PUBLISH_TOKEN no ambiente da Action com permissão de escrita nesse destino. Nenhum token deve entrar no JSON, README, URL ou navegador.
+Abra o endereço Local exibido. Não há pacote npm público para npx.
 
 ## Problemas comuns
 
 | Sintoma | O que verificar |
 | --- | --- |
-| O perfil não mostra README | Repositório público com o mesmo nome do login, README.md não vazio na raiz e conta elegível. |
-| Continua aparecendo Ada ou projetos do exemplo | Use Limpar textos de exemplo e confira os campos, contatos, projetos e o texto exportado. |
-| O README não tem as cores do preview | O modo simples é Markdown; escolha SVGs com Action para os visuais do preview. |
-| Tecnologias ou trajetória sumiram | Preencha os itens em Conteúdo pessoal e habilite os blocos correspondentes. |
-| Não consigo baixar | Corrija os campos destacados; mantenha ao menos apresentação ou outro bloco com conteúdo. |
-| Action não encontrada ou acesso negado | Confira a referência YagoBorba/diagnostic-profile@v0.1.0, as permissões de Actions e os secrets necessários. |
-| SVG aparece quebrado | Confira execução concluída, branch/destino, nomes e acesso público aos assets; não use URLs autenticadas temporárias. |
-| Dados não mudaram | Confira a última execução e os logs, agendamento na branch padrão e cache das imagens. Schedules podem atrasar; rode manualmente para investigar. |
-| Falha de token ou de publicação | Separe leitura dos dados da escrita no destino; confira permissões e secrets da Action sem colar tokens em issues. |
-| Meu rascunho sumiu | O armazenamento é local ao navegador e pode ser limpo/bloqueado. Use Baixar JSON para guardar uma cópia. |
+| O perfil não mostra README | Nome do repositório igual ao login, repositório público e README.md na raiz. |
+| Continua aparecendo Ada | Limpe os exemplos e revise também projetos, contatos, campos e textos exportados. |
+| Imagem estática aparece quebrada | Envie assets/ junto com README.md e mantenha os caminhos relativos. |
+| Não vejo cores no Markdown | Esse formato usa texto e links; selecione kit visual estático ou Action para SVGs. |
+| Tecnologias/traços sumiram | Preencha Conteúdo pessoal e habilite os blocos correspondentes. |
+| Não consigo baixar | Corrija os campos destacados e habilite um bloco compatível com o formato escolhido. |
+| Métricas não aparecem no kit estático | Esse modo usa conteúdo manual; escolha Action para estatísticas reais. |
+| Action não encontrada | Confira v0.2.0, permissões de Actions e acesso à referência; não invente tags. |
+| Dados da Action não mudaram | Confira execução, logs, branch padrão e cache de imagens. Geração idêntica preserva arquivos/timestamp; --force força novo build na CLI. |
+| Falha de token ou publicação | Separe leitura dos dados da escrita no destino; confira secrets sem copiá-los em issues. |
+| Meu rascunho sumiu | O armazenamento é local ao navegador/domínio. Baixe JSON como backup portátil. |
 
-Mais detalhes: [Studio](STUDIO.md), [galeria](GALLERY.md), [avaliação e lançamento público](PRODUCT_REVIEW.md), [roadmap](ROADMAP.md).
+Mais detalhes: [Studio](STUDIO.md), [mundos e receitas](WORLDS.md), [galeria](GALLERY.md), [release e migração](RELEASE.md), [roadmap](ROADMAP.md).

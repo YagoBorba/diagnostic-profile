@@ -8,6 +8,7 @@ import { paletteNames, resolveTheme } from '../src/themes.mjs';
 import { renderHeader } from '../src/widgets/header.mjs';
 import { PRESETS } from '../src/presets.mjs';
 import { WIDGETS } from '../src/catalog.mjs';
+import { renderThumbnail } from '../src/thumbnail.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const outputDir = join(root, 'docs', 'preview');
@@ -30,6 +31,7 @@ await mkdir(outputDir, { recursive: true });
 for (const preset of Object.keys(PRESETS)) {
   const themed = normalizeConfig({ ...JSON.parse(await readFile(join(root, 'examples', 'diagnostic-profile.json'), 'utf8')), theme: undefined, preset });
   const assets = buildAssets(themed, data, now);
+  files['composition-' + preset + '.svg'] = renderThumbnail(themed, data);
   for (const mode of ['dark', 'light']) files['preset-' + preset + '-' + mode + '.svg'] = assets['header-' + mode + '.svg'];
 }
 await Promise.all(Object.entries(files).map(([name, content]) => writeFile(join(outputDir, name), content)));

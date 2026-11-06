@@ -177,14 +177,16 @@ function render() {
     oldUrls.forEach((url) => URL.revokeObjectURL(url));
     lastValid = config; $('errors').hidden = true; fieldErrors();
     ['download', 'download-readme', 'save-json', 'share', 'share-style', 'copy', 'favorite'].forEach((id) => { $(id).disabled = false; });
-    $('data-warning').hidden = !declared?.warnings.length || exportMode === 'readme';
-    $('data-warning').textContent = declared?.warnings.join(' ') ?? '';
+    const notices = exportMode === 'readme' ? [] : [...(declared?.warnings ?? [])];
+    if (exportMode !== 'readme' && config.layout.type !== 'compact' && $('preview').getBoundingClientRect().width < 600) notices.push('Em telas pequenas, escolha a composição Compacta para manter os textos legíveis.');
+    $('data-warning').hidden = !notices.length;
+    $('data-warning').textContent = notices.join(' ');
     $('demo-banner').textContent = exportMode === 'action'
       ? 'DADOS FICTÍCIOS — a Action buscará seus dados reais.'
       : exportMode === 'static' ? 'CONTEÚDO DECLARADO — kit visual sem estatísticas de demonstração.' : 'MARKDOWN — conteúdo e links do arquivo exportado; a aparência final segue o GitHub.';
     $('render-status').textContent = exportMode === 'readme' ? 'Markdown · conteúdo declarado'
       : Object.keys(files).filter((n) => n.endsWith('.svg')).length + ' SVGs · ' + Math.round(performance.now() - start) + ' ms · ' + (exportMode === 'static' ? 'conteúdo declarado' : 'preview fictício');
-    themeSwatches(config); renderCode();
+    themeSwatches(config); if (exportMode === 'readme') $('contrast-warning').hidden = true; renderCode();
     const saved = storage.set('diagnostic-profile.draft.v1', exportConfig(state));
     $('draft-status').textContent = saved ? 'Rascunho salvo neste navegador.' : 'Armazenamento indisponível; baixe o JSON para guardar.';
   } catch (error) {

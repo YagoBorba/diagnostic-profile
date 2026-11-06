@@ -4,6 +4,7 @@ import { WIDGETS } from './catalog.mjs';
 import { localizeMetadata } from './accessibility.mjs';
 
 const definition = (name, renderer, world = false) => Object.freeze({ name, version: 1, world,
+  author: 'Yago Borba', repository: 'https://github.com/YagoBorba/diagnostic-profile', license: 'MIT', artwork: 'original-vector',
   formats: Object.freeze(['static', 'action']), widgets: Object.freeze(WIDGETS.map((w) => w.id)), render: (context) => localizeMetadata(renderer(context), context) });
 export const FAMILIES = Object.freeze({
   diagnostic: definition('Diagnóstico', renderLegacy), terminal: definition('Terminal', renderLegacy), minimal: definition('Minimalista', renderLegacy),

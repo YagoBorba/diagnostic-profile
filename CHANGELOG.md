@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-06
+
 - Localize system labels, accessible descriptions, summaries and kit instructions in English/Portuguese while preserving profile text and default legacy SVGs.
 - Skip publication when the configuration/data/version hash is unchanged and owned files are intact; --force rebuilds explicitly.
 - Add weekly Dependabot updates for npm and SHA-pinned Actions targeting develop.
