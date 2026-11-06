@@ -45,6 +45,8 @@ The free static hosting plan, privacy details and launch blockers are documented
 
 ## Save and share
 
+The site and every non-empty exported README include a small linked credit to Yago Borba and the Diagnostic Profile repository. Hiding the optional profile footer does not remove this credit. The software remains MIT licensed; see LICENSE.
+
 Drafts and favorites stay in the browser when local storage is available. Download JSON for a portable copy. Imports and shared links are validated; unsupported fields, including credential fields, are discarded.
 
 Shared links contain profile texts and contacts in the URL fragment. Localhost links only work where the same server is reachable; use the hosted Studio origin to share with other people. Oversized configurations should be shared as files.

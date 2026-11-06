@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Keep minimal linked credits for Yago Borba and Diagnostic Profile in the Studio footer and both README export formats, independently of optional profile blocks.
+
 ### Studio and personalization
 
 - Generate standalone Markdown READMEs without a token, Action or fictional statistics; download directly or as a two-file ZIP.

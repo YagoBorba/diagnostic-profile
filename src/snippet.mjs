@@ -1,3 +1,5 @@
+import { CREDITS } from './credits.mjs';
+
 const attr = (v) => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const markdownText = (v) => String(v).replace(/[\\[\]]/g, '\\$&').replace(/[\r\n]+/g, ' ');
 
@@ -30,5 +32,5 @@ export function renderSnippet(config, data, projects, sections) {
       data.totals.repositories + ' public owned non-fork repositories; ' + data.totals.followers + ' current followers.',
     );
   }
-  return output.join('\n\n') + '\n';
+  return output.join('\n\n') + (sections.some((section) => section.items.length) ? '\n\n' + CREDITS : '') + '\n';
 }

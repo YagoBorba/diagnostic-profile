@@ -6,6 +6,7 @@ import { PRESETS, PRESET_GUIDE } from '../src/presets.mjs';
 import { zipFiles } from '../src/transfer.mjs';
 import { readFileSync } from 'node:fs';
 import { parse } from 'yaml';
+import { CREDITS } from '../src/credits.mjs';
 
 test('standalone README uses declared content and never introduces fixture statistics or image services', () => {
   const text = generateReadme({ login: 'new-user', preset: 'resume', header: { name: 'Júlia 山田', headline: 'Backend engineer' },
@@ -17,7 +18,7 @@ test('standalone README uses declared content and never introduces fixture stati
   assert.ok(text.indexOf('Tecnologias') < text.indexOf('Trajetória'));
   assert.doesNotMatch(text, /Ada|Mercer|fleetlink|stars|contributions|\.svg|raw\.githubusercontent|<img|<picture/);
   const beginner = generateReadme({ login: 'new-user', projects: [] });
-  assert.equal(beginner, '# new-user\n');
+  assert.equal(beginner, '# new-user\n\n' + CREDITS + '\n');
   assert.match(generateReadme({ login: 'new-user' }), /new-user\?tab=repositories/);
 });
 
@@ -60,6 +61,26 @@ test('each template explains its purpose and works for a user without activity o
     assert.ok(PRESET_GUIDE[preset].category);
     assert.match(generateReadme({ login: 'new-user', preset, projects: [] }), /^# new-user/);
   }
+});
+
+test('every template keeps minimal author and repository credits when the footer is disabled', async () => {
+  const { buildAssets } = await import('../src/build.mjs');
+  const { summarize } = await import('../src/stats.mjs');
+  const fixture = JSON.parse(readFileSync(new URL('./fixtures/user.json', import.meta.url), 'utf8'));
+  for (const preset of Object.keys(PRESETS)) {
+    const input = { login: 'new-user', preset, widgets: [{ type: 'header' }, { type: 'footer', enabled: false }] };
+    const readme = generateReadme(input);
+    assert.ok(readme.endsWith(CREDITS + '\n'));
+    assert.equal(readme.split(CREDITS).length, 2);
+    const { normalizeConfig } = await import('../src/config.mjs');
+    const snippet = buildAssets(normalizeConfig(input), summarize(fixture), new Date('2026-10-31T12:00:00Z'))['README.snippet.md'];
+    assert.ok(snippet.endsWith(CREDITS + '\n'));
+    assert.equal(snippet.split(CREDITS).length, 2);
+  }
+  assert.match(CREDITS, /https:\/\/github.com\/YagoBorba\/diagnostic-profile/);
+  assert.match(CREDITS, /href="https:\/\/github.com\/YagoBorba"/);
+  const html = readFileSync(new URL('../studio/index.html', import.meta.url), 'utf8');
+  assert.match(html, /<footer[\s\S]*href="https:\/\/github.com\/YagoBorba"[\s\S]*href="https:\/\/github.com\/YagoBorba\/diagnostic-profile"/);
 });
 
 test('Pages publication is manual, restricted to released main and uses pinned Actions', () => {

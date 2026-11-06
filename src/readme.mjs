@@ -1,4 +1,5 @@
 import { normalizeConfig } from './config.mjs';
+import { CREDITS } from './credits.mjs';
 
 // User text is always prose, never Markdown or HTML supplied by the visitor.
 const prose = (value) => String(value).replace(/[\r\n\t]+/g, ' ').replace(/&/g, '&amp;')
@@ -51,7 +52,7 @@ export function generateReadme(input) {
       default: break;
     }
   }
-  return blocks.map((block) => block.trim()).join('\n\n') + (blocks.length ? '\n' : '');
+  return blocks.length ? blocks.map((block) => block.trim()).join('\n\n') + '\n\n' + CREDITS + '\n' : '';
 }
 
 export function createReadmeKit(input) {
