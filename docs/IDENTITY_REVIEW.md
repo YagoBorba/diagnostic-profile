@@ -17,6 +17,7 @@ Branches verificadas: main contém v0.1.0; develop integra a próxima versão e 
 | P1 | Famílias pouco independentes | Em src/build.mjs, projetos dependem de compact, contatos usam sempre renderContact e o rodapé pode usar renderFooter independentemente da família. | Toda nova família deve mudar apresentação, projetos, contatos e rodapé de modo coerente; fallback deve ser explícito. |
 | P1 | Semelhança mensurável entre famílias | Com os mesmos dados, paleta, layout e movimento desativado, mudar diagnostic para minimal deixou 16 dos 22 SVGs exatamente iguais: oito projetos, seis contatos e dois rodapés. | Comparar o perfil completo com os mesmos dados; distinguir geometria, hierarquia e composição, inclusive sem cor. Não interpretar esta comparação isolada como uma nota geral de qualidade. |
 | P1 | Preview não representa o export padrão | Studio mostra composição SVG; README pronto exporta Markdown sem as paletas/animações. Há aviso, mas a diferença continua exigindo atenção. | Escolher o formato antes de personalizar e mostrar preview correspondente; sinalizar quais escolhas afetam somente SVG. |
+| P1 | O visual personalizado ainda depende da instalação da Action | O caminho sem automação gera somente Markdown; o kit SVG existente inclui previews com dados fictícios e não deve ser publicado como dado real. | Oferecer um terceiro formato: kit visual estático com README e SVGs locais feitos somente com conteúdo declarado. Omitir métricas/calendários sem fonte real, usar links relativos e orientar o upload dos arquivos no repositório da pessoa. Isso permite usar um mundo visual sem token ou workflow. |
 | P1 | Miniaturas mostram pouco da proposta | drawGallery usa somente o header escuro, apesar de a diferença entre presets estar também nos blocos seguintes. | Miniatura com apresentação, projeto e outro bloco real; mesmas informações nos exemplos; indicação clara de tema claro/escuro e composição. |
 | P1 | Texto pequeno ao reduzir painéis largos | Painéis diagnósticos de 1200 px carregam textos de 11–13 px; a incorporação pode reduzi-los proporcionalmente. Existem variantes compactas, mas não são escolhidas por todos os usuários. | Modelos com variante estreita própria, sugestão contextual e verificação a 320/390 px; não apenas diminuir o SVG inteiro. |
 | P1 | Qualidade visual não está coberta por XML | CI verifica testes, schema, XML e drift dos arquivos, mas não legibilidade ou sobreposição em imagens renderizadas. | Verificar capturas representativas por família, claro/escuro, largura estreita e conteúdo extremo; incluir avaliação real do README no GitHub. |
@@ -74,6 +75,8 @@ O Studio pode ter interações locais. O README no GitHub recebe imagens, links 
 
 Cada mundo deve oferecer resultado SVG coerente e alternativa textual compreensível. Movimentos e efeitos nunca devem ser necessários para ler o conteúdo. O resumo textual e os créditos continuam disponíveis.
 
+O kit visual estático proposto é diferente dos previews fictícios atuais: deve ser gerado do perfil preenchido, sem importar a fixture e sem inventar números ausentes. Arquivos SVG podem acompanhar o README em uma pasta de assets no repositório do usuário. Conteúdo e estatísticas só mudam quando a pessoa gera/publica novamente; quem quer atualização automática escolhe a Action. Os três formatos precisam de instruções e previews correspondentes.
+
 ## Contrato técnico sugerido
 
 - Um registro de famílias declara nome, versão, formatos suportados, widgets suportados, tokens e funções de renderização. A coleta da API e os cálculos continuam compartilhados.
@@ -96,7 +99,7 @@ Completar a validação em outro repositório público, manter atualização/rol
 | Ordem | Branch proposta a partir de develop | Entrega e aceite |
 | --- | --- | --- |
 | 1 | feature/family-renderer-contract | Contrato de família e migração das atuais sem mudar a saída v0.1.0 inadvertidamente; regressões e exemplos. |
-| 2 | feature/matching-export-preview | Modo de saída escolhido no início e preview fiel do README/kit selecionado. |
+| 2 | feature/matching-export-preview | Modo de saída escolhido no início e preview fiel; preparar o kit visual estático, separando conteúdo manual de métricas automáticas e de dados fictícios. |
 | 3 | feature/workshop-world | Oficina Zero completa, com projetos/contatos próprios e variante estreita. |
 | 4 | feature/field-notebook-world | Arquivo de Campo completo, reutilizando dados e validações. |
 | 5 | feature/orbital-world | Cartografia Orbital completa, com distinção entre decoração e métrica. |
