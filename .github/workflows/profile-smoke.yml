@@ -16,7 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Prepare public demo configuration
         env:
           PROFILE_LOGIN: YagoBorba
@@ -53,7 +55,7 @@ jobs:
           console.log('Released Action generated real public profile data with attribution.');
           NODE
       - name: Publish public demo assets
-        uses: crazy-max/ghaction-github-pages@df5cc2bfa78282ded844b354faee141f06b41865 # v4
+        uses: crazy-max/ghaction-github-pages@1d6ee9b181a81033a16bd707a1401afa978daab4 # v5.0.0
         with:
           target_branch: demo-assets
           build_dir: dist/smoke

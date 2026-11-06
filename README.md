@@ -151,14 +151,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - uses: YagoBorba/diagnostic-profile@v0.2.0
         with:
           config: diagnostic-profile.json
           output_dir: dist
 
-      - uses: crazy-max/ghaction-github-pages@v4
+      - uses: crazy-max/ghaction-github-pages@1d6ee9b181a81033a16bd707a1401afa978daab4 # v5.0.0
         with:
           target_branch: output
           build_dir: dist
@@ -227,6 +229,8 @@ node src/cli.mjs --fixture test/fixtures/user.json --dry-run --json
 ```
 
 `init` creates a schema-enabled config and an example workflow, without replacing existing files unless `--force` is supplied. The generated workflow uses `@v0.2.0`; pin the tag's full commit SHA if you require an immutable reference. Review release notes before upgrading.
+
+See [Action maintenance and runner compatibility](docs/ACTION_MAINTENANCE.md) when upgrading pinned workflow dependencies or using self-hosted runners.
 
 Configuration without `schemaVersion` is interpreted as version 1; unsupported future versions fail before generating assets. [JSON Schema](schema/diagnostic-profile.schema.json) provides editor completion. CLI validation also reports misspelled/unknown fields. Precedence is `--login`, then file login, then `DP_LOGIN`, then defaults for optional fields.
 
