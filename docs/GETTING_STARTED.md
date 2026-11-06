@@ -26,6 +26,8 @@ O destino de imagens precisa ser público para visitantes sem autenticação. Um
 
 [Exemplo público de instalação](https://github.com/YagoBorba/diagnostic-profile-example) · [Workflows do projeto](https://github.com/YagoBorba/diagnostic-profile/actions).
 
+O exemplo contém configuração e workflows completos, README com imagens reais e branch output pública. A [execução externa verificada](https://github.com/YagoBorba/diagnostic-profile-example/actions/runs/42156188833) usa v0.2.0 e o GITHUB_TOKEN do próprio repositório, sem PAT. Seu workflow roda manualmente ou quando a configuração muda em main; copie e adapte login/destino antes de usar.
+
 ## Repositório do perfil e execução local
 
 No GitHub, o repositório deve ser público, ter o mesmo nome do seu login e conter README.md não vazio na raiz. Consulte as [condições oficiais](https://docs.github.com/en/account-and-profile/how-tos/profile-customization/managing-your-profile-readme), incluindo a restrição a contas gerenciadas.
