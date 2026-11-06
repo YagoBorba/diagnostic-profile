@@ -155,7 +155,7 @@ jobs:
         with:
           persist-credentials: false
 
-      - uses: YagoBorba/diagnostic-profile@v0.2.0
+      - uses: YagoBorba/diagnostic-profile@v0.2.1
         with:
           config: diagnostic-profile.json
           output_dir: dist
@@ -228,7 +228,7 @@ node src/cli.mjs preview
 node src/cli.mjs --fixture test/fixtures/user.json --dry-run --json
 ```
 
-`init` creates a schema-enabled config and an example workflow, without replacing existing files unless `--force` is supplied. The generated workflow uses `@v0.2.0`; pin the tag's full commit SHA if you require an immutable reference. Review release notes before upgrading.
+`init` creates a schema-enabled config and an example workflow, without replacing existing files unless `--force` is supplied. The generated workflow uses `@v0.2.1`; pin the tag's full commit SHA if you require an immutable reference. Review release notes before upgrading.
 
 See [Action maintenance and runner compatibility](docs/ACTION_MAINTENANCE.md) when upgrading pinned workflow dependencies or using self-hosted runners.
 
