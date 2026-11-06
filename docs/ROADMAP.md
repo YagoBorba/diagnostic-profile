@@ -210,7 +210,7 @@ Referência de agendamento: https://docs.github.com/en/actions/reference/workflo
 - [x] SEC-03 · P0 · E — Validar protocolos de links e impedir atributos, scripts ou eventos fornecidos como conteúdo.
 - [x] SEC-04 · P0 · E — Limitar quantidade e tamanho dos textos, widgets e arquivos importados para evitar travamentos.
 - [x] SEC-05 · P0 · E — Garantir que nomes gerados permaneçam no diretório de saída e não contenham traversal.
-- [x] SEC-06 · P1 · E — Fixar Actions externas por SHA revisado e manter atualização automatizada.
+- [ ] SEC-06 · P1 · E — Fixar Actions externas por SHA revisado e manter atualização automatizada. Os SHAs já estão fixados; a automação de atualização não está declarada no checkout e precisa ser verificada/configurada.
 - [x] SEC-07 · P1 · E — Criar SECURITY.md com canal privado de reporte e versões suportadas.
 - [ ] SEC-08 · P1 · E — Proteger branch de release e exigir as verificações definidas antes de publicar.
 - [x] SEC-09 · P1 · E — Documentar dados locais, dados públicos e serviços externos usados pelo configurador.

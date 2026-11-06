@@ -43,6 +43,8 @@ Create a plain Markdown README in the Studio without a token or installation, or
 
 ## Profile Studio
 
+The next design cycle is assessed in the [identity and playful experience review](docs/IDENTITY_REVIEW.md): complete visual worlds, matching export previews and quality criteria. These are proposals; they are not additional themes already available in v0.1.0.
+
 Build a profile visually with ten presets, six palettes and three families: Diagnostic, Terminal and Minimal. Edit profile fields, projects and contacts, reorder blocks, compare styles and export a standalone README or matching SVG configuration, snippet and workflow. Search templates by goal and clear the fictional sample before publishing.
 
     npm ci
