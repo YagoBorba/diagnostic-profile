@@ -1,4 +1,4 @@
-# Profile Studio 0.2.0
+# Profile Studio 0.2.1
 
 [Studio público](https://yagoborba.github.io/diagnostic-profile/) · por [Yago Borba](https://github.com/YagoBorba) · [código](https://github.com/YagoBorba/diagnostic-profile).
 
@@ -12,7 +12,7 @@ No kit estático, os SVGs usam apenas conteúdo preenchido, com caminhos relativ
 
 No Markdown, o preview é construído pelo mesmo modelo semântico que gera o texto. O conteúdo do usuário vira texto no DOM, nunca HTML arbitrário. Esse formato não reproduz paletas e molduras SVG.
 
-Na Action, o preview é explicitamente fictício; o workflow consulta os dados reais. A referência é v0.2.0. Main, master, develop e a branch padrão não podem ser destinos de assets. Outra conta/repositório exige PROFILE_PUBLISH_TOKEN apropriado. Os arquivos fictícios do kit ficam separados em preview/.
+Na Action, o preview é explicitamente fictício; o workflow consulta os dados reais. A referência é v0.2.1. Main, master, develop e a branch padrão não podem ser destinos de assets. Outra conta/repositório exige PROFILE_PUBLISH_TOKEN apropriado. Os arquivos fictícios do kit ficam separados em preview/.
 
 Siga o [guia de iniciante](GETTING_STARTED.md) e a [referência de instalação](../README.md).
 

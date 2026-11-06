@@ -36,7 +36,7 @@ jobs:
           writeFileSync(process.env.RUNNER_TEMP + '/profile-smoke.json', JSON.stringify(config));
           NODE
       - name: Generate with the released Action
-        uses: YagoBorba/diagnostic-profile@v0.2.0
+        uses: YagoBorba/diagnostic-profile@v0.2.1
         with:
           config: ${{ runner.temp }}/profile-smoke.json
           output_dir: dist/smoke

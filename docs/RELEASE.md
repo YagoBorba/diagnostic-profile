@@ -1,3 +1,19 @@
+# Lançamento 0.2.1
+
+Data: 06/11/2026. Manutenção das Actions por [Yago Borba](https://github.com/YagoBorba).
+
+Atualiza checkout 7.0.1, setup-node 7.1.0, upload-pages-artifact 5.0.0, deploy-pages 5.0.1 e ghaction-github-pages 5.0.0 com pins SHA. O [PR #33](https://github.com/YagoBorba/diagnostic-profile/pull/33) reúne as propostas #25–29, atualiza também os workflows exportados e verifica empacotamento de Pages na CI.
+
+A versão mantém os mundos, dados, créditos e schema 1. Agora os instaladores exportados usam YagoBorba/diagnostic-profile@v0.2.1. Atualize a referência e os pins do workflow ao migrar; não basta trocar apenas a tag se quiser atualizar checkout/publicação.
+
+Runners próprios devem suportar Node 24 (Actions Runner 2.327.1+). O projeto continua executado/testado em Node 22/24. Cache automático de pacotes e credenciais persistentes de checkout estão explicitamente desativados. Consulte [compatibilidade e rollback](ACTION_MAINTENANCE.md).
+
+Gitflow: chore/action-runtime-maintenance → develop → release/0.2.1 → main, tag anotada v0.2.1 e merge de main para develop. Tags anteriores permanecem intactas. A publicação do Pages e o smoke test da versão são verificados após criar a tag; os resultados ficam em [IMPLEMENTATION.md](IMPLEMENTATION.md).
+
+Página pública: https://yagoborba.github.io/diagnostic-profile/. Npm/Marketplace não fazem parte deste lançamento.
+
+---
+
 # Lançamento 0.2.0
 
 Data: 06/11/2026. Por [Yago Borba](https://github.com/YagoBorba) · [diagnostic-profile](https://github.com/YagoBorba/diagnostic-profile).

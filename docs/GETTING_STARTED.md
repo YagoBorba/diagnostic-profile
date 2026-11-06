@@ -18,7 +18,7 @@ Escolha README em Markdown para copiar ou baixar somente textos e links. Esse fo
 
 ## Action: dados públicos atualizados
 
-Escolha SVGs e métricas com Action. Exporte JSON, workflow e snippet, confira permissões e execute o workflow no seu repositório. A referência pública é YagoBorba/diagnostic-profile@v0.2.0; use o SHA completo da tag se precisar de imutabilidade. Siga a [instalação completa](../README.md).
+Escolha SVGs e métricas com Action. Exporte JSON, workflow e snippet, confira permissões e execute o workflow no seu repositório. A referência pública é YagoBorba/diagnostic-profile@v0.2.1; use o SHA completo da tag se precisar de imutabilidade. Siga a [instalação completa](../README.md).
 
 O preview da Action usa dados **fictícios**. Os SVGs fictícios ficam separados em preview/ no ZIP; não publique esses arquivos como suas estatísticas. O workflow gera dados reais. Para outra conta/repositório de destino, configure PROFILE_PUBLISH_TOKEN com escrita naquele destino. Nunca coloque token no JSON, README, URL ou navegador.
 
@@ -50,7 +50,7 @@ Abra o endereço Local exibido. Não há pacote npm público para npx.
 | Tecnologias/traços sumiram | Preencha Conteúdo pessoal e habilite os blocos correspondentes. |
 | Não consigo baixar | Corrija os campos destacados e habilite um bloco compatível com o formato escolhido. |
 | Métricas não aparecem no kit estático | Esse modo usa conteúdo manual; escolha Action para estatísticas reais. |
-| Action não encontrada | Confira v0.2.0, permissões de Actions e acesso à referência; não invente tags. |
+| Action não encontrada | Confira v0.2.1, permissões de Actions e acesso à referência; não invente tags. |
 | Dados da Action não mudaram | Confira execução, logs, branch padrão e cache de imagens. Geração idêntica preserva arquivos/timestamp; --force força novo build na CLI. |
 | Falha de token ou publicação | Separe leitura dos dados da escrita no destino; confira secrets sem copiá-los em issues. |
 | Meu rascunho sumiu | O armazenamento é local ao navegador/domínio. Baixe JSON como backup portátil. |

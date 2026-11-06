@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-06
+
 - Upgrade SHA-pinned checkout, setup-node, Pages upload/deploy and asset publication Actions together; align Studio/CLI-generated workflows and README installation examples.
 - Disable automatic package-manager caching and persisted checkout credentials explicitly. Document modern runner requirements and rollback.
 - Exercise Pages artifact packaging in pull-request CI and verify dependency parity between exported workflows, composite Action and smoke checks.
