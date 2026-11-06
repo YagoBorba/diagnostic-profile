@@ -1,5 +1,6 @@
 import { normalizeConfig } from './config.mjs';
 import { CREDITS } from './credits.mjs';
+import { readmeModel } from './readme-model.mjs';
 
 // User text is always prose, never Markdown or HTML supplied by the visitor.
 const prose = (value) => String(value).replace(/[\r\n\t]+/g, ' ').replace(/&/g, '&amp;')
@@ -8,51 +9,15 @@ const link = (label, url) => '[' + prose(label) + '](<' + url.replace(/[\s<>\\]/
 
 /** A standalone README from declared content only: no fixture, API or image host. */
 export function generateReadme(input) {
-  const config = normalizeConfig(input);
-  const blocks = [];
-  for (const widget of config.widgets) {
-    if (!widget.enabled) continue;
-    const heading = (fallback) => config.layout.headings ? '## ' + prose(widget.title || fallback) : '';
-    switch (widget.type) {
-      case 'header': {
-        const lines = ['# ' + prose(config.header.name || config.login)];
-        if (config.header.headline) lines.push(prose(config.header.headline));
-        if (config.header.tags.length) lines.push(config.header.tags.map(prose).join(' · '));
-        for (const entry of config.header.readouts) if (entry.value) lines.push('**' + prose(entry.label) + ':** ' + prose(entry.value));
-        blocks.push(lines.join('\n\n'));
-        break;
-      }
-      case 'projects':
-        if (config.projects === 'pinned') blocks.push(heading('Projetos') + '\n\n' + link('Veja meus repositórios no GitHub', 'https://github.com/' + config.login + '?tab=repositories'));
-        else if (config.projects.length) blocks.push(heading('Projetos') + '\n\n' + config.projects.map((p) => {
-          const fullName = p.repo.includes('/') ? p.repo : config.login + '/' + p.repo;
-          return '- ' + link(p.title || p.repo, p.url || 'https://github.com/' + fullName) +
-            (p.summary ? ' — ' + prose(p.summary) : '') + (p.tags?.length ? ' (' + p.tags.map(prose).join(', ') + ')' : '');
-        }).join('\n'));
-        break;
-      case 'contacts':
-        if (config.contacts.length) blocks.push(heading('Contato') + '\n\n' + config.contacts.map((c) => '- ' + link(c.label, c.url)).join('\n'));
-        break;
-      case 'skills':
-      case 'timeline': {
-        const values = config.content[widget.type];
-        if (values.length) blocks.push(heading(widget.type === 'skills' ? 'Tecnologias' : 'Trajetória') + '\n\n' + values.map((v) => '- ' + prose(v)).join('\n'));
-        break;
-      }
-      case 'now': {
-        const lines = [];
-        for (const [key, label] of [['learning', 'Estudando'], ['building', 'Construindo']]) {
-          if (config.content[key].length) lines.push('**' + label + '**\n\n' + config.content[key].map((v) => '- ' + prose(v)).join('\n'));
-        }
-        if (lines.length) blocks.push(heading('Agora') + '\n\n' + lines.join('\n\n'));
-        break;
-      }
-      case 'divider': blocks.push('---'); break;
-      // Statistics, calendars and timestamps need real GitHub data. Never fabricate them.
-      default: break;
-    }
-  }
-  return blocks.length ? blocks.map((block) => block.trim()).join('\n\n') + '\n\n' + CREDITS + '\n' : '';
+  const blocks = readmeModel(input).map((b) => {
+    if (b.kind === 'heading') return '#'.repeat(b.level) + ' ' + prose(b.text);
+    if (b.kind === 'paragraph') return (b.label ? '**' + prose(b.label) + ':** ' : '') + prose(b.text);
+    if (b.kind === 'label') return '**' + prose(b.text) + '**';
+    if (b.kind === 'divider') return '---';
+    return b.items.map((item) => '- ' + (item.url ? link(item.label, item.url) : prose(item.text)) +
+      (item.description ? ' — ' + prose(item.description) : '') + (item.tags?.length ? ' (' + item.tags.map(prose).join(', ') + ')' : '')).join('\n');
+  });
+  return blocks.length ? blocks.join('\n\n') + '\n\n' + CREDITS + '\n' : '';
 }
 
 export function createReadmeKit(input) {

@@ -41,6 +41,36 @@ export function wrap(content, maxChars, maxLines) {
   return lines;
 }
 
+// Conservative glyph widths for proportional SVG fonts, without a browser/canvas dependency.
+export function wrapPixels(content, maxWidth, size, { mono = false, maxLines = 12 } = {}) {
+  const measure = (value) => graphemes(value).reduce((sum, part) => {
+    if (mono) return sum + textColumns(part) * size * 0.62;
+    const first = part[0];
+    const factor = textColumns(part) > 1 ? 2 : /[WMwm@#%&]/.test(first) ? 1 : /[ilI.,:;'!| ]/.test(first) ? 0.36 : /[A-Z]/.test(first) ? 0.84 : first.codePointAt(0) > 127 ? 1.15 : 0.7;
+    return sum + size * factor;
+  }, 0);
+  const words = String(content).trim().split(/\s+/).flatMap((word) => {
+    const parts = []; let current = '';
+    for (const part of graphemes(word)) {
+      if (current && measure(current + part) > maxWidth) { parts.push(current); current = ''; }
+      current += part;
+    }
+    if (current) parts.push(current);
+    return parts;
+  });
+  const lines = []; let current = '';
+  for (const word of words) {
+    const candidate = current ? current + ' ' + word : word;
+    if (current && measure(candidate) > maxWidth) { lines.push(current); current = word; } else current = candidate;
+  }
+  if (current) lines.push(current);
+  if (lines.length <= maxLines) return lines;
+  const kept = lines.slice(0, maxLines), end = graphemes(kept.at(-1));
+  while (end.length && measure(end.join('') + '…') > maxWidth) end.pop();
+  kept[kept.length - 1] = end.join('') + '…';
+  return kept;
+}
+
 export function document({ width, height, title, desc, css = '', body }) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-labelledby="title desc">
 <title id="title">${esc(title)}</title>

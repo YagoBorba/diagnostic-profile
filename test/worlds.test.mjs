@@ -10,10 +10,18 @@ import { WIDGETS } from '../src/catalog.mjs';
 import { summarize } from '../src/stats.mjs';
 import { manualProfile, createVisualKit } from '../src/manual.mjs';
 import { zipFiles } from '../src/transfer.mjs';
+import { wrapPixels } from '../src/svg.mjs';
 const example = JSON.parse(readFileSync(new URL('../examples/diagnostic-profile.json', import.meta.url)));
 const fixture = JSON.parse(readFileSync(new URL('./fixtures/user.json', import.meta.url)));
 const now = new Date('2026-10-31T12:00:00Z');
 const worlds = Object.keys(FAMILIES).filter((id) => FAMILIES[id].world);
+
+test('proportional text wrapping protects wide names and preserves emoji clusters', () => {
+  const lines = wrapPixels('W'.repeat(120), 264, 30, { maxLines: 24 });
+  assert.equal(lines.join(''), 'W'.repeat(120));
+  assert.ok(lines.every((line) => line.length * 30 <= 264));
+  assert.ok(wrapPixels('👩🏽‍💻 '.repeat(8), 200, 20).every((line) => !line.includes('\ufffd')));
+});
 
 test('family contract preserves every committed v0.1 SVG widget in its default configuration', () => {
   const config = normalizeConfig({ ...example, widgets: WIDGETS.map((w) => ({ id: w.id, type: w.id })) });
