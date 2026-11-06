@@ -73,3 +73,11 @@ Destination-ref validation also checks reserved Git names/components against git
 - 75 tests cover compatibility, XML, manual kits, localization, recipes, publication caching and version consistency. Browser measurements checked 648 proof samples and 4,196 text boxes without frame overflow; 320/390 px layouts had no horizontal document overflow. These checks do not substitute for screen-reader testing or independent usability research.
 - Main and develop now require pull requests, four successful strict CI checks and resolved conversations; force pushes/deletion are disabled. Dependabot targets develop weekly.
 - The release workflow additionally uploads the visual proof sheet for human inspection. It is not an automated pixel comparison.
+
+## Release 0.2.0 and external installation — 2026-11-06
+
+- [Release PR #30](https://github.com/YagoBorba/diagnostic-profile/pull/30) passed all four checks and merged release/0.2.0 into main. Annotated v0.2.0 identifies 48934d330957079de1c13f7b98318c55522e3189; v0.1.0 was not moved. [PR #31](https://github.com/YagoBorba/diagnostic-profile/pull/31) back-merged main into develop after green CI. The release branch was removed.
+- [Pages publication](https://github.com/YagoBorba/diagnostic-profile/actions/runs/42156022051) and [released Action smoke test](https://github.com/YagoBorba/diagnostic-profile/actions/runs/42156024978) succeeded. The public demo manifest reports version 0.2.0, source github and no warnings.
+- The separate public [installation example](https://github.com/YagoBorba/diagnostic-profile-example) consumes v0.2.0, tests real API output in CI, and follows its own feature/develop/release/main cycle with annotated example v0.1.0. It leaves the owner's personal profile repository untouched.
+- [External publication](https://github.com/YagoBorba/diagnostic-profile-example/actions/runs/42156188833) succeeded with the repository GITHUB_TOKEN, no PAT and no schedule. An unauthenticated HTTP request returned 200 for output/header-dark.svg; its manifest reports source github and version 0.2.0. CI verifies linked author/source attribution. This verifies a second repository under the same owner, not adoption by an independent participant.
+- The existing owner-private Sites preview mirror was updated without changing audience. GitHub Pages remains the public entry point.

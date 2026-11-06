@@ -3,7 +3,7 @@
 Data: 31/10/2026. Base técnica: análise da branch develop, commit 605ef7d.
 Atualizado em 06/11/2026. Este documento acompanha o roteiro aprovado: [x] indica comportamento implementado e verificado; [ ] indica trabalho pendente. As evidências e os PRs estão em [IMPLEMENTATION.md](IMPLEMENTATION.md). A integração do lote corrente depende da CI.
 
-A revisão atual de usabilidade e do site gratuito está em [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md); o caminho sem automação está em [GETTING_STARTED.md](GETTING_STARTED.md). A versão v0.1.0 e a página pública https://yagoborba.github.io/diagnostic-profile/ foram publicadas; os resultados estão em [IMPLEMENTATION.md](IMPLEMENTATION.md). A validação da Action já inclui geração e publicação reais no próprio projeto; instalação em outro repositório segue pendente.
+A revisão de usabilidade está em [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md); o caminho sem automação está em [GETTING_STARTED.md](GETTING_STARTED.md). A versão v0.2.0 está publicada em https://yagoborba.github.io/diagnostic-profile/. A Action foi instalada, executada e publicada em um [repositório de exemplo separado](https://github.com/YagoBorba/diagnostic-profile-example); as evidências estão em [IMPLEMENTATION.md](IMPLEMENTATION.md).
 
 Execução 0.2.0: seis mundos, kit visual estático, preview por formato, receitas/travas/favoritos, saída en/pt-BR, deduplicação de publicação e folha de revisão visual. Main/develop exigem PR e quatro checks CI. A interface do Studio e diagnósticos CLI ainda não são anunciados como totalmente bilíngues; teste externo de instalação e estudo com leitor de tela são registrados separadamente.
 
@@ -189,9 +189,9 @@ Concluído quando: uma pessoa consegue escolher um preset, alterá-lo, importar/
 
 ## 11. GitHub Action e instalação
 
-- [ ] ACT-01 · P0 · E — Disponibilizar a Action para o público pretendido e testar consumo a partir de outro repositório.
+- [x] ACT-01 · P0 · E — Disponibilizar a Action para o público pretendido e testar consumo a partir de outro repositório.
 - [x] ACT-02 · P0 · E — Publicar versão fixa, política de tags e notas de release consistentes com o README.
-- [ ] ACT-03 · P0 · E — Testar ponta a ponta em repositório descartável: checkout, geração, publicação e imagens acessíveis.
+- [x] ACT-03 · P0 · E — Testar ponta a ponta em repositório descartável: checkout, geração, publicação e imagens acessíveis.
 - [x] ACT-04 · P0 · E — Documentar permissões mínimas separando leitura de dados e publicação dos arquivos.
 - [ ] ACT-05 · P1 · E — Gerar outputs com diretório, snippet, manifesto e versão da configuração.
 - [ ] ACT-06 · P1 · E — Produzir resumo da execução com widgets gerados, avisos e acesso aos artefatos.
@@ -240,7 +240,7 @@ Referência para SHA de Actions: https://docs.github.com/en/actions/reference/se
 
 ## 14. Documentação e suporte
 
-- [ ] DOC-01 · P0 · E — Reescrever Quick Start com um caminho mínimo testado, arquivos completos e resultado esperado.
+- [x] DOC-01 · P0 · E — Reescrever Quick Start com um caminho mínimo testado, arquivos completos e resultado esperado.
 - [x] DOC-02 · P1 · E — Documentar cada opção, tipo, limite, padrão e exemplo de configuração.
 - [x] DOC-03 · P1 · E — Separar guias de iniciante, personalização e referência avançada.
 - [x] DOC-04 · P1 · E — Criar galeria com imagens e acesso direto à configuração de cada exemplo.
