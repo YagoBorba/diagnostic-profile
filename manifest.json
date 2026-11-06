@@ -1,0 +1,28 @@
+{
+  "generator": "diagnostic-profile",
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-06T00:14:48.698Z",
+  "version": "0.1.0",
+  "login": "YagoBorba",
+  "source": "github",
+  "warnings": [],
+  "files": {
+    "header-dark.svg": "6b80e7d1e4de4b1256788bfe4a2d87e9404daf995de8bb636f5a5a485f104349",
+    "header-light.svg": "1495b443aa3434f38021e5c2277e7a4032d69fd2a5c4472cccbe9849f1dbde06",
+    "project-stackcode-dark.svg": "8b9514c78bba8315273dfe8e613b81a804e854c51544cbf78fac38dcab649d37",
+    "project-maxdiagnostic-dark.svg": "156db1d21b65e2684e57a378e4f90d94098d0cd860ac4d41d5e32f1789b9fa16",
+    "project-borbacarlabs-dark.svg": "ccab3ff54ff4106a3a4e2523701e118e3b1ac52c1d8ac45631cc2aa5b47543fd",
+    "project-devtaskmanager-dark.svg": "6a9f28006a2556a53d5e41a5516b592886f41465de316b71e7819820c8293291",
+    "project-watthouse-dark.svg": "6147fcf40cd6f0e3af35f3f4ddaae097b99b63e3122e6e2fb5a2f7a60f6436af",
+    "project-stackcode-light.svg": "5f2870b5f95357be72f13098bc4976860bd7e59945eedcd035de2bc29ad65611",
+    "project-maxdiagnostic-light.svg": "6fc410b835e95cc71eeb774d9d4b9f465defad06cb75abb4cfc2766d34a856b5",
+    "project-borbacarlabs-light.svg": "640ae1ed9d7ed577519e1145d3c3c2a97d5671077877fc3c61ea55dba2b9c9fa",
+    "project-devtaskmanager-light.svg": "f8e17440d36150ba809c7df9f1736eeb0f28841febe9baad3c75ba6d39bfa50a",
+    "project-watthouse-light.svg": "dfd0358d7d1e14ecdbf4cf80cfd5b70a507877bb54e2ec83a3fe61c2ad148ea5",
+    "skills-dark.svg": "94b3eb67426f96b86914eca67ce1a4fadab94fce9d8f8d84ebd70f77fd957c48",
+    "skills-light.svg": "74d5195616aea6220cbaea4bb6e8547c99329699ed136d51a2fb2d5c25125e3f",
+    "footer-dark.svg": "9db5b7a00c5e97a84139fe503645dce73dd9017bfd8449cf66fb0a124ff0f475",
+    "footer-light.svg": "6ccc7208b829147a64705297027539605e7bde907fa9e14b20a2c4582e618c00",
+    "README.snippet.md": "aa49be10653f860722736ca7e0bd3cc5a78660d80faf41251db502e471e65391"
+  }
+}
