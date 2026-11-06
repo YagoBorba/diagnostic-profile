@@ -1,3 +1,4 @@
+import { ACTION_REF } from './version.mjs';
 import { normalizeConfig } from './config.mjs';
 
 export function generateWorkflow(input = { login: 'your-login' }, { configPath = 'diagnostic-profile.json', outputDir = 'dist' } = {}) {
@@ -27,7 +28,7 @@ export function generateWorkflow(input = { login: 'your-login' }, { configPath =
     '            echo "::error::Publishing to another repository requires the PROFILE_PUBLISH_TOKEN secret."',
     '            exit 1', '          fi',
     '      # Versioned release; pin its full commit SHA for an immutable reference.',
-    '      - uses: YagoBorba/diagnostic-profile@v0.1.0',
+    '      - uses: ' + ACTION_REF,
     '        with:', '          config: ' + JSON.stringify(configPath), '          output_dir: ' + JSON.stringify(outputDir),
     '      - uses: crazy-max/ghaction-github-pages@df5cc2bfa78282ded844b354faee141f06b41865 # v4',
     '        with:', '          repo: ' + JSON.stringify(target), '          target_branch: ' + JSON.stringify(branch),

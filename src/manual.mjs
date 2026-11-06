@@ -1,3 +1,4 @@
+import { VERSION } from './version.mjs';
 import { normalizeConfig } from './config.mjs';
 import { buildAssets } from './build.mjs';
 import { exportConfig } from './transfer.mjs';
@@ -34,7 +35,7 @@ export function createVisualKit(input, now = new Date()) {
       ...warnings,
       'Créditos: Yago Borba · https://github.com/YagoBorba/diagnostic-profile',
     ].join('\n') + '\n',
-    'manifest.json': JSON.stringify({ generator: 'diagnostic-profile', source: 'manual', generatedAt: now.toISOString(),
+    'manifest.json': JSON.stringify({ generator: 'diagnostic-profile', version: VERSION, source: 'manual', generatedAt: now.toISOString(),
       locale: config.locale, warnings, files: svgFiles.map(([name]) => 'assets/' + name) }, null, 2) + '\n',
   };
   if (config.locale === 'en') files['INSTALL.txt'] = [

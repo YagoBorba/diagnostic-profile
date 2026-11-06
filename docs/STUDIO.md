@@ -1,66 +1,53 @@
-# Profile Studio
+# Profile Studio 0.2.0
 
-Studio edits the same configuration and SVG engine used by the CLI and Action. It runs locally with fictional data and does not request a GitHub token.
+[Studio público](https://yagoborba.github.io/diagnostic-profile/) · por [Yago Borba](https://github.com/YagoBorba) · [código](https://github.com/YagoBorba/diagnostic-profile).
 
-## Start
+O Studio tem 16 modelos, seis paletas e nove famílias. As seis novas famílias são Oficina Zero, Arquivo de Campo, Cartografia Orbital, Estação de Rádio, Inventário de Exploração e Herbário Digital. Diagnóstico, Terminal e Minimalista continuam disponíveis.
+
+## Criar e exportar
+
+Escolha primeiro o formato: kit visual estático, Markdown ou Action. O preview usa o mesmo renderizador/modelo de conteúdo da exportação correspondente. A galeria usa dados de demonstração e miniaturas compostas de apresentação, projeto e contato; não precisa construir todos os assets de cada modelo.
+
+No kit estático, os SVGs usam apenas conteúdo preenchido, com caminhos relativos em README.md. Métricas/calendários são omitidos e projetos fixados precisam ser adicionados manualmente. Envie a pasta assets/ inteira junto com o README. A configuração JSON permite editar e gerar outra versão.
+
+No Markdown, o preview é construído pelo mesmo modelo semântico que gera o texto. O conteúdo do usuário vira texto no DOM, nunca HTML arbitrário. Esse formato não reproduz paletas e molduras SVG.
+
+Na Action, o preview é explicitamente fictício; o workflow consulta os dados reais. A referência é v0.2.0. Main, master, develop e a branch padrão não podem ser destinos de assets. Outra conta/repositório exige PROFILE_PUBLISH_TOKEN apropriado. Os arquivos fictícios do kit ficam separados em preview/.
+
+Siga o [guia de iniciante](GETTING_STARTED.md) e a [referência de instalação](../README.md).
+
+## Mundos e movimento
+
+As famílias têm renderizadores para cada widget e autoria/licença declaradas em src/families.mjs. A saída SVG usa o mesmo motor na CLI, Action e navegador. Cores são independentes da família e têm feedback de contraste; há bordas, densidade, alinhamento e variantes estreitas.
+
+Escolha Compacta para legibilidade em telas pequenas. Reduzir um painel de 1200 px não equivale a uma composição estreita. O Studio avisa quando o preview está estreito e o layout amplo continua selecionado. Picture suporta modo claro/escuro automático; Markdown com imagem fixa usa um modo escolhido. Agrupamento/alinhamento de cartões depende do HTML aceito pelo GitHub.
+
+Movimento reduzido é respeitado e os novos mundos abrem sem animação. Figuras e ondas decorativas não representam estatísticas. Habilidades e trajetória são fornecidas manualmente; não há XP ou classificação de competência.
+
+## Misturas e receitas
+
+A semente determina a escolha de preset/paleta. Travas preservam mundo, cores, layout/blocos e movimento; conteúdo pessoal é mantido. Desafios opcionais mudam somente os blocos e não são requisito para exportar.
+
+Receitas compartilham apenas campos visuais, sem nomes, contatos, títulos pessoais de seções ou IDs personalizados. O compartilhamento de perfil completo é separado e inclui textos e contatos. Os links são validados e limitados em tamanho; use JSON para configurações grandes. Links localhost só funcionam onde o mesmo servidor estiver acessível.
+
+Favoritos ficam no navegador, com nome editável e miniatura. Rascunhos não são sincronizados. Digitação no mesmo campo é agrupada para desfazer; o histórico mantém até 40 transações. Baixe JSON para backup. Recomeçar substitui o rascunho, e favoritos são removidos individualmente.
+
+## Idioma e acessibilidade
+
+Locale en/pt-BR controla rótulos gerados, resumos, descrições acessíveis e instruções dos kits. Textos pessoais e nomes de tecnologias são preservados. A interface do Studio é em português e traduz as dicas comuns de validação. Diagnósticos de CLI mantêm o formato documentado em inglês.
+
+Há rótulos, foco visível e setas para reordenação por teclado. O resumo textual complementa as imagens. Não anunciar suporte validado por leitor de tela sem uma sessão real no GitHub; title/desc de SVG não garantem por si só leitura dos dados incorporados.
+
+## Desenvolvimento e qualidade
 
     npm ci
     npm run studio
+    npm run proof -- --serve
 
-Open the printed Local URL. npm run build:studio writes a static website to dist/site, including the shared renderer and fictional fixture. Relative URLs support repository subpaths.
+Build estático: npm run build:studio -> dist/site. Folha de revisão visual: npm run proof -> dist/proof, separada do site distribuído. A CI disponibiliza a folha como artefato por três dias. Ela permite inspeção humana; não equivale a comparação automática de pixels.
 
-## Create a profile
+Arquitetura: src/families.mjs declara o contrato; src/families/ contém implementações; src/build.mjs compõe; src/manual.mjs exclui dados automáticos no kit estático; src/readme-model.mjs compartilha semântica entre preview e Markdown. src/version.mjs centraliza referências de release/schema.
 
-1. Search or filter ten templates by career, learning, community or technical identity. Each card explains its block order. Resume, Research notebook, Maker bench and Community join the original six templates.
-2. Edit login, name, bio, focus tags and readouts. Replace fictional sample names, projects, contacts and locations before installing.
-3. Choose a palette independently of the visual family. Adjust per-mode colors, borders, motion and layout.
-4. Add, hide or reorder blocks. Arrow buttons are available alongside drag-and-drop.
-5. Compare with a reference, inspect mobile width and check both modes.
-6. Choose a standalone Markdown README (default) or the SVG installation kit. The plain README uses declared content only and omits data-dependent widgets; it does not reproduce SVG colors/animation. Download README.md directly or a ZIP with installation instructions. See the [beginner guide](GETTING_STARTED.md).
+A CLI preserva os arquivos e a data de geração quando configuração/dados/versão são idênticos e os arquivos continuam íntegros. --force regenera. Arquivos próprios editados são detectados; arquivos alheios continuam preservados. O timestamp descreve geração, não cada consulta de rede.
 
-Blocks: header, contacts, projects, telemetry, spectrum, footer, skills, currently learning/building, contribution calendar, milestones and divider. Skills and milestones are supplied manually, without inferred skill levels.
-
-## SVG installation kit
-
-The ZIP contains diagnostic-profile.json, .github/workflows/profile.yml, README.snippet.md and INSTALL.txt. The separate preview/ folder contains FICTIONAL SVGs rather than real GitHub statistics.
-
-The generated workflow matches the selected asset repository/branch. main, master and develop cannot be asset branches; the workflow also checks the actual default branch. A different repository requires the PROFILE_PUBLISH_TOKEN secret with appropriate write access.
-
-The public Action uses v0.1.0. The free public Studio is available at https://yagoborba.github.io/diagnostic-profile/. Marketplace and npm distribution are not included; see [release instructions](RELEASE.md).
-
-## Layout behavior
-
-- Standard retains wide diagnostic panels.
-- Compact uses 360-pixel main panels/project cards and incorporates projects in one column.
-- Grid uses medium-width simple panels and explicit project columns.
-- Two columns remain two columns on narrow READMEs. Choose Compact or one column for larger text.
-- Automatic theme selection uses picture sources. Simple Markdown uses a fixed image; automatic mode falls back to dark.
-- Group alignment applies to HTML project/contact groups, not plain Markdown.
-- A plain-text metric summary is available alongside images.
-- Reduced-motion CSS is included in the Studio and SVGs.
-
-Studio controls use Brazilian Portuguese; generated system labels currently use English. Custom profile text is preserved as supplied. Additional locales remain planned.
-
-The free static hosting plan, privacy details and launch blockers are documented in the [product review](PRODUCT_REVIEW.md). The Pages workflow is manual and restricted to released main. Deployment results are visible in the repository Actions and Pages settings.
-
-## Save and share
-
-The site and every non-empty exported README include a small linked credit to Yago Borba and the Diagnostic Profile repository. Hiding the optional profile footer does not remove this credit. The software remains MIT licensed; see LICENSE.
-
-Drafts and favorites stay in the browser when local storage is available. Download JSON for a portable copy. Imports and shared links are validated; unsupported fields, including credential fields, are discarded.
-
-Shared links contain profile texts and contacts in the URL fragment. Localhost links only work where the same server is reachable; use the hosted Studio origin to share with other people. Oversized configurations should be shared as files.
-
-## Contribute
-
-The next version adds six world families and a static visual kit through the shared family contract in src/families.mjs. Each family supports every registered widget. src/manual.mjs excludes data-dependent blocks and never loads the fictional fixture; its ZIP contains local assets and a matching README. These development changes reach the public site through the next release.
-
-The next Studio selects the export format before editing: static SVG, plain Markdown or Action. Markdown preview uses the same semantic model as the exporter, with text-only DOM construction. Static preview uses declared content; only Action preview uses the clearly labeled fixture. Recipe links share layout/colors/widgets without profile content, custom section titles or identifiers. Seeded mixtures preserve content and respect locks; text edits in the same field are grouped for undo. Favorites support names and three-block thumbnails.
-
-Generated labels, summaries and kit instructions support locale en and pt-BR. Profile text, technology names and custom labels are preserved. The Studio interface uses Portuguese; its login/type/range validation hints are translated for that interface. CLI diagnostics retain their documented English form. Repeated CLI builds with identical configuration/data/version preserve the prior generated timestamp and files; --force requests regeneration. Files edited after generation are detected and rebuilt, and unrelated files remain preserved.
-
-Presets in src/presets.mjs declare versioned defaults; explicit settings override them. Widget types are listed in src/catalog.mjs, validated in src/design.mjs and composed in src/build.mjs. Each instance has a unique id, type, enabled flag and optional title. No two instances may produce the same filename.
-
-Update the schema, warnings, tests and gallery for new fields. Run npm test, npm run preview and npm run build:studio. XML/schema checks complement manual inspection; screen-reader sessions and a rendered GitHub README check remain separate verification.
-
-![Studio desktop preview with fictional data](media/studio-desktop.png)
+Créditos discretos para Yago Borba e o repositório acompanham todos os READMEs não vazios, independentemente do bloco de rodapé pessoal. Veja a licença MIT.

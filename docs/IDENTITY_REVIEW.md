@@ -1,5 +1,7 @@
 # Identidade, diversão e qualidade — revisão da próxima versão
 
+Execução: a estratégia principal deste documento foi implementada na versão 0.2.0, incluindo os seis mundos, contrato de família, kit estático, previews correspondentes, receitas/travas/favoritos, localização da saída, revisão visual e manutenção. As tabelas abaixo preservam o diagnóstico original. Consulte [WORLDS.md](WORLDS.md) e [RELEASE.md](RELEASE.md) para o uso atual; pesquisas com usuários externos e leitor de tela não são anunciadas como realizadas.
+
 Revisão em 05/11/2026 sobre develop, commit 7f1d452. Autor do projeto: [Yago Borba](https://github.com/YagoBorba). [Studio público](https://yagoborba.github.io/diagnostic-profile/). Este documento registra achados e propostas; os temas abaixo ainda não foram implementados nem anunciados como disponíveis.
 
 ## Diagnóstico
