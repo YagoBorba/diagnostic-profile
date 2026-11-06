@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+- Localize system labels, accessible descriptions, summaries and kit instructions in English/Portuguese while preserving profile text and default legacy SVGs.
+- Skip publication when the configuration/data/version hash is unchanged and owned files are intact; --force rebuilds explicitly.
+- Add weekly Dependabot updates for npm and SHA-pinned Actions targeting develop.
+
 - Match previews to Markdown, static SVG and Action exports; make static SVG the default path.
 - Add seeded mixes with style locks, style-only recipe links, optional composition challenges, grouped text undo and named favorites with thumbnails.
 - Compose gallery thumbnails from actual header/project/contact renders without building every asset.

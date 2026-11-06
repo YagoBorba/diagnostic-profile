@@ -1,3 +1,4 @@
+import { legacyLabel, number, t } from '../i18n.mjs';
 import { document, esc, fmt, monoWidth, panel, smoothPath, text } from '../svg.mjs';
 
 const WIDTH = 1200;
@@ -78,7 +79,9 @@ export function renderHeader(theme, config, data) {
     chipX += chipWidth + 12;
   });
 
-  const status = 'LINK ESTABLISHED';
+  const manual = data.source === 'manual';
+  const contributionReadout = manual ? t(theme.locale, 'manual') : number(theme.locale ?? 'en', data.totals.contributions) + (theme.locale === 'pt-BR' ? ' CONTRIBUIÇÕES / 12 M' : ' CONTRIBUTIONS / 12 MO');
+  const status = manual ? t(theme.locale, 'manual').toUpperCase() : legacyLabel(theme.locale, 'LINK ESTABLISHED');
   const statusX = WIDTH - 32 - monoWidth(status, 13);
   const code = data.login.slice(0, 2).toUpperCase();
 
@@ -87,7 +90,7 @@ export function renderHeader(theme, config, data) {
 <clipPath id="screen"><rect x="${SCOPE.x}" y="${SCOPE.y}" width="${SCOPE.w}" height="${SCOPE.h}" rx="8"/></clipPath>
 </defs>
 ${panel(WIDTH, HEIGHT, theme)}
-${text(32, 34, `${code}-01  //  ${header.systemLabel.toUpperCase()}  //  SYSTEM SCAN`, { cls: 'mono', size: 13, fill: theme.muted, extra: ' letter-spacing="1"' })}
+${text(32, 34, `${code}-01  //  ${header.systemLabel.toUpperCase()}  //  ${legacyLabel(theme.locale, 'SYSTEM SCAN')}`, { cls: 'mono', size: 13, fill: theme.muted, extra: ' letter-spacing="1"' })}
 <circle class="pulse" cx="${statusX - 14}" cy="29.5" r="5" fill="${theme.ok}"/>
 ${text(WIDTH - 32, 34, status, { cls: 'mono', size: 13, fill: theme.ok, anchor: 'end' })}
 <line x1="0" y1="52" x2="${WIDTH}" y2="52" stroke="${theme.border}"/>
@@ -98,9 +101,9 @@ ${text(32, 218, headline, { size: 22, fill: theme.muted })}
 ${readouts}
 ${scope}
 <text x="${SCOPE.x + 16}" y="${SCOPE.y + 24}" class="mono" font-size="11" letter-spacing="1"><tspan fill="${theme.accent}">CH1 ANALOG</tspan><tspan fill="${theme.signal}" dx="16">CH2 DATA BUS</tspan></text>
-${text(SCOPE.x + SCOPE.w - 16, SCOPE.y + 24, 'LIVE', { cls: 'mono', size: 11, fill: theme.muted, anchor: 'end' })}
-${text(SCOPE.x + 16, SCOPE.y + SCOPE.h - 8, 'SIGNAL NOMINAL', { cls: 'mono', size: 11, fill: theme.muted })}
-${text(SCOPE.x + SCOPE.w - 16, SCOPE.y + SCOPE.h - 8, `${fmt(data.totals.contributions)} CONTRIBUTIONS / 12 MO`, { cls: 'mono', size: 11, fill: theme.muted, anchor: 'end' })}
+${text(SCOPE.x + SCOPE.w - 16, SCOPE.y + 24, (manual ? (theme.locale === 'pt-BR' ? 'DECORAÇÃO' : 'DECORATION') : legacyLabel(theme.locale, 'LIVE')), { cls: 'mono', size: 11, fill: theme.muted, anchor: 'end' })}
+${text(SCOPE.x + 16, SCOPE.y + SCOPE.h - 8, (manual ? (theme.locale === 'pt-BR' ? 'TRAÇO DECORATIVO' : 'DECORATIVE TRACE') : legacyLabel(theme.locale, 'SIGNAL NOMINAL')), { cls: 'mono', size: 11, fill: theme.muted })}
+${text(SCOPE.x + SCOPE.w - 16, SCOPE.y + SCOPE.h - 8, contributionReadout, { cls: 'mono', size: 11, fill: theme.muted, anchor: 'end' })}
 ${chips.join('')}
 ${text(WIDTH - 32, 343, link, { cls: 'mono', size: 12, fill: theme.muted, anchor: 'end' })}
 `;
@@ -119,7 +122,7 @@ ${text(WIDTH - 32, 343, link, { cls: 'mono', size: 12, fill: theme.muted, anchor
     width: WIDTH,
     height: HEIGHT,
     title: headline ? `${name} — ${headline}` : name,
-    desc: `Profile header styled as a diagnostic console.${focus} An oscilloscope shows an animated analog signal and data bus, next to ${fmt(data.totals.contributions)} GitHub contributions in the last 12 months.`,
+    desc: manual ? `${name}. ${headline}. ${t(theme.locale, 'manual')}. Decorative oscilloscope.` : `Profile header styled as a diagnostic console.${focus} An oscilloscope shows an animated analog signal and data bus, next to ${fmt(data.totals.contributions)} GitHub contributions in the last 12 months.`,
     css,
     body,
   });

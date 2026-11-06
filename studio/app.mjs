@@ -15,6 +15,7 @@ import { FAMILIES } from '../src/families.mjs';
 import { renderThumbnail } from '../src/thumbnail.mjs';
 import { applyRecipe, encodeRecipe, decodeRecipe, shuffleStyle } from '../src/playground.mjs';
 import { renderMarkdownPreview } from './markdown-preview.mjs';
+import { configErrorMessage } from '../src/i18n.mjs';
 
 const $ = (id) => document.getElementById(id);
 const clone = (value) => structuredClone(value);
@@ -143,7 +144,7 @@ function fieldErrors(error) {
       const key = field.dataset.configPath;
       if (key !== path && !path.startsWith(key + '[') && !key.startsWith(path + '.')) continue;
       field.setAttribute('aria-invalid', 'true');
-      const hint = element('span', message.replace(/^-\s*/, ''), 'field-error');
+      const hint = element('span', configErrorMessage(message.replace(/^-\s*/, '')), 'field-error');
       hint.id = 'field-error-' + key.replace(/[^a-z0-9]/gi, '-');
       field.setAttribute('aria-describedby', hint.id);
       field.insertAdjacentElement('afterend', hint);
@@ -188,7 +189,7 @@ function render() {
     $('draft-status').textContent = saved ? 'Rascunho salvo neste navegador.' : 'Armazenamento indisponível; baixe o JSON para guardar.';
   } catch (error) {
     fieldErrors(error);
-    $('errors').textContent = 'Revise a configuração:\n' + error.message; $('errors').hidden = false;
+    $('errors').textContent = 'Revise a configuração:\n' + configErrorMessage(error.message); $('errors').hidden = false;
     ['download', 'download-readme', 'save-json', 'share', 'share-style', 'copy', 'favorite'].forEach((id) => { $(id).disabled = true; });
     $('render-status').textContent = 'O último preview válido foi mantido.';
   }
@@ -431,7 +432,7 @@ $('clear-example').addEventListener('click', () => {
   mutate(() => {
     if (state.login === example.login) state.login = '';
     state.header = { name: '', headline: '', tags: [], readouts: [] };
-    state.projects = 'pinned'; manualProjects = [];
+    state.projects = exportMode === 'static' ? [] : 'pinned'; manualProjects = [];
     state.contacts = []; state.content = { skills: [], learning: [], building: [], timeline: [] };
     state.footer = { message: '' }; delete state.assetsBaseUrl;
   }, true);

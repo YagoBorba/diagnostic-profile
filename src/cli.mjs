@@ -13,6 +13,7 @@ import { summarize } from './stats.mjs';
 import { paletteNames } from './themes.mjs';
 import { generateWorkflow } from './workflow.mjs';
 import { PRESETS } from './presets.mjs';
+import { createHash } from 'node:crypto';
 
 const HELP = [
   'Usage: diagnostic-profile [build|init|validate|doctor|list-themes|list-widgets|list-presets|preview] [options]',
@@ -22,7 +23,7 @@ const HELP = [
   '  --fixture      Saved fictional GraphQL user payload; skips the API',
   '  --dry-run      Render and list files without changing output',
   '  --json         Machine-readable result',
-  '  --force        Allow init to replace its config/workflow files',
+  '  --force        Replace init files or rebuild an unchanged asset set',
   '  --version      Print package version',
   '', 'init writes diagnostic-profile.json and .github/workflows/profile.yml.',
   'validate checks configuration without network access.',
@@ -99,8 +100,12 @@ export async function main(args = process.argv.slice(2), env = process.env) {
   const data = summarize(user, config.telemetry);
   const files = buildAssets(config, data);
   const result = { output: resolve(values.output), files: [...Object.keys(files), 'manifest.json'], warnings, dryRun: Boolean(values['dry-run']) };
-  if (!values['dry-run']) await writeAssets(values.output, files, { version: pkg.version, login: data.login, source: values.fixture ? 'fixture' : 'github', warnings });
-  print(result, (values['dry-run'] ? 'Would write ' : 'Wrote ') + result.files.length + ' files to ' + result.output);
+  if (!values['dry-run']) {
+    const inputHash = createHash('sha256').update(JSON.stringify({ config, data, version: pkg.version, warnings })).digest('hex');
+    const published = await writeAssets(values.output, files, { version: pkg.version, login: data.login, source: values.fixture ? 'fixture' : 'github', warnings, inputHash }, { force: values.force });
+    result.unchanged = Boolean(published.unchanged);
+  }
+  print(result, (values['dry-run'] ? 'Would write ' : result.unchanged ? 'Unchanged: ' : 'Wrote ') + result.files.length + ' files to ' + result.output);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

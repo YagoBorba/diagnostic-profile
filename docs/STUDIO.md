@@ -57,6 +57,8 @@ The next version adds six world families and a static visual kit through the sha
 
 The next Studio selects the export format before editing: static SVG, plain Markdown or Action. Markdown preview uses the same semantic model as the exporter, with text-only DOM construction. Static preview uses declared content; only Action preview uses the clearly labeled fixture. Recipe links share layout/colors/widgets without profile content, custom section titles or identifiers. Seeded mixtures preserve content and respect locks; text edits in the same field are grouped for undo. Favorites support names and three-block thumbnails.
 
+Generated labels, summaries and kit instructions support locale en and pt-BR. Profile text, technology names and custom labels are preserved. The Studio interface uses Portuguese; its login/type/range validation hints are translated for that interface. CLI diagnostics retain their documented English form. Repeated CLI builds with identical configuration/data/version preserve the prior generated timestamp and files; --force requests regeneration. Files edited after generation are detected and rebuilt, and unrelated files remain preserved.
+
 Presets in src/presets.mjs declare versioned defaults; explicit settings override them. Widget types are listed in src/catalog.mjs, validated in src/design.mjs and composed in src/build.mjs. Each instance has a unique id, type, enabled flag and optional title. No two instances may produce the same filename.
 
 Update the schema, warnings, tests and gallery for new fields. Run npm test, npm run preview and npm run build:studio. XML/schema checks complement manual inspection; screen-reader sessions and a rendered GitHub README check remain separate verification.
