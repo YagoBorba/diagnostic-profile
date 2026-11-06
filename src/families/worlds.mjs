@@ -1,4 +1,4 @@
-import { document, esc, text, wrap } from '../svg.mjs';
+import { document, esc, text, wrap, wrapPixels } from '../svg.mjs';
 import { t, number } from '../i18n.mjs';
 
 const frame = {
@@ -19,8 +19,8 @@ export function renderWorld({ type, theme, config, data, now, project, repo, ind
   const font = ['fieldbook', 'herbarium'].includes(family) ? 'editorial' : ['workshop', 'radio', 'inventory'].includes(family) ? 'mono' : 'sans';
   let y = family === 'fieldbook' ? 106 : family === 'inventory' ? 98 : 92;
   let content = '', desc = '', label = title || t(locale, type);
-  const line = (value, size = 16, color = theme.text, gap = 10) => {
-    const lines = wrap(value, Math.max(12, Math.floor((w - pad * 2) / (size * 0.62))), 8);
+  const line = (value, size = 16, color = theme.text, gap = 10, maxLines = 12) => {
+    const lines = wrapPixels(value, w - pad * 2, size, { mono: font === 'mono', maxLines });
     for (const entry of lines) { content += text(pad, y, entry, { size, cls: font, fill: color }); y += size * 1.45; }
     if (lines.length) y += gap;
   };
@@ -31,7 +31,7 @@ export function renderWorld({ type, theme, config, data, now, project, repo, ind
   if (type === 'header') {
     const name = config.header.name || data.name || config.login;
     label = t(locale, family);
-    line(name, narrow ? 30 : family === 'fieldbook' ? 46 : 40, theme.text, 14);
+    line(name, narrow ? 30 : family === 'fieldbook' ? 46 : 40, theme.text, 14, 24);
     line(config.header.headline ?? data.bio ?? '', 18, theme.muted, 16);
     config.header.readouts.forEach((r, i) => { if (r.value) item(r.label + ': ' + r.value, i); });
     if (config.header.tags.length) line(config.header.tags.join(' / '), 14, theme.accent);

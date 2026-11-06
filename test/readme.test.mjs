@@ -9,7 +9,7 @@ import { parse } from 'yaml';
 import { CREDITS } from '../src/credits.mjs';
 
 test('standalone README uses declared content and never introduces fixture statistics or image services', () => {
-  const text = generateReadme({ login: 'new-user', preset: 'resume', header: { name: 'Júlia 山田', headline: 'Backend engineer' },
+  const text = generateReadme({ login: 'new-user', locale: 'pt-BR', preset: 'resume', header: { name: 'Júlia 山田', headline: 'Backend engineer' },
     content: { skills: ['Go', 'Rust'], timeline: ['2026: First job'] }, projects: [{ repo: 'lib', summary: 'A library' }],
     contacts: [{ label: 'Email', url: 'mailto:hello@example.org' }] });
   assert.match(text, /^# Júlia 山田/);
@@ -37,7 +37,7 @@ test('empty, disabled and data-only widgets do not produce a misleading download
   const config = { login: 'a', projects: [], widgets: [{ type: 'telemetry' }, { type: 'heatmap' }, { type: 'header', enabled: false }, { type: 'skills' }] };
   assert.equal(generateReadme(config), '');
   assert.throws(() => createReadmeKit(config), /Habilite/);
-  const ordered = generateReadme({ login: 'a', content: { learning: ['Databases'], skills: ['SQL'] }, widgets: [
+  const ordered = generateReadme({ login: 'a', locale: 'pt-BR', content: { learning: ['Databases'], skills: ['SQL'] }, widgets: [
     { id: 'one', type: 'divider' }, { type: 'now', title: 'Em andamento' }, { id: 'two', type: 'divider' }, { type: 'skills' },
   ] });
   assert.equal((ordered.match(/---/g) ?? []).length, 2);

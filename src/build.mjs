@@ -24,7 +24,7 @@ export function buildAssets(config, data, now = new Date()) {
       projects.forEach((p) => item((widget.id === 'projects' ? 'project' : widget.id) + '-' + p.slug, p.title + (p.summary ? ': ' + p.summary : ''), p.url,
         config.layout.type === 'compact' || config.layout.projectColumns === 1 ? '100%' : '49%'));
     } else if (widget.type === 'contacts') {
-      config.contacts.forEach((c) => item((widget.id === 'contacts' ? 'contact' : widget.id) + '-' + c.id, c.label, c.url, '220'));
+      config.contacts.forEach((c) => item((widget.id === 'contacts' ? 'contact' : widget.id) + '-' + c.id, c.label, c.url, family.world ? '360' : '220'));
     } else {
       const description = widget.type === 'header' ? ownerName + '. ' + (config.header.headline ?? data.bio ?? '') :
         widget.type === 'telemetry' ? 'GitHub: ' + data.totals.contributions + ' contributions in the reported calendar; ' + data.totals.stars + ' current stars; ' + data.totals.repositories + ' public owned non-fork repositories.' :

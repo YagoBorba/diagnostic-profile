@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+- Match previews to Markdown, static SVG and Action exports; make static SVG the default path.
+- Add seeded mixes with style locks, style-only recipe links, optional composition challenges, grouped text undo and named favorites with thumbnails.
+- Compose gallery thumbnails from actual header/project/contact renders without building every asset.
+- Add generated-content language selection and editable metric language filters; wrap proportional-font text safely for long names.
+
 - Introduce a versioned family renderer contract while preserving legacy SVG output.
 - Add six complete visual worlds: Oficina Zero, Arquivo de Campo, Cartografia Orbital, Estação de Rádio, Inventário de Exploração and Herbário Digital.
 - Add a static visual kit with relative image paths, declared content, minimal credits and no fixture/API statistics.

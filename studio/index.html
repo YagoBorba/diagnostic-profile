@@ -26,7 +26,7 @@
       <div>
         <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> O SEU README, COM IDENTIDADE</p>
         <h1>Seu perfil.<br><span>Do seu jeito.</span></h1>
-        <p class="intro">Escolha um modelo, preencha seu perfil e baixe um README pronto. Se quiser métricas e SVGs personalizados, configure a atualização pelo GitHub Actions.</p>
+        <p class="intro">Monte uma bancada, um arquivo de campo ou uma missão orbital. Experimente mundos, misture detalhes e leve sua composição para o GitHub.</p>
       </div>
       <div class="hero-note">
         <span class="note-index">01 — 02 — 03</span>
@@ -35,6 +35,10 @@
       </div>
     </section>
 
+    <section class="mode-picker" aria-label="Formato do seu README">
+      <label>Como você quer criar?<select id="export-mode"><option value="static">Kit visual estático — sem token ou Action</option><option value="readme">README em Markdown — só texto e links</option><option value="action">SVGs e métricas — com GitHub Action</option></select></label>
+      <p id="mode-help" class="help">O preview usa seus textos. Baixe o ZIP e envie o README e os assets ao seu repositório.</p>
+    </section>
     <section class="gallery-section" id="gallery" aria-labelledby="gallery-title">
       <div class="section-header">
         <div><p class="eyebrow">01 / PONTO DE PARTIDA</p><h2 id="gallery-title">Encontre a sua frequência.</h2></div>
@@ -58,6 +62,18 @@
         </div>
       </div>
 
+      <details class="playground">
+        <summary>Misturas, travas e pequenos desafios</summary>
+        <label>Semente da mistura<input id="recipe-seed" value="oficina-01" maxlength="80" spellcheck="false"><small>A mesma semente reproduz a escolha de estilo. As travas preservam suas opções atuais.</small></label>
+        <div class="locks">
+          <label class="check"><input id="lock-world" type="checkbox"> Manter mundo</label>
+          <label class="check"><input id="lock-colors" type="checkbox"> Manter cores</label>
+          <label class="check"><input id="lock-layout" type="checkbox"> Manter blocos e layout</label>
+          <label class="check"><input id="lock-motion" type="checkbox" checked> Manter movimento</label>
+        </div>
+        <p class="help">Seu conteúdo sempre é preservado. Desafios opcionais mudam apenas os blocos; não há pontos ou nível de habilidade.</p>
+        <div class="challenge-actions"><button id="challenge-projects" class="quiet">Só projetos e contatos</button><button id="challenge-notes" class="quiet">Diário de estudos</button><button id="challenge-story" class="quiet">Minha trajetória</button></div>
+      </details>
       <div class="editor-layout">
         <aside class="controls" aria-label="Controles de personalização">
           <div class="editor-tabs" role="tablist" aria-label="Categorias">
@@ -68,6 +84,7 @@
 
           <div id="panel-profile" role="tabpanel" aria-labelledby="tab-profile">
             <label>Login do GitHub<input id="login" maxlength="39" autocomplete="off" spellcheck="false"></label>
+            <label>Idioma do conteúdo gerado<select id="locale"><option value="pt-BR">Português</option><option value="en">English</option></select></label>
             <button id="clear-example" class="quiet full">Limpar textos de exemplo</button>
             <p class="help">Começamos com Ada, uma pessoa fictícia. Troque também os projetos, links e contatos antes de publicar.</p>
             <label>Nome de exibição<input id="name" maxlength="120"></label>
@@ -97,6 +114,11 @@
               <label>Marcos e trajetória <small>Uma entrada por linha</small><textarea id="timeline" rows="3"></textarea></label>
               <label>Mensagem de rodapé<input id="footer-message" maxlength="120"></label>
             </details>
+            <details id="metrics-options" hidden>
+              <summary>Filtros das métricas</summary>
+              <label>Quantidade de linguagens<input id="language-limit" type="number" min="1" max="10"></label>
+              <label>Linguagens excluídas <small>Separadas por vírgula. Vazio inclui todas; tamanho de código não mede habilidade.</small><textarea id="excluded-languages" rows="2"></textarea></label>
+            </details>
             <details>
               <summary>Destino dos arquivos</summary>
               <label>Repositório dos assets <small>owner/repository; vazio usa login/login</small><input id="destination" placeholder="seu-login/seu-login" maxlength="140"></label>
@@ -106,7 +128,7 @@
           </div>
 
           <div id="panel-style" role="tabpanel" aria-labelledby="tab-style" hidden>
-            <label>Família visual<select id="family"><option value="diagnostic">Diagnóstico</option><option value="terminal">Terminal</option><option value="minimal">Minimalista</option></select></label>
+            <label>Família visual<select id="family"></select></label>
             <label>Paleta<select id="theme"></select></label>
             <div class="swatches" id="swatches" aria-label="Cores da paleta"></div>
             <div class="field-pair"><label>Destaque<input id="accent" type="color"></label><label>Fundo do painel<input id="panel-color" type="color"></label></div>
@@ -144,7 +166,8 @@
             <div class="segmented" aria-label="Largura do preview"><button id="desktop" aria-pressed="true">Desktop</button><button id="mobile" aria-pressed="false">Celular</button></div>
             <button id="compare" class="quiet" aria-pressed="false">Comparar</button>
           </div>
-          <div class="demo-banner"><span class="demo-dot" aria-hidden="true"></span> DADOS FICTÍCIOS <span>Você está criando o estilo. O workflow buscará seus dados reais.</span></div>
+          <div class="demo-banner" id="demo-banner"></div>
+          <div class="warning-box" id="data-warning" role="status" hidden></div>
           <div id="errors" class="error-box" role="alert" hidden></div>
           <div id="contrast-warning" class="warning-box" role="status" hidden></div>
           <div class="comparison" id="comparison">
@@ -158,7 +181,6 @@
 
     <section id="export" class="export-section" aria-labelledby="export-title">
       <div class="export-copy"><p class="eyebrow">03 / LEVE PARA O GITHUB</p><h2 id="export-title">Pronto para ser seu.</h2>
-        <label>Como você quer usar?<select id="export-mode"><option value="readme">README pronto, sem automação</option><option value="action">SVGs e métricas com Action</option></select></label>
         <p id="export-description">Baixe um README em Markdown com seus textos e links. Não precisa de token ou instalação. As cores e animações do preview são exclusivas da opção SVG; este README usa a aparência do GitHub.</p>
         <ol class="install-steps" id="install-steps"><li>Revise os textos, projetos e contatos de exemplo.</li><li>Abra ou crie seu repositório público login/login.</li><li>Copie o README.md para a raiz e salve no GitHub.</li></ol>
         <p class="help" id="export-limitations">Não inclui métricas ou calendários. Revise os textos de exemplo. Os textos são atualizados manualmente. O ZIP contém o README e as instruções.</p>
@@ -168,8 +190,8 @@
         <div class="export-tabs"><button id="show-readme" aria-pressed="true">README pronto</button><button id="show-config" aria-pressed="false">JSON</button><button id="show-snippet" aria-pressed="false" hidden>Snippet</button><button id="show-workflow" aria-pressed="false" hidden>Workflow</button></div>
         <pre id="code" tabindex="0" aria-label="Código para exportação"></pre>
         <div class="export-actions"><button id="copy" class="quiet">Copiar código</button><button id="download-readme" class="quiet">Baixar README.md</button><button id="download" class="primary">Baixar kit ZIP ↗</button></div>
-        <div class="secondary-actions"><button id="import" class="text-button">Importar JSON</button><button id="save-json" class="text-button">Baixar JSON</button><button id="share" class="text-button">Compartilhar estilo</button><button id="favorite" class="text-button">Salvar favorito</button></div>
-        <p class="help">Links de estilo incluem seus textos e contatos. Confira antes de compartilhar. Não inclua credenciais.</p>
+        <div class="secondary-actions"><button id="import" class="text-button">Importar JSON</button><button id="save-json" class="text-button">Baixar JSON</button><button id="share-style" class="text-button">Compartilhar receita</button><button id="share" class="text-button">Compartilhar perfil completo</button><button id="favorite" class="text-button">Salvar favorito</button></div>
+        <p class="help">Receitas compartilham só o visual. Links de perfil completo incluem seus textos e contatos; confira antes de compartilhar e nunca inclua credenciais.</p>
         <input id="import-file" type="file" accept=".json,application/json" hidden>
         <div id="favorites"></div>
       </div>
