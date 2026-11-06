@@ -1,0 +1,485 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/develop/schema/diagnostic-profile.schema.json",
+  "title": "Diagnostic Profile configuration",
+  "description": "Schema version 1. Unversioned configurations are interpreted as version 1. Unknown properties are warned about by the CLI.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1,
+      "default": 1,
+      "description": "Configuration format version."
+    },
+    "login": {
+      "type": "string",
+      "description": "GitHub account to read; falls back to DP_LOGIN or the Action login.",
+      "maxLength": 39,
+      "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$"
+    },
+    "theme": {
+      "type": "string",
+      "enum": [
+        "amber",
+        "phosphor",
+        "ice",
+        "ember",
+        "monochrome",
+        "violet"
+      ],
+      "default": "amber"
+    },
+    "assetsBaseUrl": {
+      "type": "string",
+      "description": "Public HTTP(S) base URL without query or fragment; defaults to the profile repository output branch.",
+      "maxLength": 2048,
+      "pattern": "^https?://[^\\s,?#]+$"
+    },
+    "header": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name; falls back to GitHub.",
+          "maxLength": 120
+        },
+        "headline": {
+          "type": "string",
+          "description": "Profile subtitle; falls back to GitHub bio.",
+          "maxLength": 200
+        },
+        "prompt": {
+          "type": "string",
+          "description": "Terminal prompt.",
+          "maxLength": 120
+        },
+        "systemLabel": {
+          "type": "string",
+          "description": "Header status label.",
+          "maxLength": 80
+        },
+        "readouts": {
+          "type": "array",
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "Readout label.",
+                "maxLength": 40
+              },
+              "value": {
+                "type": "string",
+                "description": "Readout value.",
+                "maxLength": 80
+              }
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "description": "Focus tag.",
+            "maxLength": 50
+          }
+        }
+      }
+    },
+    "projects": {
+      "description": "Pinned repositories or up to eight explicit cards. Foreign repositories use owner/name.",
+      "default": "pinned",
+      "anyOf": [
+        {
+          "const": "pinned"
+        },
+        {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "repo"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "repo": {
+                "type": "string",
+                "description": "Repository name or owner/name.",
+                "maxLength": 140,
+                "minLength": 1,
+                "pattern": "^(?:[a-zA-Z0-9][a-zA-Z0-9-]*/)?[a-zA-Z0-9_.-]+$"
+              },
+              "title": {
+                "type": "string",
+                "description": "Card title.",
+                "maxLength": 120
+              },
+              "kind": {
+                "type": "string",
+                "description": "Module category.",
+                "maxLength": 120
+              },
+              "summary": {
+                "type": "string",
+                "description": "Card description.",
+                "maxLength": 1000
+              },
+              "tags": {
+                "type": "array",
+                "maxItems": 5,
+                "items": {
+                  "type": "string",
+                  "description": "Technology tag.",
+                  "maxLength": 50
+                }
+              },
+              "url": {
+                "type": "string",
+                "description": "HTTP(S) project URL.",
+                "maxLength": 2048,
+                "pattern": "^https?://"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "contacts": {
+      "type": "array",
+      "maxItems": 12,
+      "default": [],
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "url"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique filename identifier, after slug normalization.",
+            "maxLength": 60
+          },
+          "label": {
+            "type": "string",
+            "description": "Button label.",
+            "maxLength": 40,
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "description": "HTTP(S) or mailto link without credentials.",
+            "maxLength": 2048,
+            "pattern": "^(https?://|mailto:)"
+          },
+          "glyph": {
+            "type": "string",
+            "description": "Short button glyph.",
+            "maxLength": 3
+          }
+        }
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "excludeLanguages": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "string",
+            "description": "Excluded language.",
+            "maxLength": 80
+          }
+        },
+        "languageLimit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 7
+        }
+      }
+    },
+    "footer": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "Footer message.",
+          "maxLength": 120
+        }
+      }
+    },
+    "preset": {
+      "type": "string",
+      "enum": [
+        "diagnostic",
+        "terminal",
+        "minimal",
+        "opensource",
+        "student",
+        "portfolio",
+        "resume",
+        "researcher",
+        "maker",
+        "community"
+      ],
+      "description": "Versioned preset; explicit configuration overrides its defaults."
+    },
+    "presetVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "appearance": {
+      "type": "object",
+      "properties": {
+        "family": {
+          "type": "string",
+          "enum": [
+            "diagnostic",
+            "terminal",
+            "minimal"
+          ],
+          "description": "Visual family, independent of palette."
+        },
+        "motion": {
+          "type": "string",
+          "enum": [
+            "none",
+            "subtle",
+            "full"
+          ],
+          "description": "Animation intensity; reduced motion is always respected."
+        },
+        "border": {
+          "type": "string",
+          "enum": [
+            "rounded",
+            "square"
+          ],
+          "description": "Panel border shape."
+        },
+        "density": {
+          "type": "string",
+          "enum": [
+            "compact",
+            "comfortable"
+          ],
+          "description": "Content density."
+        },
+        "decorations": {
+          "type": "boolean",
+          "default": true
+        },
+        "colors": {
+          "type": "object",
+          "properties": {
+            "dark": {
+              "type": "object",
+              "properties": {
+                "accent": {
+                  "type": "string",
+                  "pattern": "^#[a-fA-F0-9]{6}$"
+                },
+                "signal": {
+                  "type": "string",
+                  "pattern": "^#[a-fA-F0-9]{6}$"
+                },
+                "panel": {
+                  "type": "string",
+                  "pattern": "^#[a-fA-F0-9]{6}$"
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "^#[a-fA-F0-9]{6}$"
+                }
+              }
+            },
+            "light": {
+              "type": "object",
+              "properties": {
+                "accent": {
+                  "type": "string",
+                  "pattern": "^#[a-fA-F0-9]{6}$"
+                },
+                "signal": {
+                  "type": "string",
+                  "pattern": "^#[a-fA-F0-9]{6}$"
+                },
+                "panel": {
+                  "type": "string",
+                  "pattern": "^#[a-fA-F0-9]{6}$"
+                },
+                "text": {
+                  "type": "string",
+                  "pattern": "^#[a-fA-F0-9]{6}$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "compact",
+            "grid"
+          ],
+          "description": "Rendering layout."
+        },
+        "projectColumns": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "dark",
+            "light"
+          ],
+          "description": "README theme selection."
+        },
+        "markup": {
+          "type": "string",
+          "enum": [
+            "picture",
+            "markdown"
+          ],
+          "description": "README incorporation format."
+        },
+        "headings": {
+          "type": "boolean"
+        },
+        "textSummary": {
+          "type": "boolean",
+          "description": "Include a plain-text metric summary."
+        },
+        "align": {
+          "type": "string",
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ],
+          "default": "center",
+          "description": "Alignment of project and contact groups in HTML snippets."
+        }
+      }
+    },
+    "widgets": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "maxLength": 50
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "header",
+              "contacts",
+              "projects",
+              "telemetry",
+              "spectrum",
+              "footer",
+              "skills",
+              "now",
+              "heatmap",
+              "timeline",
+              "divider"
+            ],
+            "description": "Registered renderer."
+          },
+          "enabled": {
+            "type": "boolean",
+            "default": true
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 80
+          }
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "skills": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "maxLength": 140
+          }
+        },
+        "learning": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "maxLength": 140
+          }
+        },
+        "building": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "maxLength": 140
+          }
+        },
+        "timeline": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "type": "string",
+            "maxLength": 140
+          }
+        }
+      }
+    },
+    "destination": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "maxLength": 140,
+          "description": "Asset destination owner/repository, independent of the account being scanned."
+        },
+        "branch": {
+          "type": "string",
+          "maxLength": 100,
+          "default": "output"
+        }
+      }
+    }
+  }
+}

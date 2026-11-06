@@ -1,0 +1,37 @@
+name: Diagnostic Profile
+description: Render a diagnostic-console themed GitHub profile README as self-hosted SVGs.
+author: Yago Borba
+branding:
+  icon: activity
+  color: orange
+
+inputs:
+  config:
+    description: Path to the JSON config file.
+    default: diagnostic-profile.json
+  output_dir:
+    description: Directory where the SVGs and README snippet are written.
+    default: dist
+  token:
+    description: Token used to read the GitHub GraphQL API.
+    default: ${{ github.token }}
+  login:
+    description: Login used when the config does not set one.
+    default: ${{ github.repository_owner }}
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      with:
+        node-version: 22
+
+    - name: Render profile assets
+      shell: bash
+      run: node "$GITHUB_ACTION_PATH/src/cli.mjs" --config "$DP_CONFIG" --output "$DP_OUTPUT_DIR"
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        DP_LOGIN: ${{ inputs.login }}
+        DP_CONFIG: ${{ inputs.config }}
+        DP_OUTPUT_DIR: ${{ inputs.output_dir }}

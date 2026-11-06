@@ -1,0 +1,36 @@
+{
+  "name": "diagnostic-profile",
+  "version": "0.1.0",
+  "description": "Generate a diagnostic-console themed GitHub profile README: animated header, telemetry, contribution spectrum and project cards as self-hosted SVGs.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Yago Borba",
+  "private": true,
+  "bin": {
+    "diagnostic-profile": "src/cli.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node src/cli.mjs",
+    "preview": "node scripts/preview.mjs",
+    "studio": "node scripts/studio.mjs --serve",
+    "build:studio": "node scripts/studio.mjs",
+    "check": "node scripts/check.mjs",
+    "test": "node --test \"test/*.test.mjs\""
+  },
+  "keywords": [
+    "github-profile",
+    "readme",
+    "svg",
+    "github-actions",
+    "profile-readme"
+  ],
+  "devDependencies": {
+    "ajv": "^8.20.0",
+    "fflate": "^0.8.3",
+    "saxes": "^6.0.0",
+    "yaml": "^2.9.1"
+  }
+}
