@@ -18,3 +18,14 @@ body:
     attributes:
       label: Legibility and accessibility
       description: Describe narrow layouts, contrast, reduced motion and text alternatives.
+    validations:
+      required: true
+  - type: checkboxes
+    id: authorship
+    attributes:
+      label: Authorship and review
+      options:
+        - label: I identify the author and license of any artwork or reference I propose to redistribute.
+          required: true
+        - label: I describe a complete composition rather than only a color change, when proposing a new visual family.
+          required: true

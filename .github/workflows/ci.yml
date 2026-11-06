@@ -48,3 +48,13 @@ jobs:
         run: |
           npm run preview
           git diff --exit-code -- docs/preview
+
+      - name: Build visual review sheet
+        run: npm run proof
+
+      - name: Upload visual review sheet
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: visual-proof-${{ matrix.os }}-node${{ matrix.node }}
+          path: dist/proof
+          retention-days: 3

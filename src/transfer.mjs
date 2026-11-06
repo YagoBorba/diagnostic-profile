@@ -1,8 +1,9 @@
+import { SCHEMA_URL } from './version.mjs';
 import { normalizeConfig } from './config.mjs';
 
 export function exportConfig(input) {
   // Normalize into a whitelist of supported fields; unknown token/credential fields are dropped.
-  return { $schema: 'https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/v0.1.0/schema/diagnostic-profile.schema.json', ...normalizeConfig(input) };
+  return { $schema: SCHEMA_URL, ...normalizeConfig(input) };
 }
 export function encodeConfig(input) {
   const bytes = new TextEncoder().encode(JSON.stringify(exportConfig(input)));

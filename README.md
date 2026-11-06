@@ -4,7 +4,7 @@
 
 <h1 align="center">Diagnostic Profile</h1>
 
-<p align="center">Turn your GitHub profile README into a live diagnostic console.</p>
+<p align="center">Create a GitHub README with its own visual world.</p>
 
 [![CI Status][ci-shield]][ci-link]
 [![MIT License][license-shield]][license-link]
@@ -27,28 +27,30 @@
 
 ## About the Project
 
-Diagnostic Profile is a GitHub Action and CLI that renders a complete profile README kit as self-hosted SVGs: an animated header, a telemetry cluster with your GitHub stats, a weekly contribution spectrum, project cards and contact buttons. Everything is styled like an instrument panel, with readouts, PIDs, gauges and an oscilloscope.
+Diagnostic Profile is a browser Studio, CLI and GitHub Action for distinctive profile READMEs. Choose a technical workbench, field notebook, orbital mission, radio station, exploration inventory or digital herbarium, alongside the original Diagnostic, Terminal and Minimal families. Headers, projects, contacts and personal blocks share a coherent world.
 
-It started as the profile of [YagoBorba](https://github.com/YagoBorba) after the popular stats card services kept returning errors. Instead of depending on third-party image servers, every asset is generated from the GitHub GraphQL API inside your own workflow and published to a branch of your profile repository.
+It started as the profile of [YagoBorba](https://github.com/YagoBorba) after the popular stats card services kept returning errors. Use declared content for a static SVG kit with no token or Action, plain Markdown for text and links, or the GitHub GraphQL API in your own workflow for updated public metrics. SVGs are hosted in your repository.
 
 - **No external image services.** Assets are plain SVG files served from your own repository.
 - **Dark and light variants** for every widget, switched with `<picture>` so they follow the viewer's GitHub theme.
 - **Text alternatives.** SVGs include title/description and snippet images include alt text. An optional text summary complements the images; real GitHub screen-reader verification remains pending.
 - **Motion that respects the viewer.** Animations stop under `prefers-reduced-motion`.
-- **Zero dependencies.** Plain Node.js 22, nothing to install.
+- **No runtime dependencies.** The rendering engine uses Node.js 22+ or browser modules. Development checks use npm ci.
 
 ## Start here
 
-Create a plain Markdown README in the Studio without a token or installation, or choose SVGs with Action for styled panels and live metrics. Follow the [beginner guide](docs/GETTING_STARTED.md). Open the free [public Studio](https://yagoborba.github.io/diagnostic-profile/). The source and versioned Action are public. See the [product review and free hosting plan](docs/PRODUCT_REVIEW.md).
+Open Studio and choose a static visual kit (default), plain Markdown or SVGs with Action. Static SVG and Markdown need no token or tool installation. Follow the [beginner guide](docs/GETTING_STARTED.md). Open the free [public Studio](https://yagoborba.github.io/diagnostic-profile/). The source and versioned Action are public. See the [product review and free hosting plan](docs/PRODUCT_REVIEW.md).
 
 ## Profile Studio
 
-Build a profile visually with ten presets, six palettes and three families: Diagnostic, Terminal and Minimal. Edit profile fields, projects and contacts, reorder blocks, compare styles and export a standalone README or matching SVG configuration, snippet and workflow. Search templates by goal and clear the fictional sample before publishing.
+Explore the [worlds and recipes guide](docs/WORLDS.md). The [identity review](docs/IDENTITY_REVIEW.md) records the design rationale; the six worlds, matching previews and recipe playground are implemented in v0.2.0.
+
+Build a profile visually with sixteen presets, six palettes and nine families. Edit profile fields, projects and contacts, reorder blocks, compare styles and export a standalone README or matching SVG configuration, snippet and workflow. Search templates by goal and clear the fictional sample before publishing.
 
     npm ci
     npm run studio
 
-Studio uses clearly labeled fictional data and the same rendering engine as the CLI and Action. It includes narrow variants, custom colors with contrast feedback, local drafts/favorites, JSON import, share links and ZIP export. [Studio guide](docs/STUDIO.md).
+Studio matches preview to export: declared content for static SVG, a shared semantic model for Markdown, and clearly labeled fictional data for the Action preview. The SVG rendering engine is shared with CLI and Action. It includes narrow variants, custom colors with contrast feedback, local drafts/favorites, JSON import, share links and ZIP export. [Studio guide](docs/STUDIO.md).
 
 ## Widgets
 
@@ -151,7 +153,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: YagoBorba/diagnostic-profile@v0.1.0
+      - uses: YagoBorba/diagnostic-profile@v0.2.0
         with:
           config: diagnostic-profile.json
           output_dir: dist
@@ -224,11 +226,11 @@ node src/cli.mjs preview
 node src/cli.mjs --fixture test/fixtures/user.json --dry-run --json
 ```
 
-`init` creates a schema-enabled config and an example workflow, without replacing existing files unless `--force` is supplied. The generated workflow uses `@v0.1.0`; pin the tag's full commit SHA if you require an immutable reference. Review release notes before upgrading.
+`init` creates a schema-enabled config and an example workflow, without replacing existing files unless `--force` is supplied. The generated workflow uses `@v0.2.0`; pin the tag's full commit SHA if you require an immutable reference. Review release notes before upgrading.
 
 Configuration without `schemaVersion` is interpreted as version 1; unsupported future versions fail before generating assets. [JSON Schema](schema/diagnostic-profile.schema.json) provides editor completion. CLI validation also reports misspelled/unknown fields. Precedence is `--login`, then file login, then `DP_LOGIN`, then defaults for optional fields.
 
-`--json` returns structured results and `--dry-run` lists output without writing it. `doctor` reports environment/token presence without revealing credentials; it does not claim to verify live permissions. Builds write a SHA-256 manifest and stage the complete result before replacing output. Previous results are preserved on staging failure; unrelated files and manually edited stale assets are retained. A build lock prevents overlapping writes. After a process crash, inspect the sibling `.diagnostic-profile-lock` directory before removing it and retrying.
+`--json` returns structured results and `--dry-run` lists output without writing it. `doctor` reports environment/token presence without revealing credentials; it does not claim to verify live permissions. Builds write a SHA-256 manifest and stage the complete result before replacing output. Identical configuration/data/version leave intact generated files and timestamps unchanged; --force rebuilds. The timestamp describes generation, not a fresh network check. Previous results are preserved on staging failure; unrelated files and manually edited stale assets are retained. A build lock prevents overlapping writes. After a process crash, inspect the sibling `.diagnostic-profile-lock` directory before removing it and retrying.
 
 The rendering engine and Action have zero runtime dependencies. Development uses an XML parser to validate generated SVGs; run `npm ci` before tests.
 

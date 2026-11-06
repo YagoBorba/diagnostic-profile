@@ -2,6 +2,21 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-06
+
+- Localize system labels, accessible descriptions, summaries and kit instructions in English/Portuguese while preserving profile text and default legacy SVGs.
+- Skip publication when the configuration/data/version hash is unchanged and owned files are intact; --force rebuilds explicitly.
+- Add weekly Dependabot updates for npm and SHA-pinned Actions targeting develop.
+
+- Match previews to Markdown, static SVG and Action exports; make static SVG the default path.
+- Add seeded mixes with style locks, style-only recipe links, optional composition challenges, grouped text undo and named favorites with thumbnails.
+- Compose gallery thumbnails from actual header/project/contact renders without building every asset.
+- Add generated-content language selection and editable metric language filters; wrap proportional-font text safely for long names.
+
+- Introduce a versioned family renderer contract while preserving legacy SVG output.
+- Add six complete visual worlds: Oficina Zero, Arquivo de Campo, Cartografia Orbital, Estação de Rádio, Inventário de Exploração and Herbário Digital.
+- Add a static visual kit with relative image paths, declared content, minimal credits and no fixture/API statistics.
+
 ## [0.1.0] - 2026-11-05
 
 First public release: free Studio, ten templates, plain README export, versioned SVG Action and minimal linked attribution to Yago Borba and this repository. npm and Marketplace publication are not part of this release.

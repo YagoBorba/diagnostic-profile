@@ -33,5 +33,7 @@ Roadmap IDs:
 - [ ] No credentials or private data included
 - [ ] Fictional data is labeled as fictional
 - [ ] Remaining limitations are stated
+- [ ] Visual-family changes include proof-sheet review in light/dark, narrow/wide, reduced motion and long/empty content
+- [ ] New artwork has declared author/license and exports retain author/repository credits
 
 ## Additional Notes

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="830" viewBox="0 0 360 830" role="img" aria-labelledby="title desc">
+<title id="title">Herbário Digital</title>
+<desc id="desc">Composição de apresentação, projeto e contato. Dados fictícios.</desc>
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<svg x="0" y="0" xmlns="http://www.w3.org/2000/svg" width="360" height="246" viewBox="0 0 360 246" role="img" aria-hidden="true">
+
+
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+.editorial{font-family:Georgia,"Times New Roman",serif}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect x="1" y="1" width="358" height="244" fill="#0f141b" stroke="#2a3441"/><rect x="8" y="8" width="344" height="230" fill="none" stroke="#1a232e"/><path d="M26 221V85m0 30c-16-8-16-20 0-24m0 62c16-8 16-20 0-24" fill="none" stroke="#ffd166"/><text x="48" y="30" class="mono" font-size="13" font-weight="400" fill="#3dff8f" text-anchor="start">ESPÉCIME DIGITAL</text><text x="48" y="92" class="editorial" font-size="30" font-weight="400" fill="#e6edf3" text-anchor="start">Ada Mercer</text><text x="48" y="149.5" class="editorial" font-size="18" font-weight="400" fill="#8b98a5" text-anchor="start">Platform Engineer ·</text><text x="48" y="175.6" class="editorial" font-size="18" font-weight="400" fill="#8b98a5" text-anchor="start">Distributed Systems</text>
+</svg>
+<svg x="0" y="258" xmlns="http://www.w3.org/2000/svg" width="360" height="386" viewBox="0 0 360 386" role="img" aria-hidden="true">
+
+
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+.editorial{font-family:Georgia,"Times New Roman",serif}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect x="1" y="1" width="358" height="384" fill="#0f141b" stroke="#2a3441"/><rect x="8" y="8" width="344" height="370" fill="none" stroke="#1a232e"/><path d="M26 361V85m0 30c-16-8-16-20 0-24m0 62c16-8 16-20 0-24" fill="none" stroke="#ffd166"/><text x="48" y="30" class="mono" font-size="13" font-weight="400" fill="#3dff8f" text-anchor="start">ESPÉCIME DIGITAL 01</text><text x="48" y="92" class="editorial" font-size="30" font-weight="400" fill="#e6edf3" text-anchor="start">FleetLink</text><text x="48" y="149.5" class="editorial" font-size="13" font-weight="400" fill="#3dff8f" text-anchor="start">Gateway · Telemetry</text><text x="48" y="178.35" class="editorial" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">Fleet telemetry gateway</text><text x="48" y="201.54999999999998" class="editorial" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">that streams vehicle data</text><text x="48" y="224.74999999999997" class="editorial" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">over MQTT into a</text><text x="48" y="247.94999999999996" class="editorial" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">time-series store, with</text><text x="48" y="271.15" class="editorial" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">backpressure, replay and</text><text x="48" y="294.34999999999997" class="editorial" font-size="16" font-weight="400" fill="#8b98a5" text-anchor="start">per-</text><text x="48" y="327.54999999999995" class="editorial" font-size="14" font-weight="400" fill="#ffd166" text-anchor="start">Go · MQTT</text>
+</svg>
+<svg x="0" y="656" xmlns="http://www.w3.org/2000/svg" width="360" height="162" viewBox="0 0 360 162" role="img" aria-hidden="true">
+
+
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+.editorial{font-family:Georgia,"Times New Roman",serif}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+</style>
+<rect x="1" y="1" width="358" height="160" fill="#0f141b" stroke="#2a3441"/><rect x="8" y="8" width="344" height="146" fill="none" stroke="#1a232e"/><path d="M26 137V85m0 30c-16-8-16-20 0-24m0 62c16-8 16-20 0-24" fill="none" stroke="#ffd166"/><text x="48" y="30" class="mono" font-size="13" font-weight="400" fill="#3dff8f" text-anchor="start">CONTATO</text><text x="48" y="92" class="editorial" font-size="22" font-weight="400" fill="#3dff8f" text-anchor="start">LinkedIn ↗</text>
+</svg>
+
+</svg>

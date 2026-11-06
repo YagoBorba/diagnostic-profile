@@ -29,10 +29,28 @@ export const PRESETS = {
   community: { name: 'Community', description: 'Contribution activity, projects and ways to collaborate.', version: 1,
     config: { theme: 'phosphor', appearance: { family: 'diagnostic', motion: 'subtle', decorations: false }, layout: { type: 'grid', textSummary: true },
       widgets: widgets('header', 'now', 'projects', 'heatmap', 'contacts', 'footer') } },
+  workshop: { name: 'Oficina Zero', description: 'A technical workbench with modules and inspection records.', version: 1,
+    config: { locale: 'pt-BR', theme: 'amber', appearance: { family: 'workshop', motion: 'none' }, layout: { type: 'compact', projectColumns: 1 }, widgets: widgets('header', 'projects', 'skills', 'now', 'contacts', 'footer') } },
+  fieldbook: { name: 'Arquivo de Campo', description: 'Editorial records, annotated margins and chronological notes.', version: 1,
+    config: { locale: 'pt-BR', theme: 'monochrome', appearance: { family: 'fieldbook', motion: 'none' }, layout: { type: 'compact', projectColumns: 1 }, widgets: widgets('header', 'timeline', 'projects', 'now', 'contacts', 'footer') } },
+  orbital: { name: 'Cartografia Orbital', description: 'Mission logs, orbital geometry and exploration records.', version: 1,
+    config: { locale: 'pt-BR', theme: 'ice', appearance: { family: 'orbital', motion: 'none' }, layout: { type: 'compact', projectColumns: 1 }, widgets: widgets('header', 'projects', 'skills', 'timeline', 'contacts', 'footer') } },
+  radio: { name: 'Estação de Rádio', description: 'Channels, track labels and frequency marks.', version: 1,
+    config: { locale: 'pt-BR', theme: 'violet', appearance: { family: 'radio', motion: 'none' }, layout: { type: 'compact', projectColumns: 1 }, widgets: widgets('header', 'now', 'projects', 'spectrum', 'contacts', 'footer') } },
+  inventory: { name: 'Inventário de Exploração', description: 'Pixel-cut frames, tools and manually declared milestones.', version: 1,
+    config: { locale: 'pt-BR', theme: 'ember', appearance: { family: 'inventory', motion: 'none' }, layout: { type: 'compact', projectColumns: 1 }, widgets: widgets('header', 'skills', 'projects', 'timeline', 'contacts', 'footer') } },
+  herbarium: { name: 'Herbário Digital', description: 'Specimen plates, botanical margins and project catalogs.', version: 1,
+    config: { locale: 'pt-BR', theme: 'phosphor', appearance: { family: 'herbarium', motion: 'none' }, layout: { type: 'compact', projectColumns: 1 }, widgets: widgets('header', 'projects', 'skills', 'now', 'contacts', 'footer') } },
 };
 
 // Studio copy explains the intended composition, independently of palette/family.
 export const PRESET_GUIDE = {
+  workshop: { category: 'creative', name: 'Oficina Zero', description: 'Bancada técnica, módulos e registros de inspeção.' },
+  fieldbook: { category: 'learning', name: 'Arquivo de Campo', description: 'Fichas editoriais, margens anotadas e trajetória.' },
+  orbital: { category: 'creative', name: 'Cartografia Orbital', description: 'Missões, geometria orbital e diário de exploração.' },
+  radio: { category: 'creative', name: 'Estação de Rádio', description: 'Canais e faixas de projetos, com marcas de sintonia.' },
+  inventory: { category: 'creative', name: 'Inventário de Exploração', description: 'Ferramentas, molduras pixeladas e marcos declarados.' },
+  herbarium: { category: 'learning', name: 'Herbário Digital', description: 'Pranchas, margens botânicas e projetos catalogados.' },
   diagnostic: { category: 'creative', name: 'Console diagnóstico', description: 'Painel de instrumentos para quem quer uma identidade técnica marcante.' },
   terminal: { category: 'creative', name: 'Terminal', description: 'Composição compacta com o que você faz, projetos e métricas.' },
   minimal: { category: 'career', name: 'Essencial', description: 'Apresentação direta com projetos, tecnologias e contatos.' },

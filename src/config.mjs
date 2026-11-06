@@ -111,12 +111,12 @@ export function normalizeConfig(input, fallbackLogin) {
       name: header.name === undefined ? undefined : text(header.name, 'header.name', '', 120),
       headline: header.headline === undefined ? undefined : text(header.headline, 'header.headline', '', 200),
       prompt: text(header.prompt, 'header.prompt', '$ scan --target ' + slug(login), 120),
-      systemLabel: text(header.systemLabel, 'header.systemLabel', 'DEVELOPER PROFILE', 80),
+      systemLabel: text(header.systemLabel, 'header.systemLabel', design.locale === 'pt-BR' ? 'PERFIL DO DESENVOLVEDOR' : 'DEVELOPER PROFILE', 80),
       readouts, tags,
     },
     projects, contacts,
     telemetry: { excludeLanguages, languageLimit },
-    footer: { message: text(footer.message, 'footer.message', 'NO FAULTS DETECTED', 120) },
+    footer: { message: text(footer.message, 'footer.message', design.locale === 'pt-BR' ? 'COMPOSIÇÃO CONCLUÍDA' : 'NO FAULTS DETECTED', 120) },
   };
   if (errors.length) throw new Error('Invalid config:\n- ' + errors.join('\n- '));
   return result;

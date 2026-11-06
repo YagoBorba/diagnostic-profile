@@ -1,3 +1,4 @@
+import { legacyLabel, number } from '../i18n.mjs';
 import { arc, document, esc, fmt, niceCeil, panel, text } from '../svg.mjs';
 
 const WIDTH = 1200;
@@ -30,10 +31,10 @@ ${ticks.join('')}
 <line x1="${cx}" y1="${cy}" x2="${(cx + (r - 34) * Math.cos(needle)).toFixed(2)}" y2="${(cy + (r - 34) * Math.sin(needle)).toFixed(2)}" stroke="${theme.signal}" stroke-width="3" stroke-linecap="round"/>
 </g>
 <circle cx="${cx}" cy="${cy}" r="7" fill="${theme.panel}" stroke="${theme.signal}" stroke-width="3"/>
-${text(cx, cy + 62, fmt(value), { size: 40, weight: 700, fill: theme.text, anchor: 'middle' })}
-${text(cx, cy + 84, 'CONTRIBUTIONS · 12 MO', { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle', extra: ' letter-spacing="1.5"' })}
+${text(cx, cy + 62, number(theme.locale ?? 'en', value), { size: 40, weight: 700, fill: theme.text, anchor: 'middle' })}
+${text(cx, cy + 84, legacyLabel(theme.locale, 'CONTRIBUTIONS · 12 MO'), { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle', extra: ' letter-spacing="1.5"' })}
 ${text(cx - r * 0.87, cy + r * 0.5 + 26, '0', { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle' })}
-${text(cx + r * 0.87, cy + r * 0.5 + 26, fmt(max), { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle' })}`;
+${text(cx + r * 0.87, cy + r * 0.5 + 26, number(theme.locale ?? 'en', max), { cls: 'mono', size: 11, fill: theme.muted, anchor: 'middle' })}`;
   return { markup, swing: sweep * ratio };
 }
 
@@ -52,25 +53,25 @@ function readouts(theme, totals) {
       const y = 76 + Math.floor(index / 3) * 104;
       return `<rect x="${x}" y="${y}" width="152" height="92" rx="8" fill="${theme.inset}" stroke="${theme.border}"/>` +
         `<rect x="${x}" y="${y + 18}" width="3" height="16" fill="${theme.accent}"/>` +
-        text(x + 16, y + 31, label, { cls: 'mono', size: 11, fill: theme.muted, extra: ' letter-spacing="1"' }) +
-        text(x + 16, y + 47, period, { cls: 'mono', size: 9, fill: theme.muted }) +
-        text(x + 16, y + 80, fmt(value), { cls: 'mono', size: 30, weight: 700, fill: theme.text });
+        text(x + 16, y + 31, legacyLabel(theme.locale, label), { cls: 'mono', size: 11, fill: theme.muted, extra: ' letter-spacing="1"' }) +
+        text(x + 16, y + 47, legacyLabel(theme.locale, period), { cls: 'mono', size: 9, fill: theme.muted }) +
+        text(x + 16, y + 80, number(theme.locale ?? 'en', value), { cls: 'mono', size: 30, weight: 700, fill: theme.text });
     })
     .join('');
 }
 
 function streakMonitor(theme, streaks) {
   const x = 880;
-  const plural = (count, word) => `${count} ${count === 1 ? word : `${word}s`}`;
+  const plural = (count, word) => theme.locale === 'pt-BR' ? `${count} ${word === 'day' ? (count === 1 ? 'dia' : 'dias') : (count === 1 ? 'contribuição' : 'contribuições')}` : `${count} ${count === 1 ? word : `${word}s`}`;
   return `
 <rect x="${x}" y="76" width="288" height="196" rx="8" fill="${theme.inset}" stroke="${theme.border}"/>
-${text(x + 20, 104, 'STREAK MONITOR', { cls: 'mono', size: 11, fill: theme.signal, extra: ' letter-spacing="1"' })}
-<text x="${x + 20}" y="162" class="sans" fill="${theme.text}"><tspan font-size="54" font-weight="700">${streaks.current}</tspan><tspan font-size="16" fill="${theme.muted}" dx="8">${streaks.current === 1 ? 'day' : 'days'}</tspan></text>
-${text(x + 20, 186, 'CURRENT STREAK', { cls: 'mono', size: 11, fill: theme.muted, extra: ' letter-spacing="1"' })}
+${text(x + 20, 104, legacyLabel(theme.locale, 'STREAK MONITOR'), { cls: 'mono', size: 11, fill: theme.signal, extra: ' letter-spacing="1"' })}
+<text x="${x + 20}" y="162" class="sans" fill="${theme.text}"><tspan font-size="54" font-weight="700">${streaks.current}</tspan><tspan font-size="16" fill="${theme.muted}" dx="8">${theme.locale === 'pt-BR' ? (streaks.current === 1 ? 'dia' : 'dias') : (streaks.current === 1 ? 'day' : 'days')}</tspan></text>
+${text(x + 20, 186, legacyLabel(theme.locale, 'CURRENT STREAK'), { cls: 'mono', size: 11, fill: theme.muted, extra: ' letter-spacing="1"' })}
 <line x1="${x + 20}" y1="204" x2="${x + 268}" y2="204" stroke="${theme.border}"/>
-${text(x + 20, 230, 'LONGEST (12 MO)', { cls: 'mono', size: 12, fill: theme.muted })}
+${text(x + 20, 230, legacyLabel(theme.locale, 'LONGEST (12 MO)'), { cls: 'mono', size: 12, fill: theme.muted })}
 ${text(x + 268, 230, plural(streaks.longest, 'day'), { cls: 'mono', size: 12, fill: theme.text, anchor: 'end' })}
-${text(x + 20, 254, 'BEST DAY', { cls: 'mono', size: 12, fill: theme.muted })}
+${text(x + 20, 254, legacyLabel(theme.locale, 'BEST DAY'), { cls: 'mono', size: 12, fill: theme.muted })}
 ${text(x + 268, 254, plural(streaks.bestDay, 'contribution'), { cls: 'mono', size: 12, fill: theme.text, anchor: 'end' })}`;
 }
 
@@ -93,13 +94,13 @@ function languageMix(theme, languages) {
     .map((entry, index) => {
       const x = barX + index * slot;
       return `<circle cx="${x + 5}" cy="377" r="5" fill="${entry.color ?? theme.muted}"/>` +
-        `<text x="${x + 16}" y="381" class="mono" font-size="12"><tspan fill="${theme.text}">${esc(entry.name)}</tspan><tspan fill="${theme.muted}" dx="7">${(entry.share * 100).toFixed(1)}%</tspan></text>`;
+        `<text x="${x + 16}" y="381" class="mono" font-size="12"><tspan fill="${theme.text}">${esc(entry.name)}</tspan><tspan fill="${theme.muted}" dx="7">${theme.locale === 'pt-BR' ? (entry.share * 100).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (entry.share * 100).toFixed(1)}%</tspan></text>`;
     })
     .join('');
   return `
 <defs><clipPath id="bar"><rect x="${barX}" y="334" width="${barW}" height="12" rx="6"/></clipPath></defs>
 <line x1="0" y1="300" x2="${WIDTH}" y2="300" stroke="${theme.border}"/>
-${text(32, 322, 'LANGUAGE MIX  //  PUBLIC REPOSITORIES BY CODE SIZE', { cls: 'mono', size: 11, fill: theme.muted, extra: ' letter-spacing="1"' })}
+${text(32, 322, legacyLabel(theme.locale, 'LANGUAGE MIX  //  PUBLIC REPOSITORIES BY CODE SIZE'), { cls: 'mono', size: 11, fill: theme.muted, extra: ' letter-spacing="1"' })}
 <rect x="${barX}" y="334" width="${barW}" height="12" rx="6" fill="${theme.grid}"/>
 <g clip-path="url(#bar)" class="grow">${segments}</g>
 ${legend}`;
@@ -111,8 +112,8 @@ export function renderTelemetry(theme, data, stamp) {
 
   const body = `
 ${panel(WIDTH, HEIGHT, theme)}
-${text(32, 34, 'TELEMETRY  //  GITHUB OVERVIEW', { cls: 'mono', size: 13, fill: theme.muted, extra: ' letter-spacing="1"' })}
-${text(WIDTH - 32, 34, `SOURCE GITHUB GRAPHQL API  ·  ${stamp}`, { cls: 'mono', size: 12, fill: theme.muted, anchor: 'end' })}
+${text(32, 34, legacyLabel(theme.locale, 'TELEMETRY  //  GITHUB OVERVIEW'), { cls: 'mono', size: 13, fill: theme.muted, extra: ' letter-spacing="1"' })}
+${text(WIDTH - 32, 34, `${theme.locale === 'pt-BR' ? 'FONTE: API GITHUB GRAPHQL' : 'SOURCE GITHUB GRAPHQL API'}  ·  ${stamp}`, { cls: 'mono', size: 12, fill: theme.muted, anchor: 'end' })}
 <line x1="0" y1="52" x2="${WIDTH}" y2="52" stroke="${theme.border}"/>
 ${dial.markup}
 ${readouts(theme, totals)}
@@ -129,12 +130,12 @@ ${languageMix(theme, languages)}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 `;
 
-  const languageSummary = languages.map((entry) => `${entry.name} ${(entry.share * 100).toFixed(1)}%`).join(', ');
+  const languageSummary = languages.map((entry) => `${entry.name} ${theme.locale === 'pt-BR' ? (entry.share * 100).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (entry.share * 100).toFixed(1)}%`).join(', ');
   return document({
     width: WIDTH,
     height: HEIGHT,
     title: 'GitHub overview: contribution period and current totals',
-    desc: `${fmt(totals.contributions)} contributions, ${fmt(totals.commits)} commits, ${fmt(totals.pullRequests)} pull requests, ${fmt(totals.issues)} issues in the last 12 months. Current totals: ${fmt(totals.stars)} stars, ${totals.repositories} public repositories, ${totals.followers} followers. Current streak ${streaks.current} days, longest in the reported 12 months ${streaks.longest} days. Current language mix by public code size: ${languageSummary || 'no data'}.`,
+    desc: `${number(theme.locale ?? 'en', totals.contributions)} contributions, ${number(theme.locale ?? 'en', totals.commits)} commits, ${number(theme.locale ?? 'en', totals.pullRequests)} pull requests, ${number(theme.locale ?? 'en', totals.issues)} issues in the last 12 months. Current totals: ${number(theme.locale ?? 'en', totals.stars)} stars, ${totals.repositories} public repositories, ${totals.followers} followers. Current streak ${streaks.current} days, longest in the reported 12 months ${streaks.longest} days. Current language mix by public code size: ${languageSummary || 'no data'}.`,
     css,
     body,
   });

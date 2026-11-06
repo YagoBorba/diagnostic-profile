@@ -1,3 +1,4 @@
+import { legacyLabel, number } from '../i18n.mjs';
 import { document, esc, fmt, panel, text, wrap } from '../svg.mjs';
 
 export function renderSimple(theme, type, config, data, title = '') {
@@ -52,12 +53,12 @@ export function renderSimple(theme, type, config, data, title = '') {
     const slot = (width - pad * 2) / columns;
     metrics.forEach(([label, value], i) => {
       const x = pad + (i % columns) * slot, y = 84 + Math.floor(i / columns) * 90;
-      body += line(x, y, label, compact ? 14 : 12, muted, { cls: 'mono' });
-      body += line(x, y + 39, fmt(value), 32, theme.accent, { weight: 700 });
+      body += line(x, y, legacyLabel(config.locale, label), compact ? 14 : 12, muted, { cls: 'mono' });
+      body += line(x, y + 39, number(config.locale ?? 'en', value), 32, theme.accent, { weight: 700 });
     });
     const y = 92 + Math.ceil(metrics.length / columns) * 90;
-    const languages = data.languages.map((l) => l.name + ' ' + (l.share * 100).toFixed(1) + '%').join(' · ');
-    const rendered = rows(['Language mix by public code size', languages || 'No language data'], y);
+    const languages = data.languages.map((l) => l.name + ' ' + (config.locale === 'pt-BR' ? (l.share * 100).toLocaleString('pt-BR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) : (l.share * 100).toFixed(1)) + '%').join(' · ');
+    const rendered = rows([legacyLabel(config.locale, 'Language mix by public code size'), languages || legacyLabel(config.locale, 'No language data')], y);
     body += rendered.markup; height = rendered.end + 10;
     desc = metrics.map(([label, value]) => label + ': ' + value).join('. ') + '. ' + languages;
   } else if (type === 'spectrum') {
@@ -71,7 +72,7 @@ export function renderSimple(theme, type, config, data, title = '') {
       const h = w.count ? Math.max(3, Math.log1p(w.count) / Math.log1p(Math.max(1, peak)) * (height - 120)) : 2;
       body += '<rect x="' + (pad + i * step).toFixed(2) + '" y="' + (floor - h).toFixed(2) + '" width="' + Math.max(2, step - 2).toFixed(2) + '" height="' + h.toFixed(2) + '" fill="' + (w.count ? theme.accent : theme.grid) + '"/>';
     });
-    body += line(pad, height - 17, 'Peak: ' + peak + ' · Active weeks: ' + values.filter((w) => w.count).length + '/' + values.length, 14, muted);
+    body += line(pad, height - 17, (config.locale === 'pt-BR' ? 'Pico: ' : 'Peak: ') + peak + (config.locale === 'pt-BR' ? ' · Semanas ativas: ' : ' · Active weeks: ') + values.filter((w) => w.count).length + '/' + values.length, 14, muted);
     desc = 'Weekly contribution chart. Peak ' + peak + '. ' + values.map((w) => w.start + ': ' + w.count).join('; ');
   } else if (type === 'heatmap') {
     heading ||= 'Contribution calendar';
@@ -87,7 +88,7 @@ export function renderSimple(theme, type, config, data, title = '') {
       body += '<rect x="' + x.toFixed(2) + '" y="' + y.toFixed(2) + '" width="' + (cell - 1).toFixed(2) + '" height="' + (cell - 1).toFixed(2) + '" rx="1" fill="' + (day.contributionCount ? theme.accent : theme.grid) + '" opacity="' + opacity.toFixed(2) + '"><title>' + esc(day.date + ': ' + day.contributionCount) + '</title></rect>';
     });
     height = 110 + cell * 7;
-    body += line(pad, height - 15, days.length ? days[0].date + ' — ' + days.at(-1).date : 'No calendar data', 14, muted);
+    body += line(pad, height - 15, days.length ? days[0].date + ' — ' + days.at(-1).date : legacyLabel(config.locale, 'No calendar data'), 14, muted);
     desc = 'GitHub contribution calendar. ' + data.totals.contributions + ' contributions in the reported period.';
   } else if (type === 'footer') {
     heading ||= 'End of report';
@@ -101,16 +102,16 @@ export function renderSimple(theme, type, config, data, title = '') {
     desc = heading;
   } else {
     const items = type === 'skills' ? config.content.skills : type === 'timeline' ? config.content.timeline :
-      [...config.content.learning.map((x) => 'Learning: ' + x), ...config.content.building.map((x) => 'Building: ' + x)];
+      [...config.content.learning.map((x) => legacyLabel(config.locale, 'Learning: ') + x), ...config.content.building.map((x) => legacyLabel(config.locale, 'Building: ') + x)];
     heading ||= ({ skills: 'Technologies I use', timeline: 'Milestones', now: 'Currently' })[type] ?? type;
-    const rendered = rows(items.length ? items : ['Add your own items in the configuration.'], 88);
+    const rendered = rows(items.length ? items : [legacyLabel(config.locale, 'Add your own items in the configuration.')], 88);
     body += rendered.markup;
     height = Math.max(144, rendered.end + 10);
     desc = heading + '. ' + (items.length ? items.join('. ') : 'No items supplied.');
   }
   const status = config.appearance.family === 'terminal' ? '> ' : '';
   body = panel(width, height, theme, config.appearance.family === 'minimal' ? 4 : 12) +
-    line(pad, 35, wrap(status + heading, Math.floor((width - pad * 2) / 10.8), 1)[0] ?? '', compact ? 16 : 18, theme.accent, { weight: 600 }) + body;
+    line(pad, 35, wrap(status + (title ? heading : legacyLabel(config.locale, heading)), Math.floor((width - pad * 2) / 10.8), 1)[0] ?? '', compact ? 16 : 18, theme.accent, { weight: 600 }) + body;
   const accessibleTitle = type === 'header' ? (config.header.name ?? data.name ?? data.login) + (config.header.headline ? ' — ' + config.header.headline : '') : heading;
   return document({ width, height, title: accessibleTitle, desc, body });
 }

@@ -1,9 +1,11 @@
 # Diagnostic Profile — roteiro de evolução
 
 Data: 31/10/2026. Base técnica: análise da branch develop, commit 605ef7d.
-Atualizado em 05/11/2026. Este documento acompanha o roteiro aprovado: [x] indica comportamento implementado e verificado; [ ] indica trabalho pendente. As evidências e os PRs estão em [IMPLEMENTATION.md](IMPLEMENTATION.md). A integração do lote corrente depende da CI.
+Atualizado em 06/11/2026. Este documento acompanha o roteiro aprovado: [x] indica comportamento implementado e verificado; [ ] indica trabalho pendente. As evidências e os PRs estão em [IMPLEMENTATION.md](IMPLEMENTATION.md). A integração do lote corrente depende da CI.
 
-A revisão atual de usabilidade e do site gratuito está em [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md); o caminho sem automação está em [GETTING_STARTED.md](GETTING_STARTED.md). O workflow de Pages foi preparado, mas não publicado.
+A revisão atual de usabilidade e do site gratuito está em [PRODUCT_REVIEW.md](PRODUCT_REVIEW.md); o caminho sem automação está em [GETTING_STARTED.md](GETTING_STARTED.md). A versão v0.1.0 e a página pública https://yagoborba.github.io/diagnostic-profile/ foram publicadas; os resultados estão em [IMPLEMENTATION.md](IMPLEMENTATION.md). A validação da Action já inclui geração e publicação reais no próprio projeto; instalação em outro repositório segue pendente.
+
+Execução 0.2.0: seis mundos, kit visual estático, preview por formato, receitas/travas/favoritos, saída en/pt-BR, deduplicação de publicação e folha de revisão visual. Main/develop exigem PR e quatro checks CI. A interface do Studio e diagnósticos CLI ainda não são anunciados como totalmente bilíngues; teste externo de instalação e estudo com leitor de tela são registrados separadamente.
 
 ## Objetivo do produto
 
@@ -35,7 +37,7 @@ Tipos: C = problema confirmado na análise; E = evolução proposta; V = comport
 - [x] FIX-07 · P0 · E — Detectar colisões de nomes de arquivos de projetos após normalização, como a.b e a-b.
 - [x] FIX-08 · P0 · C — Escapar assetsBaseUrl nos atributos do snippet e validar seu formato.
 - [x] FIX-09 · P0 · C — Mostrar pico zero em calendário zerado; separar o valor estatístico do mínimo matemático da escala.
-- [ ] FIX-10 · P0 · C — Criar a referência de versão anunciada no README, que atualmente usa uma tag v0 ausente na análise.
+- [x] FIX-10 · P0 · C — Criar a referência de versão anunciada no README, que atualmente usa uma tag v0 ausente na análise.
 - [x] FIX-11 · P1 · V — Revisar se campos esperados por projetos personalizados, como primaryLanguage, estão presentes na consulta.
 - [x] FIX-12 · P1 · E — Distinguir dado indisponível de zero real em estrelas, datas, linguagens e status dos projetos.
 
@@ -66,7 +68,7 @@ Concluído quando: cada número tem definição clara, período correto e compor
 - [x] REL-06 · P1 · E — Gerar manifest.json com versão, arquivos, origem dos dados e data de atualização, sem tokens.
 - [ ] REL-07 · P1 · E — Definir política para dados parciais: avisar quais widgets foram afetados e não fabricar valores.
 - [ ] REL-08 · P2 · E — Oferecer cache local opcional com expiração; indicar quando o resultado usa dados antigos.
-- [ ] REL-09 · P2 · E — Evitar regenerar conteúdo idêntico; tratar o timestamp para não causar commits a cada execução sem alteração relevante.
+- [x] REL-09 · P2 · E — Evitar regenerar conteúdo idêntico; tratar o timestamp para não causar commits a cada execução sem alteração relevante.
 
 ## 4. Configuração extensível
 
@@ -169,7 +171,7 @@ Concluído quando: uma pessoa consegue escolher um preset, alterá-lo, importar/
 - [x] A11Y-06 · P1 · E — Garantir navegação por teclado, foco visível e rótulos nos controles do configurador.
 - [ ] A11Y-07 · P1 · E — Localizar rótulos, datas, números, textos alternativos e erros em português e inglês.
 - [x] A11Y-08 · P1 · E — Tratar nomes longos, URLs sem espaços, emojis e alfabetos diversos sem cortar informação essencial.
-- [ ] A11Y-09 · P2 · E — Estruturar traduções para contribuições comunitárias, com fallback documentado.
+- [x] A11Y-09 · P2 · E — Estruturar traduções para contribuições comunitárias, com fallback documentado.
 - [ ] A11Y-10 · P2 · E — Avaliar suporte a idiomas da direita para a esquerda antes de anunciá-lo.
 
 ## 10. CLI e experiência local
@@ -188,7 +190,7 @@ Concluído quando: uma pessoa consegue escolher um preset, alterá-lo, importar/
 ## 11. GitHub Action e instalação
 
 - [ ] ACT-01 · P0 · E — Disponibilizar a Action para o público pretendido e testar consumo a partir de outro repositório.
-- [ ] ACT-02 · P0 · E — Publicar versão fixa, política de tags e notas de release consistentes com o README.
+- [x] ACT-02 · P0 · E — Publicar versão fixa, política de tags e notas de release consistentes com o README.
 - [ ] ACT-03 · P0 · E — Testar ponta a ponta em repositório descartável: checkout, geração, publicação e imagens acessíveis.
 - [x] ACT-04 · P0 · E — Documentar permissões mínimas separando leitura de dados e publicação dos arquivos.
 - [ ] ACT-05 · P1 · E — Gerar outputs com diretório, snippet, manifesto e versão da configuração.
@@ -210,9 +212,9 @@ Referência de agendamento: https://docs.github.com/en/actions/reference/workflo
 - [x] SEC-03 · P0 · E — Validar protocolos de links e impedir atributos, scripts ou eventos fornecidos como conteúdo.
 - [x] SEC-04 · P0 · E — Limitar quantidade e tamanho dos textos, widgets e arquivos importados para evitar travamentos.
 - [x] SEC-05 · P0 · E — Garantir que nomes gerados permaneçam no diretório de saída e não contenham traversal.
-- [x] SEC-06 · P1 · E — Fixar Actions externas por SHA revisado e manter atualização automatizada.
+- [x] SEC-06 · P1 · E — Fixar Actions externas por SHA revisado e manter atualização automatizada. Os SHAs estão fixados e Dependabot verifica npm/Actions semanalmente, com PRs para develop.
 - [x] SEC-07 · P1 · E — Criar SECURITY.md com canal privado de reporte e versões suportadas.
-- [ ] SEC-08 · P1 · E — Proteger branch de release e exigir as verificações definidas antes de publicar.
+- [x] SEC-08 · P1 · E — Proteger branch de release e exigir as verificações definidas antes de publicar.
 - [x] SEC-09 · P1 · E — Documentar dados locais, dados públicos e serviços externos usados pelo configurador.
 - [ ] SEC-10 · P2 · E — Exigir sanitização de SVG e licenças de ícones/temas aceitos da comunidade; não executar temas como código remoto.
 - [ ] SEC-11 · P3 · E — Avaliar OAuth ou backend somente se recursos de dados reais exigirem; projetar expiração, revogação e privilégio mínimo antes de implementar.
@@ -249,7 +251,7 @@ Referência para SHA de Actions: https://docs.github.com/en/actions/reference/se
 - [x] DOC-09 · P1 · E — Documentar acessibilidade, idioma e uso em dispositivos menores.
 - [ ] DOC-10 · P2 · E — Criar tutorial curto em vídeo/GIF com alternativa textual completa.
 - [ ] DOC-11 · P2 · E — Manter documentação em português e inglês com política de sincronização.
-- [ ] DOC-12 · P2 · E — Publicar guia de migração, changelog e matriz de versões suportadas.
+- [x] DOC-12 · P2 · E — Publicar guia de migração, changelog e matriz de versões suportadas.
 
 ## 15. Comunidade e manutenção
 

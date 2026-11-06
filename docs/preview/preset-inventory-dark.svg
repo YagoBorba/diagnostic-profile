@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="402" viewBox="0 0 360 402" role="img" aria-labelledby="title desc">
+<title id="title">Ada Mercer</title>
+<desc id="desc">Ada Mercer. Platform Engineer · Distributed Systems. Role: Platform &amp; SRE. Base: Lisbon, PT. Stack: Go · Rust · TS. DISTRIBUTED SYSTEMS. OBSERVABILITY. EDGE &amp; IoT. DEVEX</desc>
+<style>
+.mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
+.sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}
+.editorial{font-family:Georgia,"Times New Roman",serif}
+@media (prefers-reduced-motion: reduce){*{animation:none!important}}
+*{animation:none!important}
+</style>
+<path d="M9 1H351V9H359V393H351V401H9V393H1V9H9Z" fill="#0f141b" stroke="#ff7b5c" stroke-width="2"/><path d="M10 57H350" stroke="#2a3441"/><rect x="300" y="24" width="8" height="8" fill="#a5d6ff"/><rect x="314" y="24" width="8" height="8" fill="#a5d6ff"/><rect x="328" y="24" width="8" height="8" fill="#a5d6ff"/><text x="28" y="30" class="mono" font-size="13" font-weight="400" fill="#ff7b5c" text-anchor="start">EXPLORAÇÃO / INVENTÁRIO</text><text x="28" y="98" class="mono" font-size="30" font-weight="400" fill="#e6edf3" text-anchor="start">Ada Mercer</text><text x="28" y="155.5" class="mono" font-size="18" font-weight="400" fill="#8b98a5" text-anchor="start">Platform Engineer ·</text><text x="28" y="181.6" class="mono" font-size="18" font-weight="400" fill="#8b98a5" text-anchor="start">Distributed Systems</text><text x="28" y="223.7" class="mono" font-size="16" font-weight="400" fill="#e6edf3" text-anchor="start">▣ Role: Platform &amp; SRE</text><text x="28" y="256.9" class="mono" font-size="16" font-weight="400" fill="#e6edf3" text-anchor="start">▣ Base: Lisbon, PT</text><text x="28" y="290.09999999999997" class="mono" font-size="16" font-weight="400" fill="#e6edf3" text-anchor="start">▣ Stack: Go · Rust · TS</text><text x="28" y="323.29999999999995" class="mono" font-size="14" font-weight="400" fill="#ff7b5c" text-anchor="start">DISTRIBUTED SYSTEMS / OBSERVABILITY</text><text x="28" y="343.59999999999997" class="mono" font-size="14" font-weight="400" fill="#ff7b5c" text-anchor="start">/ EDGE &amp; IoT / DEVEX</text>
+</svg>

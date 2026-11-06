@@ -54,3 +54,22 @@ Destination-ref validation also checks reserved Git names/components against git
 - Issue #14 corrects the diagnostic telemetry heading, per-metric period labels and text alternative: contributions/commits/PRs/issues cover 12 months; stars/repos/followers are current totals. The new regression parses both SVG modes. Desktop inspection checked the additional labels; DATA-01 is implemented.
 - npm audit reported zero known vulnerabilities on 2026-11-05.
 - The beginner guide and [product review](PRODUCT_REVIEW.md) describe installation, troubleshooting, privacy, launch blockers and acceptance criteria.
+
+## Public release — 2026-11-05
+
+- The owner explicitly authorized public repository visibility. The public site is https://yagoborba.github.io/diagnostic-profile/; no ChatGPT login is required there. The earlier chatgpt.site URL remains a private preview mirror, not the public entry point.
+- [PR #17](https://github.com/YagoBorba/diagnostic-profile/pull/17) integrated minimal linked author/repository credits into develop. Attribution is independent of optional footer widgets and covered for every preset.
+- [PR #18](https://github.com/YagoBorba/diagnostic-profile/pull/18) integrated release/0.1.0 into main after green CI. Annotated v0.1.0 points to c205ad67276a49e3eb9973a42c62c97e70ea6605. [PR #19](https://github.com/YagoBorba/diagnostic-profile/pull/19) merged main back into develop after green CI. Supporting feature/release branches were removed.
+- [Pages deployment](https://github.com/YagoBorba/diagnostic-profile/actions/runs/42135215085) succeeded. GitHub initially created an environment policy for the default develop branch; it was corrected to main, matching the release-only workflow, and the deployment then passed.
+- [Released Action verification](https://github.com/YagoBorba/diagnostic-profile/actions/runs/42135393488) succeeded using v0.1.0, GITHUB_TOKEN and public YagoBorba data. It verified manifest/source/credits and published 17 generated files to demo-assets. An unauthenticated request returned HTTP 200 for header-dark.svg and verified the public snippet credits.
+- Browser verification of the actual Pages URL covered ten loaded templates, sample clearing, a new profile, README.md download, both author/repository links and no console errors. The GitHub Markdown API preserved the small sub/anchor attribution in rendered HTML.
+- 62 tests passed locally and in Linux/Windows with Node 22/24. The repository is public and its homepage points to Pages. No npm or Marketplace publication is claimed. Another-repository installation, screen-reader testing and independent user research remain pending.
+
+## Distinctive worlds — 2026-11-06
+
+- PRs [#22](https://github.com/YagoBorba/diagnostic-profile/pull/22), [#23](https://github.com/YagoBorba/diagnostic-profile/pull/23) and [#24](https://github.com/YagoBorba/diagnostic-profile/pull/24) were merged into develop with merge commits after all four Linux/Windows × Node 22/24 checks passed.
+- Six complete visual families bring the catalog to 16 presets and nine families. Static SVG kits use declared content; Markdown previews share the export model; fictional data is labeled and confined to Action previews.
+- Reproducible style recipes exclude personal content. Seeded mixing, locks, named local favorites and grouped undo support experimentation. Generated output supports English and Brazilian Portuguese; the editor interface remains Portuguese.
+- 75 tests cover compatibility, XML, manual kits, localization, recipes, publication caching and version consistency. Browser measurements checked 648 proof samples and 4,196 text boxes without frame overflow; 320/390 px layouts had no horizontal document overflow. These checks do not substitute for screen-reader testing or independent usability research.
+- Main and develop now require pull requests, four successful strict CI checks and resolved conversations; force pushes/deletion are disabled. Dependabot targets develop weekly.
+- The release workflow additionally uploads the visual proof sheet for human inspection. It is not an automated pixel comparison.
