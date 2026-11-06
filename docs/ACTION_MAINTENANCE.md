@@ -9,6 +9,7 @@ As atualizações propostas pelos PRs #25–29 são validadas em conjunto. Todos
 | [upload-pages-artifact](https://github.com/actions/upload-pages-artifact/releases/tag/v5.0.0) | 5.0.0 | Pages e empacotamento real na CI do PR |
 | [deploy-pages](https://github.com/actions/deploy-pages/releases/tag/v5.0.1) | 5.0.1 | Publicação do Studio |
 | [ghaction-github-pages](https://github.com/crazy-max/ghaction-github-pages/releases/tag/v5.0.0) | 5.0.0 | Publicação dos SVGs e workflow exportado |
+| [upload-artifact](https://github.com/actions/upload-artifact/releases/tag/v7.0.2) | 7.0.2 | Folhas de revisão visual na CI |
 
 ## Compatibilidade
 
