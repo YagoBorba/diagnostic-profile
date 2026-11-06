@@ -53,6 +53,8 @@ Shared links contain profile texts and contacts in the URL fragment. Localhost l
 
 ## Contribute
 
+The next version adds six world families and a static visual kit through the shared family contract in src/families.mjs. Each family supports every registered widget. src/manual.mjs excludes data-dependent blocks and never loads the fictional fixture; its ZIP contains local assets and a matching README. These development changes reach the public site through the next release.
+
 Presets in src/presets.mjs declare versioned defaults; explicit settings override them. Widget types are listed in src/catalog.mjs, validated in src/design.mjs and composed in src/build.mjs. Each instance has a unique id, type, enabled flag and optional title. No two instances may produce the same filename.
 
 Update the schema, warnings, tests and gallery for new fields. Run npm test, npm run preview and npm run build:studio. XML/schema checks complement manual inspection; screen-reader sessions and a rendered GitHub README check remain separate verification.

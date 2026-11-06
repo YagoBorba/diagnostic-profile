@@ -1,4 +1,5 @@
 import { DEFAULT_WIDGETS, WIDGETS } from './catalog.mjs';
+import { familyNames } from './families.mjs';
 
 const object = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 export function normalizeDesign(input, errors) {
@@ -38,7 +39,7 @@ export function normalizeDesign(input, errors) {
     }
   }
   const appearance = {
-    family: option(a.family, ['diagnostic', 'terminal', 'minimal'], 'diagnostic', 'appearance.family'),
+    family: option(a.family, familyNames, 'diagnostic', 'appearance.family'),
     motion: option(a.motion, ['none', 'subtle', 'full'], 'full', 'appearance.motion'),
     border: option(a.border, ['rounded', 'square'], 'rounded', 'appearance.border'),
     density: option(a.density, ['compact', 'comfortable'], 'comfortable', 'appearance.density'),
@@ -78,7 +79,7 @@ export function normalizeDesign(input, errors) {
   if (!/^[a-z\d][a-z\d._/-]*$/i.test(branch) || branch.includes('..') || branch.includes('//') || branch.endsWith('/') || branch.endsWith('.lock')) errors.push('"destination.branch" must be a valid branch path');
   if (branch === 'HEAD' || branch.endsWith('.') || branch.split('/').some((part) => part.startsWith('.') || part.endsWith('.lock'))) errors.push('"destination.branch" contains a reserved or invalid Git ref component');
   if (['main', 'master', 'develop'].includes(branch.toLowerCase())) errors.push('"destination.branch" must be a dedicated asset branch, not main, master or develop');
-  return { appearance, layout, content, widgets, destination: { repository, branch } };
+  return { locale: option(input.locale, ['en', 'pt-BR'], 'en', 'locale'), appearance, layout, content, widgets, destination: { repository, branch } };
 }
 
 export function applyAppearance(svg, appearance) {

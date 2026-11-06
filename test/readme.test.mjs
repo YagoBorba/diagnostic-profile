@@ -55,8 +55,8 @@ test('manual README ZIP has no workflow, fictional previews or credentials', () 
 });
 
 test('each template explains its purpose and works for a user without activity or contacts', () => {
-  assert.equal(Object.keys(PRESETS).length, 10);
-  assert.deepEqual(Object.keys(PRESET_GUIDE), Object.keys(PRESETS));
+  assert.equal(Object.keys(PRESETS).length, 16);
+  assert.deepEqual(Object.keys(PRESET_GUIDE).sort(), Object.keys(PRESETS).sort());
   for (const preset of Object.keys(PRESETS)) {
     assert.ok(PRESET_GUIDE[preset].category);
     assert.match(generateReadme({ login: 'new-user', preset, projects: [] }), /^# new-user/);

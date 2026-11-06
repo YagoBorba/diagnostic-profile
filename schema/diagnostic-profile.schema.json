@@ -234,7 +234,13 @@
         "resume",
         "researcher",
         "maker",
-        "community"
+        "community",
+        "workshop",
+        "fieldbook",
+        "orbital",
+        "radio",
+        "inventory",
+        "herbarium"
       ],
       "description": "Versioned preset; explicit configuration overrides its defaults."
     },
@@ -250,7 +256,13 @@
           "enum": [
             "diagnostic",
             "terminal",
-            "minimal"
+            "minimal",
+            "workshop",
+            "fieldbook",
+            "orbital",
+            "radio",
+            "inventory",
+            "herbarium"
           ],
           "description": "Visual family, independent of palette."
         },
@@ -480,6 +492,15 @@
           "default": "output"
         }
       }
+    },
+    "locale": {
+      "type": "string",
+      "enum": [
+        "en",
+        "pt-BR"
+      ],
+      "default": "en",
+      "description": "Language of generated labels. Profile text is preserved."
     }
   }
 }
