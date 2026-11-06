@@ -21,6 +21,7 @@ Branches verificadas: main contém v0.1.0; develop integra a próxima versão e 
 | P1 | Texto pequeno ao reduzir painéis largos | Painéis diagnósticos de 1200 px carregam textos de 11–13 px; a incorporação pode reduzi-los proporcionalmente. Existem variantes compactas, mas não são escolhidas por todos os usuários. | Modelos com variante estreita própria, sugestão contextual e verificação a 320/390 px; não apenas diminuir o SVG inteiro. |
 | P1 | Qualidade visual não está coberta por XML | CI verifica testes, schema, XML e drift dos arquivos, mas não legibilidade ou sobreposição em imagens renderizadas. | Verificar capturas representativas por família, claro/escuro, largura estreita e conteúdo extremo; incluir avaliação real do README no GitHub. |
 | P1 | Idioma fragmentado | Interface e instruções em português; rótulos SVG, mensagens e formatação numérica incluem inglês. | Locale compartilhado entre Studio, SVG, alt text, resumo e erros; pt-BR/en com fallback e testes. |
+| P1 | Gitflow ainda não é imposto pelo repositório | A API do GitHub retornou protected=false em main/develop e lista de rulesets vazia nesta revisão. | Exigir PR e a matriz CI nas duas branches, preservar merge commits e impedir force-push; escolher regras de revisão compatíveis com um mantenedor único. Não aplicar a mesma restrição de push à branch automática demo-assets. |
 | P2 | Trabalho descartado ao abrir a galeria | O fluxo atual gera 210 SVGs para dez presets e mostra dez headers. Uma execução local desse trecho levou 54 ms, sem medir rede, DOM ou dispositivo de entrada. | Renderizar somente os previews necessários ou usar miniaturas determinísticas; carregar modelos adicionais sob demanda. Medir antes/depois no mesmo aparelho. |
 | P2 | Desfazer perde ações úteis durante digitação | mutate salva um estado por evento e mantém no máximo 40. | Agrupar digitação por campo/sessão e manter troca de tema, preset e ordem como ações independentes. |
 | P2 | Atualizações sem mudança de conteúdo podem gerar commits | buildAssets inclui timestamp e output.mjs cria generatedAt novo. | Separar horário da consulta de conteúdo visual e publicar somente mudanças relevantes, preservando informação de atualização verdadeira. |
@@ -88,7 +89,7 @@ Para aceitar um mundo novo, exigir exemplo completo com os mesmos dados de refer
 
 Incluir manifesto de autoria/licença de cada contribuição visual, configuração mínima reproduzível, legenda dos dados e checklist de exportação. Propostas da comunidade podem começar por JSON/arte estática revisada; instalação arbitrária de plugins não é necessária.
 
-Completar a validação em outro repositório público, documentar atualização/rollback com a referência fixa, revisar a automação de dependências e testar com usuários externos. São itens de qualidade que continuam relevantes depois do lançamento público.
+Completar a validação em outro repositório público, manter atualização/rollback documentados com a referência fixa, proteger main/develop, revisar a automação de dependências e testar com usuários externos. São itens de qualidade que continuam relevantes depois do lançamento público. Esta revisão não alterou as configurações de proteção do GitHub.
 
 ## Sequência de implementação pelo Gitflow
 
