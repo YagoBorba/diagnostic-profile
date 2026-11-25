@@ -1,40 +1,40 @@
-# Mundos e receitas
+# Worlds and recipes
 
-Por [Yago Borba](https://github.com/YagoBorba) · [Diagnostic Profile](https://github.com/YagoBorba/diagnostic-profile).
+By [Yago Borba](https://github.com/YagoBorba) · [Diagnostic Profile](https://github.com/YagoBorba/diagnostic-profile).
 
-A versão 0.2.0 tem 16 modelos, seis paletas e nove famílias. Os modelos escolhem composição e defaults; a família define também formas, tipografia e tratamento dos blocos. As famílias anteriores continuam disponíveis.
+Diagnostic Profile has 16 presets, six palettes and nine families. Presets choose the composition and defaults; the family also defines shapes, typography and how blocks are drawn. The original families remain available.
 
-| Mundo | Composição | Exemplo com dados fictícios |
+| World | Composition | Example with fictional data |
 | --- | --- | --- |
-| Oficina Zero | Bancada técnica, trilhas, módulos e registros | ![Oficina Zero](preview/composition-workshop.svg) |
-| Arquivo de Campo | Fichas, abas, margens e tipografia editorial | ![Arquivo de Campo](preview/composition-fieldbook.svg) |
-| Cartografia Orbital | Diário de missão e geometria orbital | ![Cartografia Orbital](preview/composition-orbital.svg) |
-| Estação de Rádio | Canais, faixas e marcas de sintonia | ![Estação de Rádio](preview/composition-radio.svg) |
-| Inventário de Exploração | Molduras pixeladas e ferramentas declaradas | ![Inventário de Exploração](preview/composition-inventory.svg) |
-| Herbário Digital | Pranchas, margens botânicas e catálogo de projetos | ![Herbário Digital](preview/composition-herbarium.svg) |
+| Oficina Zero | Technical workbench, tracks, modules and logs | ![Oficina Zero](preview/composition-workshop.svg) |
+| Arquivo de Campo | Index cards, tabs, margins and editorial type | ![Arquivo de Campo](preview/composition-fieldbook.svg) |
+| Cartografia Orbital | Mission log and orbital geometry | ![Cartografia Orbital](preview/composition-orbital.svg) |
+| Estação de Rádio | Channels, bands and tuning marks | ![Estação de Rádio](preview/composition-radio.svg) |
+| Inventário de Exploração | Pixel frames and declared tools | ![Inventário de Exploração](preview/composition-inventory.svg) |
+| Herbário Digital | Plates, botanical margins and a project catalog | ![Herbário Digital](preview/composition-herbarium.svg) |
 
-Escolha Compacta para leitura em telas pequenas. A composição ampla não deve ser apenas encolhida em um README estreito. As cores personalizadas mostram avisos de contraste; confira claro e escuro antes de exportar.
+Choose **Compacta** (compact) for reading on small screens; the wide composition should not simply be shrunk into a narrow README. Custom colors show contrast warnings; check light and dark mode before exporting.
 
-## Três formas de publicar
+## Three ways to publish
 
-| Formato | Preview e arquivos | Atualização |
+| Format | Preview and files | Updates |
 | --- | --- | --- |
-| Kit visual estático | SVGs do conteúdo preenchido, README com caminhos relativos e configuração | Manual: importe o JSON, edite e envie os novos arquivos |
-| Markdown | Textos e links do mesmo modelo semântico usado na exportação | Manual: copie ou envie README.md |
-| Action | Preview fictício, JSON, workflow e snippet; a execução consulta dados públicos reais | Pelo workflow do usuário |
+| Static visual kit | SVGs of the content you entered, a README with relative paths and the configuration | Manual: import the JSON, edit it and upload the new files |
+| Markdown | Text and links from the same semantic model used by the export | Manual: copy or upload README.md |
+| Action | Fictional preview, JSON, workflow and snippet; the run fetches real public data | Through your workflow |
 
-O kit estático não inclui métricas, calendário ou consulta de projetos fixados. Adicione projetos manualmente. Ondas e figuras decorativas não medem desempenho. Não há XP, ranking ou nível de habilidade inventado. O README recebe imagens e links; as interações do playground ficam no Studio.
+The static kit does not include metrics, the calendar or pinned projects. Add projects by hand. Decorative waves and figures do not measure performance. There is no XP, ranking or invented skill level. The README gets images and links; the playground interactions stay in the Studio.
 
-## Misture e guarde
+## Mix and keep
 
-Digite uma semente e use Surpreenda-me. As travas podem preservar mundo, cores, layout/blocos e movimento; o conteúdo pessoal é sempre mantido. A mesma semente e as mesmas opções reproduzem a escolha. Desfazer agrupa digitação no mesmo campo e mantém até 40 transações.
+Type a seed and use **Surpreenda-me** (surprise me). Locks can keep the world, colors, layout and blocks, or motion; personal content is always kept. The same seed and options reproduce the same choice. Undo groups typing in the same field and keeps up to 40 steps.
 
-Receitas compartilham somente as opções visuais, com IDs de blocos normalizados e sem títulos personalizados, nomes ou contatos. Perfil completo é uma opção separada e inclui seus textos: revise antes de compartilhar. Favoritos são locais ao navegador, têm nome editável e miniatura; baixe JSON para um backup portátil.
+Recipes share only the visual options, with normalized block IDs and without custom titles, names or contacts. A full profile is a separate option and includes your text: review it before sharing. Favorites stay in the browser, with an editable name and a thumbnail; download the JSON for a portable backup.
 
-Os pequenos desafios mudam a seleção de blocos, não apagam conteúdo e não bloqueiam a exportação. Os créditos para Yago Borba e o repositório permanecem nos formatos gerados.
+Small challenges change the block selection, never erase content and never block the export. Credits to Yago Borba and the repository stay in the generated formats.
 
-## Contribuir com um mundo
+## Contribute a world
 
-Cada família declara autor, licença, versão, formatos e widgets suportados em src/families.mjs. A arte desta distribuição é vetorial original, MIT. Contribuições precisam identificar origem/licença e oferecer composição coerente, inclusive projetos, contatos e rodapé.
+Each family declares its author, license, version, formats and supported widgets in src/families.mjs. The artwork in this distribution is original vector art under MIT. Contributions must state their origin and license and offer a coherent composition, including projects, contacts and the footer.
 
-Execute npm test, npm run preview e npm run proof. A folha em dist/proof/index.html contém exemplos claros/escuros, estreitos/amplos e textos extremos; a CI anexa essa folha como artefato por três dias. Para servir localmente, use npm run proof -- --serve. A folha exige inspeção humana: XML e coordenadas não comprovam sozinhos legibilidade ou experiência com leitor de tela.
+Run npm test, npm run preview and npm run proof. The sheet at dist/proof/index.html has light and dark, narrow and wide examples and extreme text; CI attaches it as an artifact for three days. To serve it locally, use npm run proof -- --serve. The sheet is for human inspection: XML checks and coordinates alone do not prove readability.

@@ -1,30 +1,30 @@
-# Manutenção das Actions
+# Action maintenance
 
-As atualizações propostas pelos PRs #25–29 são validadas em conjunto. Todos os usos continuam fixados pelo SHA completo, inclusive os workflows exportados pelo Studio/CLI.
+Every third-party Action is pinned by its full commit SHA, including in the workflows exported by the Studio and the CLI.
 
-| Dependência | Versão revisada | Uso |
+| Dependency | Reviewed version | Used by |
 | --- | --- | --- |
-| [checkout](https://github.com/actions/checkout/releases/tag/v7.0.1) | 7.0.1 | CI, Pages, smoke e workflow exportado |
-| [setup-node](https://github.com/actions/setup-node/releases/tag/v7.1.0) | 7.1.0 | CI, Pages e Action composta |
-| [upload-pages-artifact](https://github.com/actions/upload-pages-artifact/releases/tag/v5.0.0) | 5.0.0 | Pages e empacotamento real na CI do PR |
-| [deploy-pages](https://github.com/actions/deploy-pages/releases/tag/v5.0.1) | 5.0.1 | Publicação do Studio |
-| [ghaction-github-pages](https://github.com/crazy-max/ghaction-github-pages/releases/tag/v5.0.0) | 5.0.0 | Publicação dos SVGs e workflow exportado |
-| [upload-artifact](https://github.com/actions/upload-artifact/releases/tag/v7.0.2) | 7.0.2 | Folhas de revisão visual na CI |
+| [checkout](https://github.com/actions/checkout/releases/tag/v7.0.1) | 7.0.1 | CI, Pages, smoke test and exported workflow |
+| [setup-node](https://github.com/actions/setup-node/releases/tag/v7.1.0) | 7.1.0 | CI, Pages and the composite Action |
+| [upload-pages-artifact](https://github.com/actions/upload-pages-artifact/releases/tag/v5.0.0) | 5.0.0 | Pages and real packaging in pull-request CI |
+| [deploy-pages](https://github.com/actions/deploy-pages/releases/tag/v5.0.1) | 5.0.1 | Studio publication |
+| [ghaction-github-pages](https://github.com/crazy-max/ghaction-github-pages/releases/tag/v5.0.0) | 5.0.0 | SVG publication and exported workflow |
+| [upload-artifact](https://github.com/actions/upload-artifact/releases/tag/v7.0.2) | 7.0.2 | Visual review sheets in CI |
 
-## Compatibilidade
+## Compatibility
 
-Os runtimes das Actions atualizadas usam Node 24; o código do projeto continua testado em Node 22 e 24. Runners próprios precisam suportar esse runtime (Actions Runner 2.327.1 ou posterior). Comandos Git autenticados dentro de uma Docker container action com checkout moderno exigem runner 2.329.0 ou posterior; este projeto não usa esse caminho. GitHub.com com ubuntu-latest/windows-latest é o ambiente verificado. Não presumir compatibilidade com instalações antigas do GitHub Enterprise Server.
+The updated Actions run on Node 24; the project code is tested on Node 22 and 24. Self-hosted runners must support that runtime (Actions Runner 2.327.1 or newer). Authenticated Git commands inside a Docker container action with a modern checkout need runner 2.329.0 or newer; this project does not use that path. GitHub.com with ubuntu-latest and windows-latest is the verified environment. Older GitHub Enterprise Server installations are not assumed to be compatible.
 
-Setup-node 7 mudou a organização interna para ESM e removeu o fallback fictício NODE_AUTH_TOKEN. Este projeto não configura registry-url nem publica em npm. O cache automático está explicitamente desativado, inclusive na Action composta executada no repositório do usuário. Consulte as [notas oficiais](https://github.com/actions/setup-node#whats-new-in-v7).
+setup-node 7 moved to ESM internally and removed the placeholder NODE_AUTH_TOKEN fallback. This project does not configure registry-url or publish to npm. Automatic caching is explicitly disabled, including in the composite Action that runs in the user's repository. See the [official notes](https://github.com/actions/setup-node#whats-new-in-v7).
 
-Checkout usa persist-credentials: false. A publicação dos assets recebe GITHUB_TOKEN explicitamente no passo de publicação; não depende de credenciais deixadas pelo checkout. A política de permissões e a restrição de Pages a main permanecem.
+Checkout uses persist-credentials: false. Asset publication receives GITHUB_TOKEN explicitly in the publication step and does not rely on credentials left by checkout. The permission policy and the restriction of Pages to main stay in place.
 
-## Aceite e atualização
+## Updating a dependency
 
-1. Revisar os changelogs e os manifests oficiais, mantendo pins SHA.
-2. Atualizar tanto YAMLs quanto src/workflow.mjs e o exemplo no README. Dependabot não reescreve strings JavaScript.
-3. Executar testes e os quatro checks exigidos. A CI envia um artefato studio-validation com a mesma Action de upload usada no Pages, sem deploy em PR.
-4. Integrar em develop por PR/merge commit, preparar release corretiva, integrar em main e criar nova tag anotada. Não mover tags anteriores.
-5. Executar Pages e o smoke test da versão publicada. Conferir sucesso, manifesto, créditos e URLs públicas. A CI do PR não comprova sozinha o deploy.
+1. Review the official changelogs and manifests and keep the SHA pins.
+2. Update the YAML files, src/workflow.mjs and the README example. Dependabot does not rewrite JavaScript strings.
+3. Run the tests and the four required checks. CI uploads a studio-validation artifact with the same upload Action used by Pages, without deploying from a pull request.
+4. Merge into develop through a pull request with a merge commit, prepare a patch release, merge it into main and create a new annotated tag. Never move published tags.
+5. Run Pages and the smoke test of the published version, and check the result, manifest, credits and public URLs. Pull-request CI alone does not prove the deployment.
 
-Para rollback, restaure a referência de versão anterior e o workflow compatível. Não exclua a branch de assets nem mova uma tag já publicada. O código em v0.2.0 preserva as dependências anteriores para instalações que precisem delas.
+To roll back, restore the previous version reference and its compatible workflow. Do not delete the asset branch or move a published tag. The code at v0.2.0 keeps the previous dependencies for installations that need them.

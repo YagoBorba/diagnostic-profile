@@ -33,17 +33,17 @@ It started as the profile of [YagoBorba](https://github.com/YagoBorba) after the
 
 - **No external image services.** Assets are plain SVG files served from your own repository.
 - **Dark and light variants** for every widget, switched with `<picture>` so they follow the viewer's GitHub theme.
-- **Text alternatives.** SVGs include title/description and snippet images include alt text. An optional text summary complements the images; real GitHub screen-reader verification remains pending.
+- **Text alternatives.** SVGs include title/description and snippet images include alt text. An optional text summary complements the images for screen readers.
 - **Motion that respects the viewer.** Animations stop under `prefers-reduced-motion`.
 - **No runtime dependencies.** The rendering engine uses Node.js 22+ or browser modules. Development checks use npm ci.
 
 ## Start here
 
-Open Studio and choose a static visual kit (default), plain Markdown or SVGs with Action. Static SVG and Markdown need no token or tool installation. Follow the [beginner guide](docs/GETTING_STARTED.md). Open the free [public Studio](https://yagoborba.github.io/diagnostic-profile/). The source and versioned Action are public. See the [product review and free hosting plan](docs/PRODUCT_REVIEW.md).
+Open Studio and choose a static visual kit (default), plain Markdown or SVGs with Action. Static SVG and Markdown need no token or tool installation. Follow the [beginner guide](docs/GETTING_STARTED.md). Open the free [public Studio](https://yagoborba.github.io/diagnostic-profile/). The source and versioned Action are public.
 
 ## Profile Studio
 
-Explore the [worlds and recipes guide](docs/WORLDS.md). The [identity review](docs/IDENTITY_REVIEW.md) records the design rationale; the six worlds, matching previews and recipe playground are implemented in v0.2.0.
+Explore the [worlds and recipes guide](docs/WORLDS.md): six worlds, matching previews and a recipe playground.
 
 Build a profile visually with sixteen presets, six palettes and nine families. Edit profile fields, projects and contacts, reorder blocks, compare styles and export a standalone README or matching SVG configuration, snippet and workflow. Search templates by goal and clear the fictional sample before publishing.
 
@@ -248,14 +248,13 @@ Configuration validates types, text lengths, contact IDs and project filename co
 
 ## Roadmap
 
-The [complete roadmap](docs/ROADMAP.md) and [implementation evidence](docs/IMPLEMENTATION.md) distinguish delivered work from pending proposals.
+Ideas for future versions:
 
 - [ ] Recent activity as a fault code log (pull requests, reviews and releases as DTC entries)
 - [ ] Achievements as readiness monitors
 - [ ] Contribution heatmap styled as an ECU memory map
 - [ ] Coding time readout from WakaTime
 - [ ] Latest posts and releases feed
-- [ ] Section divider SVGs
 - [ ] YAML config support
 - [ ] Marketplace release
 
