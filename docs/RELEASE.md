@@ -2,6 +2,10 @@
 
 Public Studio: **https://yagoborba.github.io/diagnostic-profile/**. The full list of changes is in the [CHANGELOG](../CHANGELOG.md).
 
+## 0.2.2 — 2026-11-25
+
+Documentation release. The guides are in English throughout, with the Studio buttons quoted in Portuguese as they appear on screen, and the README keeps a short list of future ideas. Exported installers now use YagoBorba/diagnostic-profile@v0.2.2; the Action, worlds, data and schema 1 are unchanged, so updating the reference is enough.
+
 ## 0.2.1 — 2026-11-06
 
 Maintenance release for the Actions used by the project and by exported workflows: checkout 7.0.1, setup-node 7.1.0, upload-pages-artifact 5.0.0, deploy-pages 5.0.1 and ghaction-github-pages 5.0.0, all pinned by SHA. Pull-request CI now also packages the Pages artifact.

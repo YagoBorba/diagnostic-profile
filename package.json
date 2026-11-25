@@ -1,6 +1,6 @@
 {
   "name": "diagnostic-profile",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Create distinctive GitHub READMEs with visual worlds, a browser Studio, static SVG kits and a versioned GitHub Action.",
   "type": "module",
   "license": "MIT",
