@@ -1,56 +1,42 @@
-# Lançamento 0.2.1
+# Releases and migration
 
-Data: 06/11/2026. Manutenção das Actions por [Yago Borba](https://github.com/YagoBorba).
+Public Studio: **https://yagoborba.github.io/diagnostic-profile/**. The full list of changes is in the [CHANGELOG](../CHANGELOG.md).
 
-Atualiza checkout 7.0.1, setup-node 7.1.0, upload-pages-artifact 5.0.0, deploy-pages 5.0.1 e ghaction-github-pages 5.0.0 com pins SHA. O [PR #33](https://github.com/YagoBorba/diagnostic-profile/pull/33) reúne as propostas #25–29, atualiza também os workflows exportados e verifica empacotamento de Pages na CI.
+## 0.2.1 — 2026-11-06
 
-A versão mantém os mundos, dados, créditos e schema 1. Agora os instaladores exportados usam YagoBorba/diagnostic-profile@v0.2.1. Atualize a referência e os pins do workflow ao migrar; não basta trocar apenas a tag se quiser atualizar checkout/publicação.
+Maintenance release for the Actions used by the project and by exported workflows: checkout 7.0.1, setup-node 7.1.0, upload-pages-artifact 5.0.0, deploy-pages 5.0.1 and ghaction-github-pages 5.0.0, all pinned by SHA. Pull-request CI now also packages the Pages artifact.
 
-Runners próprios devem suportar Node 24 (Actions Runner 2.327.1+). O projeto continua executado/testado em Node 22/24. Cache automático de pacotes e credenciais persistentes de checkout estão explicitamente desativados. Consulte [compatibilidade e rollback](ACTION_MAINTENANCE.md).
+Worlds, data, credits and schema 1 are unchanged. Exported installers now use YagoBorba/diagnostic-profile@v0.2.1. When migrating, update both the Action reference and the workflow pins; changing only the tag does not update checkout or publication.
 
-Gitflow: chore/action-runtime-maintenance → develop → release/0.2.1 → main, tag anotada v0.2.1 e merge de main para develop. Tags anteriores permanecem intactas. A publicação do Pages e o smoke test da versão são verificados após criar a tag; os resultados ficam em [IMPLEMENTATION.md](IMPLEMENTATION.md).
+Self-hosted runners must support Node 24 (Actions Runner 2.327.1+). The project is tested on Node 22 and 24. Automatic package caching and persisted checkout credentials are explicitly disabled. See [compatibility and rollback](ACTION_MAINTENANCE.md).
 
-Página pública: https://yagoborba.github.io/diagnostic-profile/. Npm/Marketplace não fazem parte deste lançamento.
+## 0.2.0 — 2026-11-06
 
----
+- Six complete worlds besides the three earlier families: 16 presets and six palettes.
+- Static visual kit without a token or Action, Markdown with a matching semantic preview, and the Action for up-to-date public data.
+- Seeded mixes, locks, recipes without personal data, optional challenges and favorites with a name and thumbnail.
+- English and Portuguese output, wrapping for wide names, accessible descriptions and localized instructions.
+- Manifests, and no publication commits caused only by timestamps when the data did not change.
+- Small linked credits to the author and the project in every README format, even with the personal footer disabled.
 
-# Lançamento 0.2.0
+The [public example in another repository](https://github.com/YagoBorba/diagnostic-profile-example) shows the Action being consumed from outside this repository; its runs are on that example's Actions page.
 
-Data: 06/11/2026. Por [Yago Borba](https://github.com/YagoBorba) · [diagnostic-profile](https://github.com/YagoBorba/diagnostic-profile).
+### Migrating from 0.1.0
 
-Página gratuita: **https://yagoborba.github.io/diagnostic-profile/**.
+schemaVersion stays 1 and the earlier preset IDs are still accepted. Legacy SVG comparisons check the previous default output; the new families and locale are additional options. JSON without a locale uses en; new Studio profiles use pt-BR. To keep Markdown in Portuguese, select pt-BR explicitly.
 
-## Entrega
+The Studio now starts with the static visual kit. It does not fetch real data: it produces README.md with assets/ and leaves API widgets out. Choose the Action for automatic updates, using YagoBorba/diagnostic-profile@v0.2.0 or newer. Changing the world does not erase content, but keep a JSON copy before experimenting.
 
-- Seis mundos completos, além das três famílias anteriores; 16 modelos e seis paletas.
-- Kit visual estático sem token/Action, Markdown com preview semântico correspondente e Action para dados públicos atualizados.
-- Misturas por semente, travas, receitas sem dados pessoais, desafios opcionais e favoritos com nome/miniatura.
-- Saída en/pt-BR, quebra de nomes largos, descrições acessíveis e instruções localizadas.
-- Manifestos e publicação sem commits causados somente por timestamps quando os dados não mudam.
-- Atualizações semanais de dependências/Actions em develop e folha de revisão visual como artefato de CI.
-- Main/develop protegidas com PR obrigatório, quatro checks CI, bloqueio de force-push/exclusão e merge commits. Não exige aprovação de outra pessoa quando o mantenedor trabalha sozinho.
-- Créditos pequenos e com links para o autor/projeto em todos os formatos de README, mesmo com o rodapé pessoal desabilitado.
-
-Integrações: [PR #22](https://github.com/YagoBorba/diagnostic-profile/pull/22), [#23](https://github.com/YagoBorba/diagnostic-profile/pull/23), [#24](https://github.com/YagoBorba/diagnostic-profile/pull/24). Release por release/0.2.0 -> main, tag anotada v0.2.0 e merge de main para develop. Não mover tags anteriores.
-
-O [exemplo público em outro repositório](https://github.com/YagoBorba/diagnostic-profile-example) permite verificar o consumo da Action separadamente; seus resultados reais ficam na página Actions desse exemplo. O teste do próprio projeto não é apresentado como substituto desse teste externo.
-
-## Migração de 0.1.0
-
-SchemaVersion permanece 1, e IDs dos presets anteriores continuam aceitos. As comparações com SVGs legados verificam a saída padrão anterior; novas famílias e locale são opções adicionais. JSON sem locale usa en; perfis novos no Studio usam pt-BR. Para manter o Markdown em português, selecione explicitamente pt-BR.
-
-O formato inicial do Studio agora é kit visual estático. Ele não consulta dados reais: envia README.md com assets/ e omite widgets de API. Escolha Action para atualização automática, usando YagoBorba/diagnostic-profile@v0.2.0. Trocar o mundo não deve apagar o conteúdo; mantenha uma cópia JSON antes de experimentar.
-
-No workflow existente, atualize a referência da Action e revise o CHANGELOG. Para imutabilidade estrita, use o SHA completo da tag. Guarde configuração/secrets e execute manualmente antes de substituir imagens em uso.
+In an existing workflow, update the Action reference and review the CHANGELOG. For strict immutability, use the tag's full commit SHA. Keep the configuration and secrets, and run the workflow manually before replacing images in use.
 
 ## Rollback
 
-Restaure a referência e a configuração anteriores e execute novamente; não apague sua branch de assets para atualizar. --force solicita reconstrução na CLI quando necessário. Para o site, publique novamente um build revisado de main; não mova tags. Rascunhos são locais ao navegador/domínio, portanto exports JSON são o backup portátil.
+Restore the previous reference and configuration and run again; do not delete your asset branch to update. --force asks the CLI for a rebuild when needed. For the site, publish a reviewed build of main again; never move tags. Drafts are stored by the browser for this site only, so JSON exports are the portable backup.
 
-## Limites
+## Scope
 
-Npm/Marketplace, OAuth e gravação direta na conta do visitante não fazem parte desta versão. O pacote npm continua privado para impedir publicação acidental. O site e a Action são públicos. Não há promessa de métricas privadas ou de experiência validada com leitores de tela e participantes externos; essas verificações continuam no roadmap. A interface do Studio e diagnósticos de CLI não anunciam tradução completa para todas as línguas.
+npm, the Marketplace, OAuth and writing directly to the visitor's account are not part of the project. The npm package stays private to prevent accidental publication; the site and the Action are public. Private metrics are not supported. The Studio interface is in Portuguese; generated output is available in English and Portuguese.
 
-## Histórico
+## 0.1.0 — 2026-11-05
 
-[v0.1.0](https://github.com/YagoBorba/diagnostic-profile/releases/tag/v0.1.0) foi o primeiro lançamento público em 05/11/2026, com Studio, dez modelos e Action. Essa tag permanece inalterada. As [evidências de execução](IMPLEMENTATION.md) registram a evolução e os limites de cada lote.
+[v0.1.0](https://github.com/YagoBorba/diagnostic-profile/releases/tag/v0.1.0) was the first public release, with the Studio, ten presets and the Action.

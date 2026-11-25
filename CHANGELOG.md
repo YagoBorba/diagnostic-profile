@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- Documentation in English throughout, with the Studio labels quoted as they appear in Portuguese. Internal review and planning notes were removed; the README keeps a short list of future ideas.
+
 ## [0.2.1] - 2026-11-06
 
 - Upgrade SHA-pinned checkout, setup-node, Pages upload/deploy and asset publication Actions together; align Studio/CLI-generated workflows and README installation examples.

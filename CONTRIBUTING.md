@@ -39,7 +39,7 @@ Follow [.github/COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md): Conventiona
 ## Pull requests
 
 - Describe the concrete problem, resulting behavior and relevant tradeoffs.
-- Link an issue and roadmap IDs when applicable.
+- Link the related issue when there is one.
 - Run npm test and git diff --check.
 - Regenerate previews and inspect intended visual changes.
 - Add meaningful tests for new behavior and reproduced bugs.
@@ -63,7 +63,7 @@ Keep browser-compatible rendering separate from Node.js file/network orchestrati
 
 ## Roadmap and scope
 
-[docs/ROADMAP.md](docs/ROADMAP.md) contains the approved 183-task proposal. [docs/IMPLEMENTATION.md](docs/IMPLEMENTATION.md) records delivery evidence. Pending tasks are not advertised as implemented. P2/P3 proposals require the acceptance criteria and maintenance demand described in the roadmap.
+Future ideas are listed in the README roadmap. Open a feature request before large changes, describing the problem, the expected behavior and how it will be tested. Do not advertise features that are not implemented.
 
 ## Support
 
