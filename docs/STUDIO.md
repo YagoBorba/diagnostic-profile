@@ -12,7 +12,7 @@ In the static kit, the SVGs use only the content you entered, with relative path
 
 In Markdown, the preview is built from the same semantic model that generates the text. User content becomes DOM text, never arbitrary HTML. This format does not reproduce the SVG palettes and frames.
 
-In the Action, the preview is explicitly fictional; the workflow fetches the real data. The reference is v0.2.1. Main, master, develop and the default branch cannot be asset destinations. Another account or repository requires a suitable PROFILE_PUBLISH_TOKEN. The kit's fictional files are kept apart in preview/.
+In the Action, the preview is explicitly fictional; the workflow fetches the real data. The reference is v0.2.2. Main, master, develop and the default branch cannot be asset destinations. Another account or repository requires a suitable PROFILE_PUBLISH_TOKEN. The kit's fictional files are kept apart in preview/.
 
 Follow the [beginner guide](GETTING_STARTED.md) and the [installation reference](../README.md).
 

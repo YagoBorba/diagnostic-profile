@@ -18,7 +18,7 @@ Choose **README em Markdown** to copy or download text and links only. This form
 
 ## Action: up-to-date public data
 
-Choose **SVGs e métricas — com GitHub Action**. Export the JSON, workflow and snippet, check the permissions and run the workflow in your repository. The public reference is YagoBorba/diagnostic-profile@v0.2.1; use the tag's full commit SHA if you need an immutable reference. Follow the [full installation](../README.md).
+Choose **SVGs e métricas — com GitHub Action**. Export the JSON, workflow and snippet, check the permissions and run the workflow in your repository. The public reference is YagoBorba/diagnostic-profile@v0.2.2; use the tag's full commit SHA if you need an immutable reference. Follow the [full installation](../README.md).
 
 The Action preview uses **fictional** data. The fictional SVGs are kept apart in preview/ inside the ZIP; do not publish them as your statistics. The workflow generates the real data. To publish to another account or repository, set PROFILE_PUBLISH_TOKEN with write access to that destination. Never put a token in the JSON, README, a URL or the browser.
 
@@ -50,7 +50,7 @@ Open the Local address that is printed. There is no public npm package for npx.
 | Technologies or traits disappeared | Fill in **Conteúdo pessoal** and enable the matching blocks. |
 | I cannot download | Fix the highlighted fields and enable a block that fits the chosen format. |
 | Metrics do not appear in the static kit | This mode uses manual content; choose the Action for real statistics. |
-| Action not found | Check v0.2.1, the Actions permissions and access to the reference; do not invent tags. |
+| Action not found | Check v0.2.2, the Actions permissions and access to the reference; do not invent tags. |
 | Action data did not change | Check the run, logs, default branch and image cache. Identical output keeps files and timestamps; --force rebuilds in the CLI. |
 | Token or publication failure | Keep reading the data separate from writing to the destination; check secrets without pasting them in issues. |
 | My draft is gone | Drafts are stored by the browser for this site only. Download the JSON as a portable backup. |

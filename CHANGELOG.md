@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-11-25
+
+- Installers and examples reference v0.2.2.
 - Documentation in English throughout, with the Studio labels quoted as they appear in Portuguese. Internal review and planning notes were removed; the README keeps a short list of future ideas.
 
 ## [0.2.1] - 2026-11-06
