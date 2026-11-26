@@ -1,53 +1,53 @@
-# Profile Studio 0.2.1
+# Profile Studio
 
-[Studio público](https://yagoborba.github.io/diagnostic-profile/) · por [Yago Borba](https://github.com/YagoBorba) · [código](https://github.com/YagoBorba/diagnostic-profile).
+[Public Studio](https://yagoborba.github.io/diagnostic-profile/) · by [Yago Borba](https://github.com/YagoBorba) · [source](https://github.com/YagoBorba/diagnostic-profile).
 
-O Studio tem 16 modelos, seis paletas e nove famílias. As seis novas famílias são Oficina Zero, Arquivo de Campo, Cartografia Orbital, Estação de Rádio, Inventário de Exploração e Herbário Digital. Diagnóstico, Terminal e Minimalista continuam disponíveis.
+The Studio has 16 presets, six palettes and nine families. The six world families are Oficina Zero, Arquivo de Campo, Cartografia Orbital, Estação de Rádio, Inventário de Exploração and Herbário Digital. Diagnostic, Terminal and Minimal remain available.
 
-## Criar e exportar
+## Create and export
 
-Escolha primeiro o formato: kit visual estático, Markdown ou Action. O preview usa o mesmo renderizador/modelo de conteúdo da exportação correspondente. A galeria usa dados de demonstração e miniaturas compostas de apresentação, projeto e contato; não precisa construir todos os assets de cada modelo.
+Choose the format first: static visual kit, Markdown or Action. The preview uses the same renderer and content model as the matching export. The gallery uses demo data and thumbnails composed from the header, a project and a contact, so it does not build every asset of every preset.
 
-No kit estático, os SVGs usam apenas conteúdo preenchido, com caminhos relativos em README.md. Métricas/calendários são omitidos e projetos fixados precisam ser adicionados manualmente. Envie a pasta assets/ inteira junto com o README. A configuração JSON permite editar e gerar outra versão.
+In the static kit, the SVGs use only the content you entered, with relative paths in README.md. Metrics and calendars are left out, and pinned projects must be added by hand. Upload the whole assets/ folder with the README. The JSON configuration lets you edit and generate a new version later.
 
-No Markdown, o preview é construído pelo mesmo modelo semântico que gera o texto. O conteúdo do usuário vira texto no DOM, nunca HTML arbitrário. Esse formato não reproduz paletas e molduras SVG.
+In Markdown, the preview is built from the same semantic model that generates the text. User content becomes DOM text, never arbitrary HTML. This format does not reproduce the SVG palettes and frames.
 
-Na Action, o preview é explicitamente fictício; o workflow consulta os dados reais. A referência é v0.2.1. Main, master, develop e a branch padrão não podem ser destinos de assets. Outra conta/repositório exige PROFILE_PUBLISH_TOKEN apropriado. Os arquivos fictícios do kit ficam separados em preview/.
+In the Action, the preview is explicitly fictional; the workflow fetches the real data. The reference is v0.2.2. Main, master, develop and the default branch cannot be asset destinations. Another account or repository requires a suitable PROFILE_PUBLISH_TOKEN. The kit's fictional files are kept apart in preview/.
 
-Siga o [guia de iniciante](GETTING_STARTED.md) e a [referência de instalação](../README.md).
+Follow the [beginner guide](GETTING_STARTED.md) and the [installation reference](../README.md).
 
-## Mundos e movimento
+## Worlds and motion
 
-As famílias têm renderizadores para cada widget e autoria/licença declaradas em src/families.mjs. A saída SVG usa o mesmo motor na CLI, Action e navegador. Cores são independentes da família e têm feedback de contraste; há bordas, densidade, alinhamento e variantes estreitas.
+Each family has a renderer for every widget and declares its author and license in src/families.mjs. SVG output uses the same engine in the CLI, the Action and the browser. Colors are independent from the family and come with contrast feedback; there are borders, density, alignment and narrow variants.
 
-Escolha Compacta para legibilidade em telas pequenas. Reduzir um painel de 1200 px não equivale a uma composição estreita. O Studio avisa quando o preview está estreito e o layout amplo continua selecionado. Picture suporta modo claro/escuro automático; Markdown com imagem fixa usa um modo escolhido. Agrupamento/alinhamento de cartões depende do HTML aceito pelo GitHub.
+Choose **Compacta** (compact) for readability on small screens: shrinking a 1200 px panel is not the same as a narrow composition. The Studio warns when the preview is narrow while the wide layout is still selected. `<picture>` switches light and dark mode automatically; Markdown with a fixed image uses the chosen mode. Card grouping and alignment depend on the HTML that GitHub accepts.
 
-Movimento reduzido é respeitado e os novos mundos abrem sem animação. Figuras e ondas decorativas não representam estatísticas. Habilidades e trajetória são fornecidas manualmente; não há XP ou classificação de competência.
+Reduced motion is respected and the world families open without animation. Decorative figures and waves do not represent statistics. Skills and history are entered by hand; there is no XP or skill rating.
 
-## Misturas e receitas
+## Mixes and recipes
 
-A semente determina a escolha de preset/paleta. Travas preservam mundo, cores, layout/blocos e movimento; conteúdo pessoal é mantido. Desafios opcionais mudam somente os blocos e não são requisito para exportar.
+A seed decides the preset and palette. Locks keep the world, colors, layout and blocks, or motion; personal content is always kept. Optional challenges only change the blocks and are never required to export.
 
-Receitas compartilham apenas campos visuais, sem nomes, contatos, títulos pessoais de seções ou IDs personalizados. O compartilhamento de perfil completo é separado e inclui textos e contatos. Os links são validados e limitados em tamanho; use JSON para configurações grandes. Links localhost só funcionam onde o mesmo servidor estiver acessível.
+Recipes share only visual fields, without names, contacts, personal section titles or custom IDs. Sharing a full profile is a separate option that includes text and contacts. Links are validated and limited in size; use JSON for large configurations. Localhost links only work where the same server is reachable.
 
-Favoritos ficam no navegador, com nome editável e miniatura. Rascunhos não são sincronizados. Digitação no mesmo campo é agrupada para desfazer; o histórico mantém até 40 transações. Baixe JSON para backup. Recomeçar substitui o rascunho, e favoritos são removidos individualmente.
+Favorites live in the browser, with an editable name and a thumbnail. Drafts are not synced. Typing in the same field is grouped for undo, and the history keeps up to 40 steps. Download the JSON as a backup. Starting over replaces the draft; favorites are removed one by one.
 
-## Idioma e acessibilidade
+## Language and accessibility
 
-Locale en/pt-BR controla rótulos gerados, resumos, descrições acessíveis e instruções dos kits. Textos pessoais e nomes de tecnologias são preservados. A interface do Studio é em português e traduz as dicas comuns de validação. Diagnósticos de CLI mantêm o formato documentado em inglês.
+The en/pt-BR locale controls generated labels, summaries, accessible descriptions and kit instructions. Personal text and technology names are kept as written. The Studio interface is in Portuguese and translates the common validation hints. CLI diagnostics keep their documented English format.
 
-Há rótulos, foco visível e setas para reordenação por teclado. O resumo textual complementa as imagens. Não anunciar suporte validado por leitor de tela sem uma sessão real no GitHub; title/desc de SVG não garantem por si só leitura dos dados incorporados.
+Controls have labels, visible focus and arrow keys for reordering. An optional text summary complements the images. SVG title and description help assistive technology, but how a screen reader announces images embedded in a GitHub README depends on GitHub, so keep the text summary enabled when the data matters.
 
-## Desenvolvimento e qualidade
+## Development and quality
 
     npm ci
     npm run studio
     npm run proof -- --serve
 
-Build estático: npm run build:studio -> dist/site. Folha de revisão visual: npm run proof -> dist/proof, separada do site distribuído. A CI disponibiliza a folha como artefato por três dias. Ela permite inspeção humana; não equivale a comparação automática de pixels.
+Static build: npm run build:studio → dist/site. Visual review sheet: npm run proof → dist/proof, kept apart from the published site. CI uploads the sheet as an artifact for three days for human inspection; it is not an automated pixel comparison.
 
-Arquitetura: src/families.mjs declara o contrato; src/families/ contém implementações; src/build.mjs compõe; src/manual.mjs exclui dados automáticos no kit estático; src/readme-model.mjs compartilha semântica entre preview e Markdown. src/version.mjs centraliza referências de release/schema.
+Architecture: src/families.mjs declares the contract, src/families/ holds the implementations, src/build.mjs composes the output, src/manual.mjs leaves automatic data out of the static kit, and src/readme-model.mjs shares semantics between the preview and Markdown. src/version.mjs keeps the release and schema references in one place.
 
-A CLI preserva os arquivos e a data de geração quando configuração/dados/versão são idênticos e os arquivos continuam íntegros. --force regenera. Arquivos próprios editados são detectados; arquivos alheios continuam preservados. O timestamp descreve geração, não cada consulta de rede.
+The CLI keeps files and the generation date when the configuration, data and version are identical and the files are intact. --force regenerates. Edited generated files are detected; unrelated files are left alone. The timestamp describes generation, not each network request.
 
-Créditos discretos para Yago Borba e o repositório acompanham todos os READMEs não vazios, independentemente do bloco de rodapé pessoal. Veja a licença MIT.
+Small credits to Yago Borba and the repository are included in every non-empty README, regardless of the personal footer block. See the MIT license.
