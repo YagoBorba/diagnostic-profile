@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="580" height="210" viewBox="0 0 580 210" role="img" aria-labelledby="title desc">
 <title id="title">BorbaCarLabs — Java</title>
-<desc id="desc">An Android OBD-II car diagnostic app built in Java. Connects to ELM327 adapters over Bluetooth, BLE or Wi-Fi to read trouble codes and live sensor data, keeps a maintenance journal with official Inmetro fuel economy, and generates traceable PDF reports with optional AI analysis. Built with android, automotive, bluetooth-low-energy, car-diagnostics. Status: recent.</desc>
+<desc id="desc">An Android OBD-II car diagnostic app built in Java. Connects to ELM327 adapters over Bluetooth, BLE or Wi-Fi to read trouble codes and live sensor data, keeps a maintenance journal with official Inmetro fuel economy, and generates traceable PDF reports. Built with android, automotive, bluetooth-low-energy, car-diagnostics. Status: recent.</desc>
 <style>
 .mono{font-family:ui-monospace, SFMono-Regular, 'JetBrains Mono', 'Cascadia Code', Menlo, Consolas, monospace}
 .sans{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif}

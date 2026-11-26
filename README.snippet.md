@@ -25,14 +25,14 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/project-borbacarlabs-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/project-borbacarlabs-light.svg">
-  <img alt="BorbaCarLabs: An Android OBD-II car diagnostic app built in Java. Connects to ELM327 adapters over Bluetooth, BLE or Wi-Fi to read trouble codes and live sensor data, keeps a maintenance journal with official Inmetro fuel economy, and generates traceable PDF reports with optional AI analysis." src="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/project-borbacarlabs-dark.svg" width="49%">
+  <img alt="BorbaCarLabs: An Android OBD-II car diagnostic app built in Java. Connects to ELM327 adapters over Bluetooth, BLE or Wi-Fi to read trouble codes and live sensor data, keeps a maintenance journal with official Inmetro fuel economy, and generates traceable PDF reports." src="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/project-borbacarlabs-dark.svg" width="49%">
 </picture>
 </a>
 <a href="https://github.com/YagoBorba/DevTaskManager">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/project-devtaskmanager-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/project-devtaskmanager-light.svg">
-  <img alt="DevTaskManager: DevTaskManager is a Chrome extension developed to facilitate project and task management directly within the browser. This project was initiated as part of a university assignment." src="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/project-devtaskmanager-dark.svg" width="49%">
+  <img alt="DevTaskManager: Chrome extension (React, Vite, Tailwind) backed by an ASP.NET Core 8 REST API with Entity Framework Core and SQLite to manage projects and tasks from the browser." src="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/project-devtaskmanager-dark.svg" width="49%">
 </picture>
 </a>
 <a href="https://github.com/YagoBorba/WattHouse">
@@ -53,7 +53,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/footer-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/footer-light.svg">
-  <img alt="End of report. Assets generated 2026-11-06 23:20 UTC." src="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/footer-dark.svg" width="100%">
+  <img alt="End of report. Assets generated 2026-11-26 00:01 UTC." src="https://raw.githubusercontent.com/YagoBorba/diagnostic-profile/demo-assets/footer-dark.svg" width="100%">
 </picture>
 
 <sub><a href="https://github.com/YagoBorba/diagnostic-profile">Diagnostic Profile</a> · <a href="https://github.com/YagoBorba">Yago Borba</a></sub>
