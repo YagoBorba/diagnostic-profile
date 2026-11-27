@@ -23,7 +23,7 @@ Self-hosted runners must support Node 24 (Actions Runner 2.327.1+). The project 
 - Manifests, and no publication commits caused only by timestamps when the data did not change.
 - Small linked credits to the author and the project in every README format, even with the personal footer disabled.
 
-The [public example in another repository](https://github.com/YagoBorba/diagnostic-profile-example) shows the Action being consumed from outside this repository; its runs are on that example's Actions page.
+The [released Action check](../.github/workflows/profile-smoke.yml) runs the published tag with a minimal public configuration and publishes the result to the [demo-assets branch](https://github.com/YagoBorba/diagnostic-profile/tree/demo-assets).
 
 ### Migrating from 0.1.0
 
