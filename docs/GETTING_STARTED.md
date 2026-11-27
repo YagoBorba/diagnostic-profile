@@ -24,9 +24,9 @@ The Action preview uses **fictional** data. The fictional SVGs are kept apart in
 
 The image destination must be public so visitors can load it without signing in. An output branch in a private repository stays private. Do not copy temporary authenticated URLs of private images.
 
-[Public installation example](https://github.com/YagoBorba/diagnostic-profile-example) · [Project workflows](https://github.com/YagoBorba/diagnostic-profile/actions).
+[Example configuration](../examples/diagnostic-profile.json) · [Released Action check](../.github/workflows/profile-smoke.yml) · [Generated output](https://github.com/YagoBorba/diagnostic-profile/tree/demo-assets).
 
-The example has a complete configuration and workflows, a README with real images and a public output branch. It runs with the repository's own GITHUB_TOKEN, without a personal access token, manually or when the configuration changes on main. Copy it and adapt the login and destination before using it.
+The released Action check runs the published tag against a minimal public configuration with the repository's own GITHUB_TOKEN, without a personal access token, and publishes real images and a README snippet to the public demo-assets branch. Start from the example configuration and adapt the login and destination before using it.
 
 ## Profile repository and running locally
 
